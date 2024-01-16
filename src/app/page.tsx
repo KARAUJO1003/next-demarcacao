@@ -32,6 +32,7 @@ export default function Home() {
         <TabsList className="w-full items-center justify-start">
           <TabsTrigger value="Agendada">Agendada</TabsTrigger>
           <TabsTrigger value="Demarcado">Demarcado</TabsTrigger>
+          <NewDemarc />
         </TabsList>
         <TabsContent value="Agendada">
           <ScrollArea>
