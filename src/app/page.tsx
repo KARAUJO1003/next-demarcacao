@@ -63,7 +63,7 @@ export default function Home() {
               {demarcacaoFiltradaAgendada.map((item, id) => (
                 <li
                   key={id}
-                  className={`bg-zinc-200 rounded-md mb-3 p-10 h-90 flex flex-col min-w-80 h-80 `}
+                  className={`bg-zinc-200 rounded-md mb-3 p-10 flex flex-col min-w-80 h-min `}
                 >
                   <p>Demarcador: {item.demarcador}</p>
                   <p>Quadra: {item.quadra}</p>
@@ -92,7 +92,7 @@ export default function Home() {
               {demarcacaoFiltradaDemarcado.map((item, id) => (
                 <li
                   key={id}
-                  className={`bg-zinc-200 rounded-md mb-3 p-10 h-90 flex flex-col min-w-80 h-80 `}
+                  className={`bg-zinc-200 rounded-md mb-3 p-10 flex flex-col min-w-80 h-min `}
                 >
                   <p>Demarcador: {item.demarcador}</p>
                   <p>Quadra: {item.quadra}</p>
