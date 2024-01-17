@@ -15,16 +15,23 @@ export default function Home() {
 
   const handleTabChange = (value: any) => {
     // Atualize o estado de exibição com base na guia selecionada
-    setExibirAgendadas(value === "Agendada");
+    setExibirAgendadas(value === "Agendado");
     setExibirDemarcadas(value === "Demarcado");
   };
 
-  const demarcacaoFiltrada = Demarcacao.filter((item) => {
+  const demarcacaoFiltrada = demarcacao.filter((item) => {
     return (
-      (exibirAgendadas && item.status === "Agendada") ||
+      (exibirAgendadas && item.status === "Agendado") ||
       (exibirDemarcadas && item.status === "Demarcado")
     );
   });
+
+  const demarcacaoFiltradaAgendada = demarcacaoFiltrada.filter(
+    (item) => item.status === "Agendado"
+  );
+  const demarcacaoFiltradaDemarcado = demarcacaoFiltrada.filter(
+    (item) => item.status === "Demarcado"
+  );
 
   const handleAddItem: (newItem: AgendaItem) => void = (newItem) => {
     setDemarcacao((prevDemarcacao) => [...prevDemarcacao, newItem]);
@@ -39,21 +46,21 @@ export default function Home() {
 
     <main className="flex min-h-screen w-full flex-col items-center justify-between p-24">
       <Tabs
-        defaultValue="Agendada"
+        defaultValue="Agendado"
         onValueChange={handleTabChange}
         className="w-full"
       >
-        <TabsList className="w-full bg-transparent items-center justify-between">
+        <TabsList className="w-full border-b pb-2 bg-transparent items-center justify-between">
           <div>
-            <TabsTrigger value="Agendada">Agendada</TabsTrigger>
+            <TabsTrigger value="Agendado">Agendada</TabsTrigger>
             <TabsTrigger value="Demarcado">Demarcado</TabsTrigger>
           </div>
           <ProfileForm onAddItem={handleAddItem}/>
         </TabsList>
-        <TabsContent value="Agendada">
+        <TabsContent value="Agendado">
           <ScrollArea>
             <ul className="flex gap-3 ">
-              {demarcacao.map((item, id) => (
+              {demarcacaoFiltradaAgendada.map((item, id) => (
                 <li
                   key={id}
                   className={`bg-zinc-200 rounded-md mb-3 p-10 h-90 flex flex-col min-w-80 h-80 `}
@@ -66,7 +73,7 @@ export default function Home() {
                   <p>User: {item.username}</p>
                   <p
                     className={`p-1 text-xs font-semibold rounded flex items-center ${
-                      item.status === "agendado"
+                      item.status === "Agendado"
                         ? "bg-orange-600  text-orange-300"
                         : "bg-green-600  text-green-300"
                     } justify-center`}
@@ -82,7 +89,7 @@ export default function Home() {
         <TabsContent value="Demarcado">
           <ScrollArea>
             <ul className="flex gap-3 ">
-              {demarcacao.map((item, id) => (
+              {demarcacaoFiltradaDemarcado.map((item, id) => (
                 <li
                   key={id}
                   className={`bg-zinc-200 rounded-md mb-3 p-10 h-90 flex flex-col min-w-80 h-80 `}
@@ -95,7 +102,7 @@ export default function Home() {
                   <p>User: {item.username}</p>
                   <p
                     className={`p-1 text-xs font-semibold rounded flex items-center ${
-                      item.status === "agendado"
+                      item.status === "Agendado"
                         ? "bg-orange-600  text-orange-300"
                         : "bg-green-600  text-green-300"
                     } justify-center`}

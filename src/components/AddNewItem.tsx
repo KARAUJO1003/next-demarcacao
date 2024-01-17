@@ -70,7 +70,7 @@ export function ProfileForm({ onAddItem }: ProfileFormProps) {
 
   return (
     <Dialog>
-      <DialogTrigger>
+      <DialogTrigger className="bg-zinc-950 rounded-md px-3 py-2 text-sm font-semibold text-zinc-100 hover:bg-zinc-800">
         <p>Abrir modal</p>
       </DialogTrigger>
       <DialogContent>
