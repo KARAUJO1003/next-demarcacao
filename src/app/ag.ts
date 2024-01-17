@@ -1,93 +1,21 @@
-interface AgendaItem {
-    Quadra: string;
-    Lote: string;
-    User: string;
-    Demarcador: string;
-    DtaAgend: string;
-    HoraAgend: string;
-    Status: string;
-  }
+export interface AgendaItem {
+  username: string;
+  quadra?: string;
+  lote?: string;
+  data?: string;
+  hora?: string;
+  demarcador?: string | "Mauro"
+  status?: string | "Agendado"
+}
 
-  export const Demarcacao: AgendaItem[] = [
-    {
-      Quadra: '23',
-      Lote: '20',
-      User: 'Kaesyo',
-      Demarcador: 'Mauro',
-      DtaAgend: '2024/01/15',
-      HoraAgend: '13:00',
-      Status: 'Agendada',
-    },
-    {
-      Quadra: '23',
-      Lote: '20',
-      User: 'Kaesyo',
-      Demarcador: 'Mauro',
-      DtaAgend: '2024/01/15',
-      HoraAgend: '13:00',
-      Status: 'Agendada',
-    },
-    {
-      Quadra: '23',
-      Lote: '20',
-      User: 'Kaesyo',
-      Demarcador: 'Mauro',
-      DtaAgend: '2024/01/15',
-      HoraAgend: '13:00',
-      Status: 'Agendada',
-    },
-    {
-      Quadra: '23',
-      Lote: '20',
-      User: 'Kaesyo',
-      Demarcador: 'Mauro',
-      DtaAgend: '2024/01/15',
-      HoraAgend: '13:00',
-      Status: 'Agendada',
-    },
-    {
-      Quadra: '23',
-      Lote: '20',
-      User: 'Kaesyo',
-      Demarcador: 'Mauro',
-      DtaAgend: '2024/01/15',
-      HoraAgend: '13:00',
-      Status: 'Demarcado',
-    },
-    {
-      Quadra: '23',
-      Lote: '20',
-      User: 'Kaesyo',
-      Demarcador: 'Mauro',
-      DtaAgend: '2024/01/15',
-      HoraAgend: '13:00',
-      Status: 'Agendada',
-    },
-    {
-      Quadra: '23',
-      Lote: '20',
-      User: 'Kaesyo',
-      Demarcador: 'Mauro',
-      DtaAgend: '2024/01/15',
-      HoraAgend: '13:00',
-      Status: 'Agendada',
-    },
-    {
-      Quadra: '23',
-      Lote: '20',
-      User: 'Kaesyo',
-      Demarcador: 'Mauro',
-      DtaAgend: '2024/01/15',
-      HoraAgend: '13:00',
-      Status: 'Demarcado',
-    },
-    {
-      Quadra: '23',
-      Lote: '20',
-      User: 'Kaesyo',
-      Demarcador: 'Mauro',
-      DtaAgend: '2024/01/15',
-      HoraAgend: '13:00',
-      Status: 'Demarcado',
-    },
-  ];
+export const Demarcacao: AgendaItem[] = [
+  {
+    username: "Kaesyo",
+    quadra: "23",
+    lote: "20",
+    data: "2024/01/15",
+    hora: "13:00",
+    status: "agendado",
+    demarcador: "Mauro",
+  },
+];
