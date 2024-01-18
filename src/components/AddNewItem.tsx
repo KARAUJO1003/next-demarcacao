@@ -46,13 +46,13 @@ export function ProfileForm({ onAddItem }: ProfileFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "",
+      username: "Kaesyo",
       quadra: "",
       lote: "",
       data: "",
       hora: "",
-      demarcador: "",
-      status: "",
+      demarcador: "Mauro",
+      status: "Agendado",
     },
   });
 
@@ -148,8 +148,8 @@ export function ProfileForm({ onAddItem }: ProfileFormProps) {
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup {...field}>
-                          <SelectItem value="Agendado">Agendado</SelectItem>
-                          <SelectItem value="Demarcado">Demarcado</SelectItem>
+                          <SelectItem value="Agendado"><span className="flex items-center justify-center gap-3"><div className=" rounded-full bg-orange-500 w-3 h-3"/> Agendado</span></SelectItem>
+                          <SelectItem value="Demarcado"><span className="flex items-center justify-center gap-3"><div className=" rounded-full bg-green-500 w-3 h-3"/> Demarcado</span></SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>

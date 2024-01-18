@@ -5,7 +5,7 @@ export interface AgendaItem {
   data?: string;
   hora?: string;
   demarcador?: string | "Mauro"
-  status?: string | "Agendado"
+  status?: "Agendado" | "Demarcado"
 }
 
 export const Demarcacao: AgendaItem[] = [
@@ -15,7 +15,7 @@ export const Demarcacao: AgendaItem[] = [
     lote: "20",
     data: "2024/01/15",
     hora: "13:00",
-    status: "agendado",
+    status: "Agendado",
     demarcador: "Mauro",
   },
 ];

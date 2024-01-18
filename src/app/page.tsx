@@ -6,6 +6,15 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { ProfileForm } from "@/components/AddNewItem";
 import TableItens from "@/components/TableItens";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { User } from "lucide-react";
 
 export default function Home() {
   const [exibirAgendadas, setExibirAgendadas] = useState(true);
@@ -52,25 +61,30 @@ export default function Home() {
           <ScrollArea>
             <ul className="flex gap-3 ">
               {demarcacaoFiltradaAgendada.map((item, id) => (
-                <li
-                  key={id}
-                  className={`bg-zinc-200 rounded-md mb-3 p-10 flex flex-col min-w-80 h-min `}
-                >
-                  <p>Demarcador: {item.demarcador}</p>
-                  <p>Quadra: {item.quadra}</p>
-                  <p>Lote: {item.lote}</p>
-                  <p>DtaAgend: {item.data}</p>
-                  <p>HoraAgend: {item.hora}</p>
-                  <p>User: {item.username}</p>
-                  <p
-                    className={`p-1 text-xs font-semibold rounded flex items-center ${
-                      item.status === "Agendado"
-                        ? "bg-orange-600  text-orange-300"
-                        : "bg-green-600  text-green-300"
-                    } justify-center`}
-                  >
-                    {item.status}
-                  </p>
+                <li key={id} className={`  mb-3 flex flex-col min-w-80 h-min `}>
+                  <Card className="relative">
+                    <CardHeader className="flex ">
+                      <CardDescription className="flex items-center justify-start gap-1 leading-none"><User size={17}/> {item.username}</CardDescription>
+                      <p
+                        className={`p-1 absolute top-3 right-3 gap-2 text-xs font-semibold rounded-full bg-orange-200 w-min flex items-center  justify-center`}
+                      >
+                        {" "}
+                        <div className=" rounded-full bg-orange-500 w-3 h-3" />
+                        
+                      </p>
+                    </CardHeader>
+                    <CardContent className="flex flex-col gap-3">
+                      <CardTitle>Quadra: {item.quadra}</CardTitle>
+                      <CardTitle>Lote: {item.lote}</CardTitle>
+                    </CardContent>
+                    <CardFooter className="flex flex-col justify-start items-start">
+                      <CardDescription>DataAgendada: {item.data}</CardDescription>
+                      <CardDescription>HoraAgendada: {item.hora}</CardDescription>
+                      <CardDescription>
+                        Demarcador: {item.demarcador}
+                      </CardDescription>
+                    </CardFooter>
+                  </Card>
                 </li>
               ))}
             </ul>
@@ -88,16 +102,18 @@ export default function Home() {
                   <p>Demarcador: {item.demarcador}</p>
                   <p>Quadra: {item.quadra}</p>
                   <p>Lote: {item.lote}</p>
-                  <p>DtaAgend: {item.data}</p>
+                  <p>Data Agendada: {item.data}</p>
                   <p>HoraAgend: {item.hora}</p>
                   <p>User: {item.username}</p>
                   <p
-                    className={`p-1 text-xs font-semibold rounded flex items-center ${
+                    className={`p-1 gap-2 text-xs font-semibold rounded flex items-center ${
                       item.status === "Agendado"
                         ? "bg-orange-600  text-orange-300"
                         : "bg-green-600  text-green-300"
                     } justify-center`}
                   >
+                    {" "}
+                    <div className=" rounded-full bg-green-500  w-3 h-3" />
                     {item.status}
                   </p>
                 </li>
