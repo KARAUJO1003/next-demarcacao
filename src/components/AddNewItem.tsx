@@ -83,7 +83,7 @@ export function ProfileForm({ onAddItem }: ProfileFormProps) {
                 <FormItem>
                   <FormLabel>Username</FormLabel>
                   <FormControl>
-                    <Input placeholder="shadcn" {...field} />
+                    <Input placeholder="Usuário" {...field} />
                   </FormControl>
 
                   <FormMessage />
@@ -95,7 +95,7 @@ export function ProfileForm({ onAddItem }: ProfileFormProps) {
               name="quadra"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Quadra</FormLabel>
                   <FormControl>
                     <Input placeholder="quadra" {...field} />
                   </FormControl>

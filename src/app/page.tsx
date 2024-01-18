@@ -5,8 +5,7 @@ import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { ProfileForm } from "@/components/AddNewItem";
-
-
+import TableItens from "@/components/TableItens";
 
 export default function Home() {
   const [exibirAgendadas, setExibirAgendadas] = useState(true);
@@ -18,32 +17,24 @@ export default function Home() {
     setExibirAgendadas(value === "Agendado");
     setExibirDemarcadas(value === "Demarcado");
   };
-
   const demarcacaoFiltrada = demarcacao.filter((item) => {
     return (
       (exibirAgendadas && item.status === "Agendado") ||
       (exibirDemarcadas && item.status === "Demarcado")
     );
   });
-
   const demarcacaoFiltradaAgendada = demarcacaoFiltrada.filter(
     (item) => item.status === "Agendado"
   );
   const demarcacaoFiltradaDemarcado = demarcacaoFiltrada.filter(
     (item) => item.status === "Demarcado"
   );
-
   const handleAddItem: (newItem: AgendaItem) => void = (newItem) => {
     setDemarcacao((prevDemarcacao) => [...prevDemarcacao, newItem]);
-    console.log(demarcacao)
-    
-
+    console.log(demarcacao);
   };
 
   return (
-
-
-
     <main className="flex min-h-screen w-full flex-col items-center justify-between p-24">
       <Tabs
         defaultValue="Agendado"
@@ -55,7 +46,7 @@ export default function Home() {
             <TabsTrigger value="Agendado">Agendada</TabsTrigger>
             <TabsTrigger value="Demarcado">Demarcado</TabsTrigger>
           </div>
-          <ProfileForm onAddItem={handleAddItem}/>
+          <ProfileForm onAddItem={handleAddItem} />
         </TabsList>
         <TabsContent value="Agendado">
           <ScrollArea>
@@ -114,6 +105,7 @@ export default function Home() {
             </ul>
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
+          <TableItens />
         </TabsContent>
       </Tabs>
     </main>
