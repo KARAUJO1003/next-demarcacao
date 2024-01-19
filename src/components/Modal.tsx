@@ -42,7 +42,7 @@ type ProfileFormProps = {
   onAddItem: (newItem: AgendaItem) => void;
 };
 
-export function ProfileForm({ onAddItem }: ProfileFormProps) {
+export function Modal({ onAddItem }: ProfileFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

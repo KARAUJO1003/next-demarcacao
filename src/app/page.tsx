@@ -4,7 +4,7 @@ import { AgendaItem, Demarcacao } from "@/app/ag";
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { ProfileForm } from "@/components/AddNewItem";
+import { Modal } from "@/components/Modal";
 import TableItens from "@/components/TableItens";
 import {
   Card,
@@ -14,7 +14,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { User } from "lucide-react";
+import { Calendar, Timer, TimerIcon, User } from "lucide-react";
+import CardItem from "@/components/CardItem";
+import SideBar from "@/components/SideBar";
 
 export default function Home() {
   const [exibirAgendadas, setExibirAgendadas] = useState(true);
@@ -44,86 +46,68 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen w-full flex-col items-center justify-between p-24">
-      <Tabs
-        defaultValue="Agendado"
-        onValueChange={handleTabChange}
-        className="w-full"
-      >
-        <TabsList className="w-full border-b pb-2 bg-transparent items-center justify-between">
-          <div>
-            <TabsTrigger value="Agendado">Agendada</TabsTrigger>
-            <TabsTrigger value="Demarcado">Demarcado</TabsTrigger>
-          </div>
-          <ProfileForm onAddItem={handleAddItem} />
-        </TabsList>
-        <TabsContent value="Agendado">
-          <ScrollArea>
-            <ul className="flex gap-3 ">
-              {demarcacaoFiltradaAgendada.map((item, id) => (
-                <li key={id} className={`  mb-3 flex flex-col min-w-80 h-min `}>
-                  <Card className="relative">
-                    <CardHeader className="flex ">
-                      <CardDescription className="flex items-center justify-start gap-1 leading-none"><User size={17}/> {item.username}</CardDescription>
-                      <p
-                        className={`p-1 absolute top-3 right-3 gap-2 text-xs font-semibold rounded-full bg-orange-200 w-min flex items-center  justify-center`}
-                      >
-                        {" "}
-                        <div className=" rounded-full bg-orange-500 w-3 h-3" />
-                        
-                      </p>
-                    </CardHeader>
-                    <CardContent className="flex flex-col gap-3">
-                      <CardTitle>Quadra: {item.quadra}</CardTitle>
-                      <CardTitle>Lote: {item.lote}</CardTitle>
-                    </CardContent>
-                    <CardFooter className="flex flex-col justify-start items-start">
-                      <CardDescription>DataAgendada: {item.data}</CardDescription>
-                      <CardDescription>HoraAgendada: {item.hora}</CardDescription>
-                      <CardDescription>
-                        Demarcador: {item.demarcador}
-                      </CardDescription>
-                    </CardFooter>
-                  </Card>
-                </li>
-              ))}
-            </ul>
-            <ScrollBar orientation="horizontal" />
-          </ScrollArea>
-        </TabsContent>
-        <TabsContent value="Demarcado">
-          <ScrollArea>
-            <ul className="flex gap-3 ">
-              {demarcacaoFiltradaDemarcado.map((item, id) => (
-                <li
-                  key={id}
-                  className={`bg-zinc-200 rounded-md mb-3 p-10 flex flex-col min-w-80 h-min `}
-                >
-                  <p>Demarcador: {item.demarcador}</p>
-                  <p>Quadra: {item.quadra}</p>
-                  <p>Lote: {item.lote}</p>
-                  <p>Data Agendada: {item.data}</p>
-                  <p>HoraAgend: {item.hora}</p>
-                  <p>User: {item.username}</p>
-                  <p
-                    className={`p-1 gap-2 text-xs font-semibold rounded flex items-center ${
-                      item.status === "Agendado"
-                        ? "bg-orange-600  text-orange-300"
-                        : "bg-green-600  text-green-300"
-                    } justify-center`}
+    <main className=" min-h-screen w-full grid grid-cols-[200px_minmax(900px,_1fr)]">
+        <SideBar />
+        <Tabs
+          defaultValue="Agendado"
+          onValueChange={handleTabChange}
+          className="w-full"
+        >
+          <TabsList className="w-full border-b pb-2 bg-transparent items-center justify-between">
+            <div className="flex gap-2">
+              <TabsTrigger value="Agendado">Agendada</TabsTrigger>
+              <TabsTrigger value="Demarcado">Demarcado</TabsTrigger>
+            </div>
+            <Modal onAddItem={handleAddItem} />
+          </TabsList>
+          <TabsContent value="Agendado">
+            <ScrollArea>
+              <ul className="flex gap-3 ">
+                {demarcacaoFiltradaAgendada.map((item, id) => (
+                  <li
+                    key={id}
+                    className={`  mb-3 flex flex-col min-w-80 h-min `}
                   >
-                    {" "}
-                    <div className=" rounded-full bg-green-500  w-3 h-3" />
-                    {item.status}
-                  </p>
-                </li>
-              ))}
-            </ul>
-            <ScrollBar orientation="horizontal" />
-          </ScrollArea>
+                    <CardItem
+                      user={item.username}
+                      qd={item.quadra}
+                      lt={item.lote}
+                      date={item.data}
+                      timer={item.hora}
+                      demarcador={item.demarcador}
+                      status={item.status}
+                    />
+                  </li>
+                ))}
+              </ul>
+              <ScrollBar orientation="horizontal" />
+            </ScrollArea>
+          </TabsContent>
+          <TabsContent value="Demarcado">
+            <ScrollArea>
+              <ul className="flex gap-3 ">
+                {demarcacaoFiltradaDemarcado.map((item, id) => (
+                  <li
+                    key={id}
+                    className={` rounded-md mb-3  flex flex-col min-w-80 h-min `}
+                  >
+                    <CardItem
+                      user={item.username}
+                      qd={item.quadra}
+                      lt={item.lote}
+                      date={item.data}
+                      timer={item.hora}
+                      demarcador={item.demarcador}
+                    />
+                  </li>
+                ))}
+              </ul>
+              <ScrollBar orientation="horizontal" />
+            </ScrollArea>
+          </TabsContent>
           <TableItens />
-        </TabsContent>
-      </Tabs>
+        </Tabs>
+
     </main>
   );
 }
