@@ -1,20 +1,11 @@
 "use client";
 
-import { AgendaItem, Demarcacao } from "@/app/ag";
+import { AgendaItem } from "@/app/ag";
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Modal } from "@/components/Modal";
 import TableItens from "@/components/TableItens";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Calendar, Timer, TimerIcon, User } from "lucide-react";
 import CardItem from "@/components/CardItem";
 import SideBar from "@/components/SideBar";
 
@@ -46,12 +37,12 @@ export default function Home() {
   };
 
   return (
-    <main className=" min-h-screen w-full grid grid-cols-[200px_minmax(900px,_1fr)]">
+    <main className=" min-h-screen w-full  grid grid-cols-[200px_minmax(900px,_1fr)]">
         <SideBar />
         <Tabs
           defaultValue="Agendado"
           onValueChange={handleTabChange}
-          className="w-full"
+          className="w-full py-10 px-5"
         >
           <TabsList className="w-full border-b pb-2 bg-transparent items-center justify-between">
             <div className="flex gap-2">
@@ -62,7 +53,7 @@ export default function Home() {
           </TabsList>
           <TabsContent value="Agendado">
             <ScrollArea>
-              <ul className="flex gap-3 ">
+              <ul className="flex gap-3 min-h-64">
                 {demarcacaoFiltradaAgendada.map((item, id) => (
                   <li
                     key={id}

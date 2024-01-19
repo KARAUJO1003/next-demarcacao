@@ -27,6 +27,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { toast } from "sonner";
+import { Plus } from "lucide-react";
 
 const formSchema = z.object({
   username: z.string().min(2),
@@ -70,8 +71,8 @@ export function Modal({ onAddItem }: ProfileFormProps) {
 
   return (
     <Dialog>
-      <DialogTrigger className="bg-zinc-950 rounded-md px-3 py-2 text-sm font-semibold text-zinc-100 hover:bg-zinc-800">
-        <p>Abrir modal</p>
+      <DialogTrigger className="bg-blue-500 rounded-md px-3 py-2 text-sm font-semibold text-zinc-100 transition-all hover:bg-blue-700">
+        <span className="flex items-center"><Plus size={19} /> Add New</span>
       </DialogTrigger>
       <DialogContent>
         <Form {...form}>
@@ -90,34 +91,36 @@ export function Modal({ onAddItem }: ProfileFormProps) {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="quadra"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Quadra</FormLabel>
-                  <FormControl>
-                    <Input placeholder="quadra" {...field} />
-                  </FormControl>
+            <div className="flex items-center gap-3">
+              <FormField
+                control={form.control}
+                name="quadra"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Quadra</FormLabel>
+                    <FormControl>
+                      <Input placeholder="quadra" {...field} />
+                    </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="lote"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Lote</FormLabel>
-                  <FormControl>
-                    <Input placeholder="lote" {...field} />
-                  </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="lote"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Lote</FormLabel>
+                    <FormControl>
+                      <Input placeholder="lote" {...field} />
+                    </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <FormField
               control={form.control}
               name="demarcador"
@@ -141,15 +144,27 @@ export function Modal({ onAddItem }: ProfileFormProps) {
                   <FormControl>
                     <Select
                       value={form.getValues("status")}
-                      onValueChange={(selectedValue) => form.setValue("status", selectedValue)}
+                      onValueChange={(selectedValue) =>
+                        form.setValue("status", selectedValue)
+                      }
                     >
                       <SelectTrigger>
                         <SelectValue placeholder="Selecione algo" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectGroup {...field}>
-                          <SelectItem value="Agendado"><span className="flex items-center justify-center gap-3"><div className=" rounded-full bg-orange-500 w-3 h-3"/> Agendado</span></SelectItem>
-                          <SelectItem value="Demarcado"><span className="flex items-center justify-center gap-3"><div className=" rounded-full bg-green-500 w-3 h-3"/> Demarcado</span></SelectItem>
+                          <SelectItem value="Agendado">
+                            <span className="flex items-center justify-center gap-3">
+                              <div className=" rounded-full bg-orange-500 w-3 h-3" />{" "}
+                              Agendado
+                            </span>
+                          </SelectItem>
+                          <SelectItem value="Demarcado">
+                            <span className="flex items-center justify-center gap-3">
+                              <div className=" rounded-full bg-green-500 w-3 h-3" />{" "}
+                              Demarcado
+                            </span>
+                          </SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>
@@ -189,7 +204,7 @@ export function Modal({ onAddItem }: ProfileFormProps) {
                 )}
               />
             </div>
-            <Button type="submit">Submit</Button>
+            <Button type="submit">Adicionar</Button>
           </form>
         </Form>
       </DialogContent>

@@ -2,8 +2,8 @@
 
 const SideBar= (): JSX.Element => {
   return (
-    <div className="bg-zinc-500">
-      <h1>AgendaDem</h1>
+    <div className="prose  bg-zinc-200 py-10 px-5">
+      <h2>AGDEMAR</h2>
     </div>
   );
 }
