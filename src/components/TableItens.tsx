@@ -34,47 +34,21 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { AgendaItem } from "@/app/ag";
 
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
-};
-const data: Payment[] = [
+const data: AgendaItem[] = [
   {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    email: "ken99@yahoo.com",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    email: "Abe45@gmail.com",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    email: "Monserrat44@gmail.com",
-  },
-  {
-    id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    email: "Silas22@gmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    email: "carmella@hotmail.com",
+    username: "Kaesyo",
+    quadra: "00",
+    lote: "00",
+    data: "2024/01/18",
+    hora: "17:00",
+    demarcador: "Mauro",
+    status: "Agendado",
   },
 ];
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<AgendaItem>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -107,35 +81,62 @@ export const columns: ColumnDef<Payment>[] = [
     ),
   },
   {
-    accessorKey: "email",
+    accessorKey: "quadra",
     header: ({ column }) => {
       return (
         <Button
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Email
+          Quadra
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+    cell: ({ row }) => (
+      <div className="lowercase">{row.getValue("quadra")}</div>
+    ),
   },
   {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
-
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
-
-      return <div className="text-right font-medium">{formatted}</div>;
+    accessorKey: "lote",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Lote
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
     },
+    cell: ({ row }) => <div className="lowercase">{row.getValue("lote")}</div>,
   },
+  {
+    accessorKey: "username",
+    header: "User",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("username")}</div>
+    ),
+  },
+  {
+    accessorKey: "demarcador",
+    header: "Demarcador",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("demarcador")}</div>
+    ),
+  },
+  {
+    accessorKey: "data",
+    header: "Data",
+    cell: ({ row }) => <div className="capitalize">{row.getValue("data")}</div>,
+  },
+  {
+    accessorKey: "hora",
+    header: "Hora",
+    cell: ({ row }) => <div className="capitalize">{row.getValue("hora")}</div>,
+  },
+
   {
     id: "actions",
     enableHiding: false,
@@ -153,7 +154,7 @@ export const columns: ColumnDef<Payment>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
+              onClick={() => navigator.clipboard.writeText(payment.username)}
             >
               Copy payment ID
             </DropdownMenuItem>
@@ -216,17 +217,17 @@ const DataTableDemo = () => {
             {table
               .getAllColumns()
               .filter((column: any) => column.getCanHide())
-              .map((column: any) => {
+              .map((column: any, index) => {
                 return (
                   <DropdownMenuCheckboxItem
-                    key={column.id}
+                    key={index}
                     className="capitalize"
                     checked={column.getIsVisible()}
                     onCheckedChange={(value) =>
                       column.toggleVisibility(!!value)
                     }
                   >
-                    {column.id}
+                    {index}
                   </DropdownMenuCheckboxItem>
                 );
               })}
@@ -236,11 +237,11 @@ const DataTableDemo = () => {
       <div className="rounded-md border">
         <Table>
           <TableHeader>
-            {table.getHeaderGroups().map((headerGroup: any) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header: any) => {
+            {table.getHeaderGroups().map((headerGroup: any, index) => (
+              <TableRow key={index}>
+                {headerGroup.headers.map((header: any, index: any) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={index}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(

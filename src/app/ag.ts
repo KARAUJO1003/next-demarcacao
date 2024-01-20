@@ -1,5 +1,5 @@
 export interface AgendaItem {
-  username?: string;
+  username: string;
   quadra?: string;
   lote?: string;
   data?: string;
