@@ -35,6 +35,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { AgendaItem, Demarcacao } from "@/app/ag";
+import { Modal } from "./Modal";
 
 const data: AgendaItem[] = Demarcacao;
 
@@ -65,7 +66,7 @@ export const columns: ColumnDef<AgendaItem>[] = [
   },
   {
     accessorKey: "status",
-    enableResizing:true,
+    enableResizing: true,
     size: 200,
     header: ({ column }) => {
       return (
@@ -243,7 +244,7 @@ const DataTableDemo = () => {
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
+      <div className="flex items-center justify-between py-4">
         <Input
           placeholder="Filter clientes..."
           value={(table.getColumn("cliente")?.getFilterValue() as string) ?? ""}
@@ -252,41 +253,49 @@ const DataTableDemo = () => {
           }
           className="max-w-sm"
         />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown className="ml-2 h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column: any) => column.getCanHide())
-              .map((column: any, index) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={index}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {index} 
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex items-center gap-1">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="ml-auto">
+                Columns <ChevronDown className="ml-2 h-4 w-4" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {table
+                .getAllColumns()
+                .filter((column: any) => column.getCanHide())
+                .map((column: any, index) => {
+                  return (
+                    <DropdownMenuCheckboxItem
+                      key={index}
+                      className="capitalize"
+                      checked={column.getIsVisible()}
+                      onCheckedChange={(value) =>
+                        column.toggleVisibility(!!value)
+                      }
+                    >
+                      {index}
+                    </DropdownMenuCheckboxItem>
+                  );
+                })}
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <Modal onAddItem={()=> console.log()} />
+        </div>
       </div>
       <div className="rounded-md border ">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup: any, index) => (
-              <TableRow key={index}>
+              <TableRow key={index} className="bg-muted/50">
                 {headerGroup.headers.map((header: any, index: any) => {
                   return (
-                    <TableHead className="relative text-sm" colSpan={header.colSpan} style={{ width: `${header.getSize()}px` }} key={index}>
+                    <TableHead
+                      className="relative text-sm"
+                      colSpan={header.colSpan}
+                      style={{ width: `${header.getSize()}px` }}
+                      key={index}
+                    >
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -296,7 +305,11 @@ const DataTableDemo = () => {
                       <div
                         onMouseDown={header.getResizeHandler()}
                         onTouchStart={header.getResizeHandler()}
-                        className={`${header.column.getIsResizing() ? "bg-blue-500 opacity-100" : "opacity-0" } absolute hover:opacity-100 opacity-0 bg-zinc-500/50 top-0 right-0  w-1 h-full cursor-col-resize`}
+                        className={`${
+                          header.column.getIsResizing()
+                            ? "bg-blue-500 opacity-100"
+                            : "opacity-0"
+                        } absolute hover:opacity-100 opacity-0 bg-zinc-500/50 top-0 right-0  w-1 h-full cursor-col-resize`}
                       />
                     </TableHead>
                   );
@@ -308,13 +321,12 @@ const DataTableDemo = () => {
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row: any) => (
                 <TableRow
-                className="text-xs"
+                  className="text-xs "
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell: any) => (
-                    <TableCell 
-                      key={cell.id}>
+                    <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()

@@ -75,6 +75,7 @@ export function Modal({ onAddItem }: ProfileFormProps) {
         <span className="flex items-center"><Plus size={19} /> Add New</span>
       </DialogTrigger>
       <DialogContent>
+        <h1 className="font-bold text-zinc-700 text-xl">Agende uma nova demarcação</h1>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
@@ -204,7 +205,7 @@ export function Modal({ onAddItem }: ProfileFormProps) {
                 )}
               />
             </div>
-            <Button type="submit">Adicionar</Button>
+            <Button className="bg-blue-500 hover:bg-blue-600 text-zinc-200" type="submit">Adicionar</Button>
           </form>
         </Form>
       </DialogContent>

@@ -1,7 +1,7 @@
 const loading = () => {
   return (
-    <div>
-      Enter
+    <div className="flex items-center justify-center">
+      Carregando
     </div>
   );
 }

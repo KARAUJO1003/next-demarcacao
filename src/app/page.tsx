@@ -53,12 +53,12 @@ export default function Home() {
       <Tabs
         defaultValue="Agendado"
         onValueChange={handleTabChange}
-        className="w-full py-10 px-5"
+        className="w-full py-5 px-5"
       >
         <TabsList className="w-full border-b pb-2 bg-transparent items-center justify-between">
           <div className="flex gap-2">
-            <TabsTrigger value="Agendado">Agendado</TabsTrigger>
-            <TabsTrigger value="Demarcado">Demarcado</TabsTrigger>
+            <TabsTrigger value="Agendado" className="text-foreground">Agendado</TabsTrigger>
+            <TabsTrigger value="Demarcado" className="text-foreground">Demarcado</TabsTrigger>
           </div>
           <Modal onAddItem={handleAddItem} />
         </TabsList>
