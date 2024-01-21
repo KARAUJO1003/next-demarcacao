@@ -92,7 +92,26 @@ export const columns: ColumnDef<AgendaItem>[] = [
     ),
   },
   {
+    accessorKey: "cliente",
+    minSize: 350,
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Cliente
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("cliente")}</div>
+    ),
+  },
+  {
     accessorKey: "quadra",
+    
     header: ({ column }) => {
       return (
         <Button
@@ -122,23 +141,6 @@ export const columns: ColumnDef<AgendaItem>[] = [
       );
     },
     cell: ({ row }) => <div className="lowercase">{row.getValue("lote")}</div>,
-  },
-  {
-    accessorKey: "cliente",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Cliente
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("cliente")}</div>
-    ),
   },
   {
     accessorKey: "demarcador",
