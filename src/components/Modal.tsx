@@ -30,11 +30,11 @@ import { toast } from "sonner";
 import { Plus } from "lucide-react";
 
 const formSchema = z.object({
-  username: z.string().min(2),
+  cliente: z.string().min(2),
   quadra: z.string().min(2),
   lote: z.string().min(2),
-  data: z.string(),
-  hora: z.string(),
+  dt_agendamento: z.string(),
+  horario_do_agen: z.string(),
   status: z.string(),
   demarcador: z.string(),
 });
@@ -47,11 +47,11 @@ export function Modal({ onAddItem }: ProfileFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      username: "Kaesyo",
+      cliente: "Kaesyo",
       quadra: "",
       lote: "",
-      data: "",
-      hora: "",
+      dt_agendamento: "",
+      horario_do_agen: "",
       demarcador: "Mauro",
       status: "Agendado",
     },
@@ -59,7 +59,7 @@ export function Modal({ onAddItem }: ProfileFormProps) {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
-    toast("Item adicionado para a próxima " + values.data, {
+    toast("Item adicionado para a próxima " + values.dt_agendamento, {
       description: "Quadra " + values.quadra + " Lote " + values.lote,
       action: {
         label: "Fechar",
@@ -79,10 +79,10 @@ export function Modal({ onAddItem }: ProfileFormProps) {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
               control={form.control}
-              name="username"
+              name="cliente"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Cliente</FormLabel>
                   <FormControl>
                     <Input placeholder="Usuário" {...field} />
                   </FormControl>
@@ -177,12 +177,12 @@ export function Modal({ onAddItem }: ProfileFormProps) {
             <div className="flex w-full items-center justify-center gap-3">
               <FormField
                 control={form.control}
-                name="data"
+                name="dt_agendamento"
                 render={({ field }) => (
                   <FormItem className="w-full">
                     <FormLabel>Data e Hora</FormLabel>
                     <FormControl>
-                      <Input type="date" {...field} />
+                      <Input lang="pt-BR" type="date" {...field} />
                     </FormControl>
 
                     <FormMessage />
@@ -191,7 +191,7 @@ export function Modal({ onAddItem }: ProfileFormProps) {
               />
               <FormField
                 control={form.control}
-                name="hora"
+                name="horario_do_agen"
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Hora</FormLabel>

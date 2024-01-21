@@ -34,19 +34,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { AgendaItem } from "@/app/ag";
+import { AgendaItem, Demarcacao } from "@/app/ag";
 
-const data: AgendaItem[] = [
-  {
-    username: "Kaesyo",
-    quadra: "00",
-    lote: "00",
-    data: "2024/01/18",
-    hora: "17:00",
-    demarcador: "Mauro",
-    status: "Agendado",
-  },
-];
+const data: AgendaItem[] = Demarcacao;
 
 export const columns: ColumnDef<AgendaItem>[] = [
   {
@@ -75,9 +65,29 @@ export const columns: ColumnDef<AgendaItem>[] = [
   },
   {
     accessorKey: "status",
-    header: "Status",
+    enableResizing:true,
+    size: 200,
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Status
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
+      <div
+        className={`capitalize text-sm rounded-full flex items-center justify-center w-min px-3 ${
+          row.getValue("status") === "Agendado"
+            ? "bg-amber-600 text-orange-300"
+            : "bg-emerald-600 text-green-300"
+        } capitalize`}
+      >
+        {row.getValue("status")}
+      </div>
     ),
   },
   {
@@ -113,28 +123,62 @@ export const columns: ColumnDef<AgendaItem>[] = [
     cell: ({ row }) => <div className="lowercase">{row.getValue("lote")}</div>,
   },
   {
-    accessorKey: "username",
-    header: "User",
+    accessorKey: "cliente",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Cliente
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("username")}</div>
+      <div className="capitalize">{row.getValue("cliente")}</div>
     ),
   },
   {
     accessorKey: "demarcador",
-    header: "Demarcador",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Demarcador
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => (
       <div className="capitalize">{row.getValue("demarcador")}</div>
     ),
   },
   {
-    accessorKey: "data",
-    header: "Data",
-    cell: ({ row }) => <div className="capitalize">{row.getValue("data")}</div>,
+    accessorKey: "dt_agendamento",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Data
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("dt_agendamento")}</div>
+    ),
   },
   {
-    accessorKey: "hora",
+    accessorKey: "horario_do_agen",
     header: "Hora",
-    cell: ({ row }) => <div className="capitalize">{row.getValue("hora")}</div>,
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("horario_do_agen")}</div>
+    ),
   },
 
   {
@@ -154,9 +198,9 @@ export const columns: ColumnDef<AgendaItem>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.username)}
+              onClick={() => navigator.clipboard.writeText(payment.cliente)}
             >
-              Copy payment ID
+              Copiar nome do cliente
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>View customer</DropdownMenuItem>
@@ -188,6 +232,7 @@ const DataTableDemo = () => {
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
+    columnResizeMode: "onChange",
     state: {
       sorting,
       columnFilters,
@@ -200,10 +245,10 @@ const DataTableDemo = () => {
     <div className="w-full">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          placeholder="Filter clientes..."
+          value={(table.getColumn("cliente")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
+            table.getColumn("cliente")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -227,27 +272,32 @@ const DataTableDemo = () => {
                       column.toggleVisibility(!!value)
                     }
                   >
-                    {index}
+                    {index} 
                   </DropdownMenuCheckboxItem>
                 );
               })}
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-md border ">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup: any, index) => (
               <TableRow key={index}>
                 {headerGroup.headers.map((header: any, index: any) => {
                   return (
-                    <TableHead key={index}>
+                    <TableHead className="relative text-sm" colSpan={header.colSpan} style={{ width: `${header.getSize()}px` }} key={index}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
                             header.getContext()
                           )}
+                      <div
+                        onMouseDown={header.getResizeHandler()}
+                        onTouchStart={header.getResizeHandler()}
+                        className={`${header.column.getIsResizing() ? "bg-blue-500 opacity-100" : "opacity-0" } absolute hover:opacity-100 opacity-0 bg-zinc-500/50 top-0 right-0  w-1 h-full cursor-col-resize`}
+                      />
                     </TableHead>
                   );
                 })}
@@ -258,11 +308,13 @@ const DataTableDemo = () => {
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row: any) => (
                 <TableRow
+                className="text-xs"
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell: any) => (
-                    <TableCell key={cell.id}>
+                    <TableCell 
+                      key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
