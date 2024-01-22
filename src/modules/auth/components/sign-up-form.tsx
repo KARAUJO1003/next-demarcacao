@@ -26,17 +26,17 @@ export function SignUpForm() {
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="name">Name</Label>
-              <Input id="name" placeholder="Name of your project" />
+              <Input id="name" name="name" placeholder="Name of your project" />
             </div>
 
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="email">E-mail</Label>
-              <Input id="email" placeholder="Name of your project" />
+              <Input id="email" name="email" placeholder="Name of your project" />
             </div>
 
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="password">Senha</Label>
-              <Input id="password" type="password" placeholder="Senha of your project" />
+              <Input id="password" name="password" type="password" placeholder="Senha of your project" />
             </div>
           </div>
         </CardContent>
