@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { CalendarDemo } from "./Calendar-Date";
 import { ModeToggle } from "./ModeToggle";
 import LogoDark02  from '@/assets/logo02dark.png'
 import Image from "next/image";
+import { Button } from "./ui/button";
 const SideBar = (): JSX.Element => {
   return (
     <div className="prose dark:prose-invert border-r w-[300px] py-10 px-5 flex flex-col justify-between  h-screen fixed">
@@ -10,12 +10,16 @@ const SideBar = (): JSX.Element => {
         
         <Image loading="eager" alt="logo" src={LogoDark02} height={50} width={200}/>
       </div>
-      <div className="flex items-center justify-between">
-        <ModeToggle />
-        <Link href="/portal/login">Login</Link>
-        <Link href="/portal/cadastro">Cadastro</Link>
-        <Link href="/portal">Portal</Link>
+      <div className="flex flex-col h-full mt-12 gap-4 items-start justify-start">
+        
+        <Button variant={'secondary'} className="w-full justify-start text-zinc-400 hover:text-zinc-50"><Link className="text-zinc-300 " href="/portal/login">Login</Link></Button>
+        <Button variant={'secondary'} className="w-full justify-start text-zinc-400 hover:text-zinc-50"><Link className="text-zinc-300 " href="/portal/cadastro">Cadastro</Link></Button>
+        <Button variant={'secondary'} className="w-full justify-start text-zinc-400 hover:text-zinc-50"><Link className="text-zinc-300 " href="/portal">Portal</Link></Button>
+        
+        
+        
       </div>
+        <ModeToggle />
     </div>
   );
 };
