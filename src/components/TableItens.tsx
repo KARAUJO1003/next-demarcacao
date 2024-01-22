@@ -83,8 +83,8 @@ export const columns: ColumnDef<AgendaItem>[] = [
       <div
         className={`capitalize text-sm rounded-full flex items-center justify-center w-min px-3 ${
           row.getValue("status") === "Agendado"
-            ? "bg-amber-600 text-orange-300"
-            : "bg-emerald-600 text-green-300"
+            ? "bg-amber-600/80 text-orange-200"
+            : "bg-emerald-600/80 text-green-200"
         } capitalize`}
       >
         {row.getValue("status")}
