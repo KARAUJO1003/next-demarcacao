@@ -71,7 +71,7 @@ export function Modal({ onAddItem }: ProfileFormProps) {
 
   return (
     <Dialog>
-      <DialogTrigger className="bg-blue-500 rounded-md px-3 py-2 text-sm font-semibold text-zinc-100 transition-all hover:bg-blue-700">
+      <DialogTrigger className="bg-emerald-600 rounded-md px-3 py-2 text-sm font-semibold text-zinc-100 transition-all hover:bg-emerald-500">
         <span className="flex items-center"><Plus size={19} /> Add New</span>
       </DialogTrigger>
       <DialogContent>
