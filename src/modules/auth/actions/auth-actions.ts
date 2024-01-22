@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import {  PrismaClient } from '@prisma/client'
 import * as bcrypt from 'bcrypt'
 import { redirect } from 'next/navigation'
 
@@ -20,6 +20,8 @@ async function createAccount(formData:FormData) {
       password: hashPassword
     }
   })
+
+
   redirect('/portal/login')
 }
 

@@ -63,7 +63,7 @@ export default function Home() {
           <Modal onAddItem={handleAddItem} />
         </TabsList>
         <TabsContent value="Agendado">
-          <ScrollArea>
+          <ScrollArea className="outline-none">
             <ul className="flex gap-3 min-h-64">
               {demarcacaoFiltradaAgendada.map((item, id) => (
                 <li key={id} className={`  mb-3 flex flex-col min-w-80 h-min `}>
@@ -84,7 +84,7 @@ export default function Home() {
           </ScrollArea>
         </TabsContent>
         <TabsContent value="Demarcado">
-          <ScrollArea>
+          <ScrollArea className="outline-none">
             <ul className="flex gap-3 ">
               {demarcacaoFiltradaDemarcado.map((item, id) => (
                 <li

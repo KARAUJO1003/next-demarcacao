@@ -248,7 +248,7 @@ const DataTableDemo = () => {
     <div className="w-full">
       <div className="flex items-center justify-between py-4">
         <Input
-          placeholder="Filter clientes..."
+          placeholder="Filtro de clientes..."
           value={(table.getColumn("cliente")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("cliente")?.setFilterValue(event.target.value)
