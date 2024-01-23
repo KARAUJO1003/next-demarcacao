@@ -60,8 +60,8 @@
     "typescript": "^5"
   },
   "prisma": {
-		"seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
-	},
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
   "resolutions": {
     "string-width": "4.2.3"
   }
