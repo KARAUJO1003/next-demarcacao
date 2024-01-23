@@ -37,7 +37,7 @@ async function login(formData: FormData) {
     },
   });
   if (!user) {
-    console.log("Error");
+    console.log("Erro email ou senha incorreto");
     redirect("/portal/login");
   }
   const isMatch = await bcrypt.compare(password, user.password);
