@@ -53,7 +53,7 @@ export default function Home() {
       <Tabs
         defaultValue="Agendado"
         onValueChange={handleTabChange}
-        className="w-full py-5 px-5"
+        className="w-full py-5 px-5 bg-secondary dark:bg-background"
       >
         <TabsList className="w-full border-b pb-2 bg-transparent items-center justify-between">
           <div className="flex gap-2">

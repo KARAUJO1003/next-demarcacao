@@ -319,7 +319,7 @@ const DataTableDemo = () => {
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody>
+          <TableBody className="bg-zinc-50 dark:bg-background">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row: any) => (
                 <TableRow
