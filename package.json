@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -59,6 +59,9 @@
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
   },
+  "prisma": {
+		"seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+	},
   "resolutions": {
     "string-width": "4.2.3"
   }
