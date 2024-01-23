@@ -1,6 +1,6 @@
-import * as React from "react"
+import * as React from "react";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -8,9 +8,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import AuthActions from "../actions/auth-actions";
+import Link from "next/link";
 
 export function LoginForm() {
   return (
@@ -19,24 +21,40 @@ export function LoginForm() {
         <CardTitle>Login</CardTitle>
         <CardDescription>Faça login para continuar.</CardDescription>
       </CardHeader>
-      <CardContent>
-        <form>
+      <form action={AuthActions.login}>
+        <CardContent>
           <div className="grid w-full items-center gap-4">
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="email">E-mail</Label>
-              <Input id="email" placeholder="Name of your project" />
+              <Input
+                name="email"
+                id="email"
+                placeholder="Name of your project"
+              />
             </div>
             <div className="flex flex-col space-y-1.5">
               <Label htmlFor="password">Senha</Label>
-              <Input id="password" placeholder="Senha of your project" />
+              <Input
+                name="password"
+                id="password"
+                type="password"
+                placeholder="Senha of your project"
+              />
             </div>
           </div>
-        </form>
-      </CardContent>
-      <CardFooter className="flex justify-between">
-        <Button variant="outline">Criar conta</Button>
-        <Button>Entrar</Button>
-      </CardFooter>
+        </CardContent>
+        <CardFooter className="flex justify-between">
+          <Button variant="outline">
+            <Link href="/portal/cadastro">Criar conta</Link>
+          </Button>
+          <Button
+            className="bg-emerald-600 text-zinc-50 hover:bg-emerald-500"
+            type="submit"
+          >
+            Entrar
+          </Button>
+        </CardFooter>
+      </form>
     </Card>
-  )
+  );
 }
