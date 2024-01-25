@@ -77,11 +77,11 @@ export function Modal({ onAddItem }: ProfileFormProps) {
         </span>
       </DialogTrigger>
       <DialogContent>
-        <h1 className="font-bold text-foreground text-xl">
+        <h1 className="font-bold text-zinc-700 text-xl">
           Agende uma nova demarcação
         </h1>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
               control={form.control}
               name="cliente"
@@ -96,7 +96,7 @@ export function Modal({ onAddItem }: ProfileFormProps) {
                 </FormItem>
               )}
             />
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-3">
               <FormField
                 control={form.control}
                 name="quadra"
@@ -210,7 +210,7 @@ export function Modal({ onAddItem }: ProfileFormProps) {
               />
             </div>
             <Button
-              className="bg-emerald-600 hover:bg-emerald-500 text-zinc-200"
+              className="bg-blue-500 hover:bg-blue-600 text-zinc-200"
               type="submit"
             >
               Adicionar
