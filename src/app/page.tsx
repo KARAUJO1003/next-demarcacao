@@ -64,7 +64,7 @@ export default function Home() {
         </TabsList>
         <TabsContent value="Agendado">
           <ScrollArea className="outline-none">
-            <ul className="flex gap-3 min-h-64">
+            <ul className="flex gap-3">
               {demarcacaoFiltradaAgendada.map((item, id) => (
                 <li key={id} className={`  mb-3 flex flex-col min-w-80 h-min `}>
                   <CardItem
