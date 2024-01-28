@@ -3,6 +3,7 @@ import { ModeToggle } from "./ModeToggle";
 import LogoDark02  from '@/assets/logo02dark.png'
 import Image from "next/image";
 import { Button } from "./ui/button";
+import { LogOut } from "lucide-react";
 const SideBar = (): JSX.Element => {
   return (
     <div className="prose dark:prose-invert border-r w-[300px] py-10 px-5 flex flex-col justify-between  h-screen fixed">
@@ -15,11 +16,18 @@ const SideBar = (): JSX.Element => {
         <Button variant={'secondary'} className="w-full justify-start text-zinc-400 hover:text-zinc-50"><Link className="text-zinc-300 " href="/portal/login">Login</Link></Button>
         <Button variant={'secondary'} className="w-full justify-start text-zinc-400 hover:text-zinc-50"><Link className="text-zinc-300 " href="/portal/cadastro">Cadastro</Link></Button>
         <Button variant={'secondary'} className="w-full justify-start text-zinc-400 hover:text-zinc-50"><Link className="text-zinc-300 " href="/portal">Portal</Link></Button>
+        <Button variant={'secondary'} className="w-full justify-start text-zinc-400 hover:text-zinc-50"><Link className="text-zinc-300 " href="/users">Users</Link></Button>
         
         
         
       </div>
+      <div className="w-full flex items-center justify-between">
         <ModeToggle />
+        <Button variant={'outline'} className="flex gap-2">
+          <LogOut size={16}/>
+          <Link href='/api/logout' className="no-underline"> Sair</Link>
+        </Button>
+      </div>
     </div>
   );
 };
