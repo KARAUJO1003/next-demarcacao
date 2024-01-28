@@ -1,8 +1,8 @@
-import {  PrismaClient } from '@prisma/client'
-import * as bcrypt from 'bcrypt'
-import { redirect } from 'next/navigation'
-import AuthService from '../services/auth-service'
-
+import { PrismaClient } from "@prisma/client";
+import * as bcrypt from "bcrypt";
+import { redirect } from "next/navigation";
+import AuthService from "../services/auth-service";
+import { toast } from "sonner";
 
 const prisma = new PrismaClient()
 
@@ -35,12 +35,11 @@ async function login(formData: FormData) {
   const user = await prisma.user.findFirst({
     where: {
       email,
-    }
-  })
-  if(!user) { 
-    console.log('Error')
-    redirect('/portal')
-
+    },
+  });
+  if (!user) {
+    console.log("Error");
+    redirect("/portal/login");
   }
   const isMatch = await bcrypt.compare(password, user.password)
   if(!isMatch) {

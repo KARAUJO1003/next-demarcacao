@@ -98,6 +98,7 @@ export default function Home() {
                     date={item.dt_agendamento}
                     timer={item.horario_do_agen}
                     demarcador={item.demarcador}
+                    empresa={item.empresa}
                   />
                 </li>
               ))}
