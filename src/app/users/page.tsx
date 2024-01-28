@@ -36,7 +36,7 @@ export default function UsersList() {
             {users.map((user: User) => (
               <TableRow key={user.id}>
                 <TableCell>{user.name}</TableCell>
-                <TableCell>{user.id}</TableCell>
+                <TableCell>{user.email}</TableCell>
               </TableRow>
             ))}
           </TableBody>
