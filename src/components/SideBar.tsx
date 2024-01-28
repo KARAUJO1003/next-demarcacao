@@ -1,22 +1,27 @@
 import Link from "next/link";
 import { ModeToggle } from "./ModeToggle";
 import LogoDark02  from '@/assets/logo02dark.png'
+import LogoLight02  from '@/assets/logo02light.png'
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { LogOut } from "lucide-react";
+import { useTheme } from "next-themes";
 const SideBar = (): JSX.Element => {
+
+  const {theme} = useTheme()
+
   return (
     <div className="prose dark:prose-invert border-r w-[300px] py-10 px-5 flex flex-col justify-between  h-screen fixed">
       <div className="w-[200px] h-[50px] overflow-hidden flex items-center justify-center">
         
-        <Image loading="eager" alt="logo" src={LogoDark02} height={50} width={200}/>
+        <Image loading="eager" alt="logo" src={theme === 'dark'? LogoDark02 : LogoLight02} height={50} width={200}/>
       </div>
       <div className="flex flex-col h-full mt-12 gap-4 items-start justify-start">
         
-        <Button variant={'secondary'} className="w-full justify-start text-zinc-400 hover:text-zinc-50"><Link className="text-zinc-300 " href="/portal/login">Login</Link></Button>
-        <Button variant={'secondary'} className="w-full justify-start text-zinc-400 hover:text-zinc-50"><Link className="text-zinc-300 " href="/portal/cadastro">Cadastro</Link></Button>
-        <Button variant={'secondary'} className="w-full justify-start text-zinc-400 hover:text-zinc-50"><Link className="text-zinc-300 " href="/portal">Portal</Link></Button>
-        <Button variant={'secondary'} className="w-full justify-start text-zinc-400 hover:text-zinc-50"><Link className="text-zinc-300 " href="/users">Users</Link></Button>
+        <Button variant={'outline'} className="w-full justify-start bg-zinc-300 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"><Link className="no-underline" href="/portal/login">Login</Link></Button>
+        <Button variant={'outline'} className="w-full justify-start bg-zinc-300 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"><Link className="no-underline" href="/portal/cadastro">Cadastro</Link></Button>
+        <Button variant={'outline'} className="w-full justify-start bg-zinc-300 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"><Link className="no-underline" href="/portal">Portal</Link></Button>
+        <Button variant={'outline'} className="w-full justify-start bg-zinc-300 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"><Link className="no-underline" href="/users">Users</Link></Button>
         
         
         

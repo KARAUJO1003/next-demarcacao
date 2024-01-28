@@ -111,7 +111,7 @@ export const columns: ColumnDef<AgendaItem>[] = [
   },
   {
     accessorKey: "quadra",
-    
+
     header: ({ column }) => {
       return (
         <Button
@@ -276,13 +276,13 @@ const DataTableDemo = () => {
                         column.toggleVisibility(!!value)
                       }
                     >
-                      {index}
+                      {index} {column.columnDef.accessorKey}
                     </DropdownMenuCheckboxItem>
                   );
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Modal onAddItem={()=> console.log()} />
+          <Modal onAddItem={() => console.log()} />
         </div>
       </div>
       <div className="rounded-md border ">

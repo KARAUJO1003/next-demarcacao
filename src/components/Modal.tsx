@@ -210,7 +210,7 @@ export function Modal({ onAddItem }: ProfileFormProps) {
               />
             </div>
             <Button
-              className="bg-blue-500 hover:bg-blue-600 text-zinc-200"
+              className="bg-emerald-600 hover:bg-emerald-500 text-zinc-200"
               type="submit"
             >
               Adicionar
