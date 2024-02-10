@@ -17,11 +17,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 5.8.1
- * Query Engine version: 78caf6feeaed953168c64e15a249c3e9a033ebe2
+ * Query Engine version: 23fdc5965b1e05fc54e5f26ed3de66776b93de64
  */
 Prisma.prismaVersion = {
   client: "5.8.1",
-  engine: "78caf6feeaed953168c64e15a249c3e9a033ebe2"
+  engine: "23fdc5965b1e05fc54e5f26ed3de66776b93de64"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -116,6 +116,24 @@ exports.Prisma.UserScalarFieldEnum = {
   updateAt: 'updateAt'
 };
 
+exports.Prisma.BookingsScalarFieldEnum = {
+  id: 'id',
+  empresa: 'empresa',
+  cliente: 'cliente',
+  cpf_cnpj: 'cpf_cnpj',
+  quadra: 'quadra',
+  lote: 'lote',
+  status_da_venda: 'status_da_venda',
+  benfeitoria: 'benfeitoria',
+  dt_agendamento: 'dt_agendamento',
+  horario_do_agen: 'horario_do_agen',
+  resp_pelo_agendamento: 'resp_pelo_agendamento',
+  demarcador: 'demarcador',
+  status: 'status',
+  obs: 'obs',
+  idBookings: 'idBookings'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -126,9 +144,15 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Bookings: 'Bookings'
 };
 
 /**

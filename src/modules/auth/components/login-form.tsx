@@ -19,7 +19,7 @@ export function LoginForm() {
     <Card className="w-[350px]">
       <CardHeader>
         <CardTitle>Login</CardTitle>
-        <CardDescription>Faça login para continuar.</CardDescription>
+        <CardDescription>Faça seu login para continuar.</CardDescription>
       </CardHeader>
       <form action={AuthActions.login}>
         <CardContent>
@@ -29,7 +29,7 @@ export function LoginForm() {
               <Input
                 name="email"
                 id="email"
-                placeholder="Name of your project"
+                placeholder="Digite um email válido"
               />
             </div>
             <div className="flex flex-col space-y-1.5">
@@ -38,15 +38,12 @@ export function LoginForm() {
                 name="password"
                 id="password"
                 type="password"
-                placeholder="Senha of your project"
+                placeholder="Digite sua senha"
               />
             </div>
           </div>
         </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button variant="outline">
-            <Link href="/portal/cadastro">Criar conta</Link>
-          </Button>
+        <CardFooter className="flex justify-end">
           <Button
             className="bg-emerald-600 text-zinc-50 hover:bg-emerald-500"
             type="submit"

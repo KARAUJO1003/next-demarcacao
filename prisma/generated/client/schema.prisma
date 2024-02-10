@@ -1,5 +1,5 @@
 // This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// learn more about it in the docs https//pris.ly/d/prisma-schema
 
 generator client {
   provider = "prisma-client-js"
@@ -13,10 +13,30 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  password  String
-  name      String
-  createdAt DateTime @default(now())
-  updateAt  DateTime @updatedAt
+  id          String     @id @default(uuid())
+  email       String     @unique
+  password    String
+  name        String
+  createdAt   DateTime   @default(now())
+  updateAt    DateTime   @updatedAt
+  agendamento Bookings[]
+}
+
+model Bookings {
+  id                    String  @id @default(uuid())
+  empresa               String
+  cliente               String
+  cpf_cnpj              String?
+  quadra                Int
+  lote                  Int
+  status_da_venda       String  @default("Ativa")
+  benfeitoria           String?
+  dt_agendamento        String
+  horario_do_agen       String
+  resp_pelo_agendamento String
+  demarcador            String
+  status                String
+  obs                   String?
+  author                User    @relation(fields: [idBookings], references: [id])
+  idBookings            String
 }

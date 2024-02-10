@@ -5,7 +5,7 @@ export const config = {
   matcher: "/((?!_next/static|_next/image|favicon.ico).*)",
 };
 
-const publicRoutes = ['/portal' , '/portal/login', '/portal/cadastro']
+const publicRoutes = ['/portal' , '/portal/login']
 
 export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname
