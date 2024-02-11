@@ -3,7 +3,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -15,9 +14,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
-import { AgendaItem, Demarcacao } from "@/app/ag";
-import { useState } from "react";
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from "./ui/dialog";
+import { AgendaItem } from "@/app/ag";
 import {
   Select,
   SelectContent,
@@ -31,12 +29,18 @@ import { Plus } from "lucide-react";
 
 const formSchema = z.object({
   cliente: z.string().min(2),
-  quadra: z.string().min(2),
-  lote: z.string().min(2),
+  quadra: z.string().min(1).max(2),
+  lote: z.string().min(1).max(2),
   dt_agendamento: z.string(),
   horario_do_agen: z.string(),
   status: z.string(),
   demarcador: z.string(),
+  empresa: z.string(),
+  cpf_cnpj: z.string(),
+  status_da_venda: z.string(),
+  benfeitoria: z.string(),
+  resp_pelo_agendamento: z.string(),
+  obs: z.string(),
 });
 
 type ProfileFormProps = {
@@ -47,7 +51,7 @@ export function Modal({ onAddItem }: ProfileFormProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      cliente: "Kaesyo",
+      cliente: "",
       quadra: "",
       lote: "",
       dt_agendamento: "",
@@ -77,16 +81,13 @@ export function Modal({ onAddItem }: ProfileFormProps) {
         </span>
       </DialogTrigger>
       <DialogContent>
-        <h1 className="font-bold text-zinc-700 text-xl">
-          Agende uma nova demarcação
-        </h1>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
               control={form.control}
               name="cliente"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="flex items-center gap-5">
                   <FormLabel>Cliente</FormLabel>
                   <FormControl>
                     <Input placeholder="Usuário" {...field} />
@@ -101,7 +102,7 @@ export function Modal({ onAddItem }: ProfileFormProps) {
                 control={form.control}
                 name="quadra"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="flex items-center gap-5">
                     <FormLabel>Quadra</FormLabel>
                     <FormControl>
                       <Input placeholder="quadra" {...field} />
@@ -115,7 +116,7 @@ export function Modal({ onAddItem }: ProfileFormProps) {
                 control={form.control}
                 name="lote"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="flex items-center gap-5">
                     <FormLabel>Lote</FormLabel>
                     <FormControl>
                       <Input placeholder="lote" {...field} />
@@ -130,7 +131,7 @@ export function Modal({ onAddItem }: ProfileFormProps) {
               control={form.control}
               name="demarcador"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="flex items-center gap-5">
                   <FormLabel>Demarcador</FormLabel>
                   <FormControl>
                     <Input placeholder="Demarcador" {...field} />
@@ -144,7 +145,7 @@ export function Modal({ onAddItem }: ProfileFormProps) {
               control={form.control}
               name="status"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="flex items-center gap-5">
                   <FormLabel>Status</FormLabel>
                   <FormControl>
                     <Select
@@ -184,8 +185,8 @@ export function Modal({ onAddItem }: ProfileFormProps) {
                 control={form.control}
                 name="dt_agendamento"
                 render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Data e Hora</FormLabel>
+                  <FormItem className="w-full ">
+                    <FormLabel>Data</FormLabel>
                     <FormControl>
                       <Input lang="pt-BR" type="date" {...field} />
                     </FormControl>
@@ -198,7 +199,7 @@ export function Modal({ onAddItem }: ProfileFormProps) {
                 control={form.control}
                 name="horario_do_agen"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="">
                     <FormLabel>Hora</FormLabel>
                     <FormControl>
                       <Input type="time" {...field} />
@@ -209,12 +210,17 @@ export function Modal({ onAddItem }: ProfileFormProps) {
                 )}
               />
             </div>
-            <Button
-              className="bg-emerald-600 hover:bg-emerald-500 text-zinc-200"
-              type="submit"
-            >
-              Adicionar
-            </Button>
+            <div className="flex items-center justify-between">
+              <DialogClose>
+                <Button variant={"outline"}>Cancelar</Button>
+              </DialogClose>
+              <Button
+                className="bg-emerald-600 hover:bg-emerald-500 text-zinc-200"
+                type="submit"
+              >
+                Salvar
+              </Button>
+            </div>
           </form>
         </Form>
       </DialogContent>
