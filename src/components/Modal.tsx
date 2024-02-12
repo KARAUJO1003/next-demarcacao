@@ -26,11 +26,13 @@ import {
 } from "./ui/select";
 import { toast } from "sonner";
 import { Plus } from "lucide-react";
+import type { Bookings } from "../../prisma/generated/client";
 
 const formSchema = z.object({
+  id: z.string(),
   cliente: z.string().min(2),
-  quadra: z.string().min(1).max(2),
-  lote: z.string().min(1).max(2),
+  quadra: z.number().int().min(1).max(2),
+  lote: z.number().int().min(1).max(2),
   dt_agendamento: z.string(),
   horario_do_agen: z.string(),
   status: z.string(),
@@ -41,10 +43,11 @@ const formSchema = z.object({
   benfeitoria: z.string(),
   resp_pelo_agendamento: z.string(),
   obs: z.string(),
+  idBookings: z.string()
 });
 
 type ProfileFormProps = {
-  onAddItem: (newItem: AgendaItem) => void;
+  onAddItem: (newItem: Bookings) => void;
 };
 
 export function Modal({ onAddItem }: ProfileFormProps) {
@@ -52,12 +55,18 @@ export function Modal({ onAddItem }: ProfileFormProps) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       cliente: "",
-      quadra: "",
-      lote: "",
+      quadra: 0,
+      lote: 0,
       dt_agendamento: "",
       horario_do_agen: "",
-      demarcador: "Mauro",
-      status: "Agendado",
+      status: "",
+      demarcador: "",
+      empresa: "",
+      cpf_cnpj: "",
+      status_da_venda: "",
+      benfeitoria: "",
+      resp_pelo_agendamento: "",
+      obs: "",
     },
   });
 
@@ -105,7 +114,7 @@ export function Modal({ onAddItem }: ProfileFormProps) {
                   <FormItem className="flex items-center gap-5">
                     <FormLabel>Quadra</FormLabel>
                     <FormControl>
-                      <Input placeholder="quadra" {...field} />
+                      <Input type="number" placeholder="quadra" {...field} />
                     </FormControl>
 
                     <FormMessage />
@@ -119,7 +128,7 @@ export function Modal({ onAddItem }: ProfileFormProps) {
                   <FormItem className="flex items-center gap-5">
                     <FormLabel>Lote</FormLabel>
                     <FormControl>
-                      <Input placeholder="lote" {...field} />
+                      <Input type="number" placeholder="lote" {...field} />
                     </FormControl>
 
                     <FormMessage />

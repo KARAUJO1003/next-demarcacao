@@ -1,10 +1,6 @@
-// This is your Prisma schema file,
-// learn more about it in the docs https//pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
   output   = "./generated/client"
-  // previewFeatures = ["nativeTypes"]
 }
 
 datasource db {
@@ -37,6 +33,6 @@ model Bookings {
   demarcador            String
   status                String
   obs                   String?
-  author                User    @relation(fields: [idBookings], references: [id])
   idBookings            String
+  author                User    @relation(fields: [idBookings], references: [id])
 }

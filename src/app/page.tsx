@@ -1,6 +1,7 @@
 "use client";
 
 import { AgendaItem, Demarcacao } from "@/app/ag";
+import axios from 'axios'
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -8,15 +9,7 @@ import { Modal } from "@/components/Modal";
 import TableItens from "@/components/TableItens";
 import CardItem from "@/components/CardItem";
 import SideBar from "@/components/SideBar";
-import data from "@/app/data_21-01-2024.json";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { Bookings } from "../../prisma/generated/client";
 
 export default function Home() {
   const [exibirAgendadas, setExibirAgendadas] = useState(true);
@@ -40,9 +33,8 @@ export default function Home() {
   const demarcacaoFiltradaDemarcado = demarcacaoFiltrada.filter(
     (item) => item.status === "Demarcado"
   );
-  const handleAddItem: (newItem: AgendaItem) => void = (newItem) => {
-    setDemarcacao((prevDemarcacao) => [...prevDemarcacao, newItem]);
-    console.log(demarcacao);
+  const handleAddItem:  (newItem: Bookings) => void = async (newItem) => {   // Fazer a chamada para a rota HTTP POST com os dados do formulário
+      await axios.post('/api/bookings', newItem);
   };
 
   return (
