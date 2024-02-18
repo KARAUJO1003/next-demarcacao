@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../../../../prisma/generated/client";
 import * as bcrypt from "bcrypt";
 import { redirect } from "next/navigation";
 import AuthService from "../services/auth-service";

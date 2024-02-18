@@ -145,7 +145,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\kaesy\\OneDrive\\Documentos\\GitHub\\react_estudos\\next-demarcacao\\prisma\\generated\\client",
+      "value": "C:\\Users\\kaesy\\OneDrive\\Documentos\\GitHub\\next-demarcacao\\prisma\\generated\\client",
       "fromEnvVar": null
     },
     "config": {
@@ -176,13 +176,13 @@ const config = {
   "inlineDatasources": {
     "db": {
       "url": {
-        "fromEnvVar": "DATABASE_URL",
+        "fromEnvVar": "POSTGRES_PRISMA_URL",
         "value": null
       }
     }
   },
-  "inlineSchema": "Z2VuZXJhdG9yIGNsaWVudCB7CiAgcHJvdmlkZXIgPSAicHJpc21hLWNsaWVudC1qcyIKICBvdXRwdXQgICA9ICIuL2dlbmVyYXRlZC9jbGllbnQiCn0KCmRhdGFzb3VyY2UgZGIgewogIHByb3ZpZGVyID0gInBvc3RncmVzIgogIHVybCAgICAgID0gZW52KCJEQVRBQkFTRV9VUkwiKQp9Cgptb2RlbCBVc2VyIHsKICBpZCAgICAgICAgICBTdHJpbmcgICAgIEBpZCBAZGVmYXVsdCh1dWlkKCkpCiAgZW1haWwgICAgICAgU3RyaW5nICAgICBAdW5pcXVlCiAgcGFzc3dvcmQgICAgU3RyaW5nCiAgbmFtZSAgICAgICAgU3RyaW5nCiAgY3JlYXRlZEF0ICAgRGF0ZVRpbWUgICBAZGVmYXVsdChub3coKSkKICB1cGRhdGVBdCAgICBEYXRlVGltZSAgIEB1cGRhdGVkQXQKICBhZ2VuZGFtZW50byBCb29raW5nc1tdCn0KCm1vZGVsIEJvb2tpbmdzIHsKICBpZCAgICAgICAgICAgICAgICAgICAgU3RyaW5nICBAaWQgQGRlZmF1bHQodXVpZCgpKQogIGVtcHJlc2EgICAgICAgICAgICAgICBTdHJpbmcKICBjbGllbnRlICAgICAgICAgICAgICAgU3RyaW5nCiAgY3BmX2NucGogICAgICAgICAgICAgIFN0cmluZz8KICBxdWFkcmEgICAgICAgICAgICAgICAgSW50CiAgbG90ZSAgICAgICAgICAgICAgICAgIEludAogIHN0YXR1c19kYV92ZW5kYSAgICAgICBTdHJpbmcgIEBkZWZhdWx0KCJBdGl2YSIpCiAgYmVuZmVpdG9yaWEgICAgICAgICAgIFN0cmluZz8KICBkdF9hZ2VuZGFtZW50byAgICAgICAgU3RyaW5nCiAgaG9yYXJpb19kb19hZ2VuICAgICAgIFN0cmluZwogIHJlc3BfcGVsb19hZ2VuZGFtZW50byBTdHJpbmcKICBkZW1hcmNhZG9yICAgICAgICAgICAgU3RyaW5nCiAgc3RhdHVzICAgICAgICAgICAgICAgIFN0cmluZwogIG9icyAgICAgICAgICAgICAgICAgICBTdHJpbmc/CiAgaWRCb29raW5ncyAgICAgICAgICAgIFN0cmluZwogIGF1dGhvciAgICAgICAgICAgICAgICBVc2VyICAgIEByZWxhdGlvbihmaWVsZHM6IFtpZEJvb2tpbmdzXSwgcmVmZXJlbmNlczogW2lkXSkKfQo=",
-  "inlineSchemaHash": "9b7fea6c1d014580a9d204bc8376456285e5c2af097e3bbb4d08bac2f25a695e",
+  "inlineSchema": "Z2VuZXJhdG9yIGNsaWVudCB7DQogIHByb3ZpZGVyID0gInByaXNtYS1jbGllbnQtanMiDQogIG91dHB1dCAgID0gIi4vZ2VuZXJhdGVkL2NsaWVudCINCn0NCg0KZGF0YXNvdXJjZSBkYiB7DQogIHByb3ZpZGVyICA9ICJwb3N0Z3Jlc3FsIg0KICB1cmwgICAgICAgPSBlbnYoIlBPU1RHUkVTX1BSSVNNQV9VUkwiKSAvLyB1c2VzIGNvbm5lY3Rpb24gcG9vbGluZw0KICBkaXJlY3RVcmwgPSBlbnYoIlBPU1RHUkVTX1VSTF9OT05fUE9PTElORyIpIC8vIHVzZXMgYSBkaXJlY3QgY29ubmVjdGlvbg0KfQ0KDQptb2RlbCBVc2VyIHsNCiAgaWQgICAgICAgICAgU3RyaW5nICAgICBAaWQgQGRlZmF1bHQodXVpZCgpKQ0KICBlbWFpbCAgICAgICBTdHJpbmcgICAgIEB1bmlxdWUNCiAgcGFzc3dvcmQgICAgU3RyaW5nDQogIG5hbWUgICAgICAgIFN0cmluZw0KICBjcmVhdGVkQXQgICBEYXRlVGltZSAgIEBkZWZhdWx0KG5vdygpKQ0KICB1cGRhdGVBdCAgICBEYXRlVGltZSAgIEB1cGRhdGVkQXQNCiAgYWdlbmRhbWVudG8gQm9va2luZ3NbXQ0KfQ0KDQptb2RlbCBCb29raW5ncyB7DQogIGlkICAgICAgICAgICAgICAgICAgICBTdHJpbmcgIEBpZCBAZGVmYXVsdCh1dWlkKCkpDQogIGVtcHJlc2EgICAgICAgICAgICAgICBTdHJpbmcNCiAgY2xpZW50ZSAgICAgICAgICAgICAgIFN0cmluZw0KICBjcGZfY25waiAgICAgICAgICAgICAgU3RyaW5nPw0KICBxdWFkcmEgICAgICAgICAgICAgICAgSW50DQogIGxvdGUgICAgICAgICAgICAgICAgICBJbnQNCiAgc3RhdHVzX2RhX3ZlbmRhICAgICAgIFN0cmluZyAgQGRlZmF1bHQoIkF0aXZhIikNCiAgYmVuZmVpdG9yaWEgICAgICAgICAgIFN0cmluZz8NCiAgZHRfYWdlbmRhbWVudG8gICAgICAgIFN0cmluZw0KICBob3JhcmlvX2RvX2FnZW4gICAgICAgU3RyaW5nDQogIHJlc3BfcGVsb19hZ2VuZGFtZW50byBTdHJpbmcNCiAgZGVtYXJjYWRvciAgICAgICAgICAgIFN0cmluZw0KICBzdGF0dXMgICAgICAgICAgICAgICAgU3RyaW5nDQogIG9icyAgICAgICAgICAgICAgICAgICBTdHJpbmc/DQogIGlkQm9va2luZ3MgICAgICAgICAgICBTdHJpbmcNCiAgYXV0aG9yICAgICAgICAgICAgICAgIFVzZXIgICAgQHJlbGF0aW9uKGZpZWxkczogW2lkQm9va2luZ3NdLCByZWZlcmVuY2VzOiBbaWRdKQ0KfQ0K",
+  "inlineSchemaHash": "687cf0d78868d3d29cc32e1b65667ae975530df140b7074efb1cd7e674919544",
   "noEngine": false
 }
 config.dirname = '/'
@@ -193,7 +193,7 @@ config.getQueryEngineWasmModule = undefined
 
 config.injectableEdgeEnv = () => ({
   parsed: {
-    DATABASE_URL: typeof globalThis !== 'undefined' && globalThis['DATABASE_URL'] || typeof process !== 'undefined' && process.env && process.env.DATABASE_URL || undefined
+    POSTGRES_PRISMA_URL: typeof globalThis !== 'undefined' && globalThis['POSTGRES_PRISMA_URL'] || typeof process !== 'undefined' && process.env && process.env.POSTGRES_PRISMA_URL || undefined
   }
 })
 
