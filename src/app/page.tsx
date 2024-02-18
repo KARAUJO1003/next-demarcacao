@@ -18,10 +18,24 @@ export default function Home() {
   const [exibirAgendadas, setExibirAgendadas] = useState(true);
   const [exibirDemarcadas, setExibirDemarcadas] = useState(true);
   const [demarcacao, setDemarcacao] = useState<AgendaItem[]>([  ]);
+  const [bookings, setBookings] = useState([]);
 
-useEffect(() => {
-  fetch('/api/bookings').then(data => console.log(data))
-},[])
+  useEffect(() => {
+    async function fetchBookings() {
+      try {
+        const response = await fetch('/api/bookings');
+        if (!response.ok) {
+          throw new Error('Erro ao buscar os bookings');
+        }
+        const data = await response.json();
+        setDemarcacao(data);
+      } catch (error) {
+        console.error('Erro ao buscar os bookings:', error);
+      }
+    }
+
+    fetchBookings();
+  }, []);
 
   const handleTabChange = (value: any) => {
     // Atualize o estado de exibição com base na guia selecionada
