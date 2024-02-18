@@ -2,7 +2,7 @@
 
 import { AgendaItem, Demarcacao } from "@/app/ag";
 import { PrismaClient } from "../../prisma/generated/client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Modal } from "@/components/Modal";
@@ -18,6 +18,10 @@ export default function Home() {
   const [exibirAgendadas, setExibirAgendadas] = useState(true);
   const [exibirDemarcadas, setExibirDemarcadas] = useState(true);
   const [demarcacao, setDemarcacao] = useState<AgendaItem[]>([  ]);
+
+useEffect(() => {
+  fetch('/api/bookings').then(data => console.log(data))
+},[])
 
   const handleTabChange = (value: any) => {
     // Atualize o estado de exibição com base na guia selecionada

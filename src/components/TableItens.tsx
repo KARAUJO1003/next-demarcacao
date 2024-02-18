@@ -37,7 +37,10 @@ import {
 import { AgendaItem, Demarcacao } from "@/app/ag";
 import { Modal } from "./Modal";
 
-const data: AgendaItem[] = [];
+
+const data: AgendaItem[] = [
+
+];
 
 export const columns: ColumnDef<AgendaItem>[] = [
   {
@@ -243,6 +246,7 @@ const DataTableDemo = () => {
       rowSelection,
     },
   });
+
 
   return (
     <div className="w-full">

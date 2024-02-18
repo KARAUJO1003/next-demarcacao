@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Bookings" ALTER COLUMN "cliente" DROP NOT NULL,
+ALTER COLUMN "quadra" DROP NOT NULL,
+ALTER COLUMN "lote" DROP NOT NULL,
+ALTER COLUMN "status_da_venda" DROP NOT NULL;

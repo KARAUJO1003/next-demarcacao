@@ -2118,18 +2118,18 @@ export namespace Prisma {
 
   export type BookingsGroupByOutputType = {
     id: string
-    empresa: string
-    cliente: string
+    empresa: string | null
+    cliente: string | null
     cpf_cnpj: string | null
-    quadra: string
-    lote: string
-    status_da_venda: string
+    quadra: string | null
+    lote: string | null
+    status_da_venda: string | null
     benfeitoria: string | null
-    dt_agendamento: string
-    horario_do_agen: string
-    resp_pelo_agendamento: string
-    demarcador: string
-    status: string
+    dt_agendamento: string | null
+    horario_do_agen: string | null
+    resp_pelo_agendamento: string | null
+    demarcador: string | null
+    status: string | null
     obs: string | null
     idBookings: string | null
     _count: BookingsCountAggregateOutputType | null
@@ -2200,18 +2200,18 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      empresa: string
-      cliente: string
+      empresa: string | null
+      cliente: string | null
       cpf_cnpj: string | null
-      quadra: string
-      lote: string
-      status_da_venda: string
+      quadra: string | null
+      lote: string | null
+      status_da_venda: string | null
       benfeitoria: string | null
-      dt_agendamento: string
-      horario_do_agen: string
-      resp_pelo_agendamento: string
-      demarcador: string
-      status: string
+      dt_agendamento: string | null
+      horario_do_agen: string | null
+      resp_pelo_agendamento: string | null
+      demarcador: string | null
+      status: string | null
       obs: string | null
       idBookings: string | null
     }, ExtArgs["result"]["bookings"]>
@@ -2824,7 +2824,7 @@ export namespace Prisma {
     /**
      * The data needed to create a Bookings.
      */
-    data: XOR<BookingsCreateInput, BookingsUncheckedCreateInput>
+    data?: XOR<BookingsCreateInput, BookingsUncheckedCreateInput>
   }
 
 
@@ -3153,18 +3153,18 @@ export namespace Prisma {
     OR?: BookingsWhereInput[]
     NOT?: BookingsWhereInput | BookingsWhereInput[]
     id?: StringFilter<"Bookings"> | string
-    empresa?: StringFilter<"Bookings"> | string
-    cliente?: StringFilter<"Bookings"> | string
+    empresa?: StringNullableFilter<"Bookings"> | string | null
+    cliente?: StringNullableFilter<"Bookings"> | string | null
     cpf_cnpj?: StringNullableFilter<"Bookings"> | string | null
-    quadra?: StringFilter<"Bookings"> | string
-    lote?: StringFilter<"Bookings"> | string
-    status_da_venda?: StringFilter<"Bookings"> | string
+    quadra?: StringNullableFilter<"Bookings"> | string | null
+    lote?: StringNullableFilter<"Bookings"> | string | null
+    status_da_venda?: StringNullableFilter<"Bookings"> | string | null
     benfeitoria?: StringNullableFilter<"Bookings"> | string | null
-    dt_agendamento?: StringFilter<"Bookings"> | string
-    horario_do_agen?: StringFilter<"Bookings"> | string
-    resp_pelo_agendamento?: StringFilter<"Bookings"> | string
-    demarcador?: StringFilter<"Bookings"> | string
-    status?: StringFilter<"Bookings"> | string
+    dt_agendamento?: StringNullableFilter<"Bookings"> | string | null
+    horario_do_agen?: StringNullableFilter<"Bookings"> | string | null
+    resp_pelo_agendamento?: StringNullableFilter<"Bookings"> | string | null
+    demarcador?: StringNullableFilter<"Bookings"> | string | null
+    status?: StringNullableFilter<"Bookings"> | string | null
     obs?: StringNullableFilter<"Bookings"> | string | null
     idBookings?: StringNullableFilter<"Bookings"> | string | null
     author?: XOR<UserNullableRelationFilter, UserWhereInput> | null
@@ -3172,18 +3172,18 @@ export namespace Prisma {
 
   export type BookingsOrderByWithRelationInput = {
     id?: SortOrder
-    empresa?: SortOrder
-    cliente?: SortOrder
+    empresa?: SortOrderInput | SortOrder
+    cliente?: SortOrderInput | SortOrder
     cpf_cnpj?: SortOrderInput | SortOrder
-    quadra?: SortOrder
-    lote?: SortOrder
-    status_da_venda?: SortOrder
+    quadra?: SortOrderInput | SortOrder
+    lote?: SortOrderInput | SortOrder
+    status_da_venda?: SortOrderInput | SortOrder
     benfeitoria?: SortOrderInput | SortOrder
-    dt_agendamento?: SortOrder
-    horario_do_agen?: SortOrder
-    resp_pelo_agendamento?: SortOrder
-    demarcador?: SortOrder
-    status?: SortOrder
+    dt_agendamento?: SortOrderInput | SortOrder
+    horario_do_agen?: SortOrderInput | SortOrder
+    resp_pelo_agendamento?: SortOrderInput | SortOrder
+    demarcador?: SortOrderInput | SortOrder
+    status?: SortOrderInput | SortOrder
     obs?: SortOrderInput | SortOrder
     idBookings?: SortOrderInput | SortOrder
     author?: UserOrderByWithRelationInput
@@ -3194,18 +3194,18 @@ export namespace Prisma {
     AND?: BookingsWhereInput | BookingsWhereInput[]
     OR?: BookingsWhereInput[]
     NOT?: BookingsWhereInput | BookingsWhereInput[]
-    empresa?: StringFilter<"Bookings"> | string
-    cliente?: StringFilter<"Bookings"> | string
+    empresa?: StringNullableFilter<"Bookings"> | string | null
+    cliente?: StringNullableFilter<"Bookings"> | string | null
     cpf_cnpj?: StringNullableFilter<"Bookings"> | string | null
-    quadra?: StringFilter<"Bookings"> | string
-    lote?: StringFilter<"Bookings"> | string
-    status_da_venda?: StringFilter<"Bookings"> | string
+    quadra?: StringNullableFilter<"Bookings"> | string | null
+    lote?: StringNullableFilter<"Bookings"> | string | null
+    status_da_venda?: StringNullableFilter<"Bookings"> | string | null
     benfeitoria?: StringNullableFilter<"Bookings"> | string | null
-    dt_agendamento?: StringFilter<"Bookings"> | string
-    horario_do_agen?: StringFilter<"Bookings"> | string
-    resp_pelo_agendamento?: StringFilter<"Bookings"> | string
-    demarcador?: StringFilter<"Bookings"> | string
-    status?: StringFilter<"Bookings"> | string
+    dt_agendamento?: StringNullableFilter<"Bookings"> | string | null
+    horario_do_agen?: StringNullableFilter<"Bookings"> | string | null
+    resp_pelo_agendamento?: StringNullableFilter<"Bookings"> | string | null
+    demarcador?: StringNullableFilter<"Bookings"> | string | null
+    status?: StringNullableFilter<"Bookings"> | string | null
     obs?: StringNullableFilter<"Bookings"> | string | null
     idBookings?: StringNullableFilter<"Bookings"> | string | null
     author?: XOR<UserNullableRelationFilter, UserWhereInput> | null
@@ -3213,18 +3213,18 @@ export namespace Prisma {
 
   export type BookingsOrderByWithAggregationInput = {
     id?: SortOrder
-    empresa?: SortOrder
-    cliente?: SortOrder
+    empresa?: SortOrderInput | SortOrder
+    cliente?: SortOrderInput | SortOrder
     cpf_cnpj?: SortOrderInput | SortOrder
-    quadra?: SortOrder
-    lote?: SortOrder
-    status_da_venda?: SortOrder
+    quadra?: SortOrderInput | SortOrder
+    lote?: SortOrderInput | SortOrder
+    status_da_venda?: SortOrderInput | SortOrder
     benfeitoria?: SortOrderInput | SortOrder
-    dt_agendamento?: SortOrder
-    horario_do_agen?: SortOrder
-    resp_pelo_agendamento?: SortOrder
-    demarcador?: SortOrder
-    status?: SortOrder
+    dt_agendamento?: SortOrderInput | SortOrder
+    horario_do_agen?: SortOrderInput | SortOrder
+    resp_pelo_agendamento?: SortOrderInput | SortOrder
+    demarcador?: SortOrderInput | SortOrder
+    status?: SortOrderInput | SortOrder
     obs?: SortOrderInput | SortOrder
     idBookings?: SortOrderInput | SortOrder
     _count?: BookingsCountOrderByAggregateInput
@@ -3237,18 +3237,18 @@ export namespace Prisma {
     OR?: BookingsScalarWhereWithAggregatesInput[]
     NOT?: BookingsScalarWhereWithAggregatesInput | BookingsScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Bookings"> | string
-    empresa?: StringWithAggregatesFilter<"Bookings"> | string
-    cliente?: StringWithAggregatesFilter<"Bookings"> | string
+    empresa?: StringNullableWithAggregatesFilter<"Bookings"> | string | null
+    cliente?: StringNullableWithAggregatesFilter<"Bookings"> | string | null
     cpf_cnpj?: StringNullableWithAggregatesFilter<"Bookings"> | string | null
-    quadra?: StringWithAggregatesFilter<"Bookings"> | string
-    lote?: StringWithAggregatesFilter<"Bookings"> | string
-    status_da_venda?: StringWithAggregatesFilter<"Bookings"> | string
+    quadra?: StringNullableWithAggregatesFilter<"Bookings"> | string | null
+    lote?: StringNullableWithAggregatesFilter<"Bookings"> | string | null
+    status_da_venda?: StringNullableWithAggregatesFilter<"Bookings"> | string | null
     benfeitoria?: StringNullableWithAggregatesFilter<"Bookings"> | string | null
-    dt_agendamento?: StringWithAggregatesFilter<"Bookings"> | string
-    horario_do_agen?: StringWithAggregatesFilter<"Bookings"> | string
-    resp_pelo_agendamento?: StringWithAggregatesFilter<"Bookings"> | string
-    demarcador?: StringWithAggregatesFilter<"Bookings"> | string
-    status?: StringWithAggregatesFilter<"Bookings"> | string
+    dt_agendamento?: StringNullableWithAggregatesFilter<"Bookings"> | string | null
+    horario_do_agen?: StringNullableWithAggregatesFilter<"Bookings"> | string | null
+    resp_pelo_agendamento?: StringNullableWithAggregatesFilter<"Bookings"> | string | null
+    demarcador?: StringNullableWithAggregatesFilter<"Bookings"> | string | null
+    status?: StringNullableWithAggregatesFilter<"Bookings"> | string | null
     obs?: StringNullableWithAggregatesFilter<"Bookings"> | string | null
     idBookings?: StringNullableWithAggregatesFilter<"Bookings"> | string | null
   }
@@ -3322,125 +3322,125 @@ export namespace Prisma {
 
   export type BookingsCreateInput = {
     id?: string
-    empresa: string
-    cliente: string
+    empresa?: string | null
+    cliente?: string | null
     cpf_cnpj?: string | null
-    quadra: string
-    lote: string
-    status_da_venda?: string
+    quadra?: string | null
+    lote?: string | null
+    status_da_venda?: string | null
     benfeitoria?: string | null
-    dt_agendamento: string
-    horario_do_agen: string
-    resp_pelo_agendamento: string
-    demarcador: string
-    status: string
+    dt_agendamento?: string | null
+    horario_do_agen?: string | null
+    resp_pelo_agendamento?: string | null
+    demarcador?: string | null
+    status?: string | null
     obs?: string | null
     author?: UserCreateNestedOneWithoutAgendamentoInput
   }
 
   export type BookingsUncheckedCreateInput = {
     id?: string
-    empresa: string
-    cliente: string
+    empresa?: string | null
+    cliente?: string | null
     cpf_cnpj?: string | null
-    quadra: string
-    lote: string
-    status_da_venda?: string
+    quadra?: string | null
+    lote?: string | null
+    status_da_venda?: string | null
     benfeitoria?: string | null
-    dt_agendamento: string
-    horario_do_agen: string
-    resp_pelo_agendamento: string
-    demarcador: string
-    status: string
+    dt_agendamento?: string | null
+    horario_do_agen?: string | null
+    resp_pelo_agendamento?: string | null
+    demarcador?: string | null
+    status?: string | null
     obs?: string | null
     idBookings?: string | null
   }
 
   export type BookingsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    empresa?: StringFieldUpdateOperationsInput | string
-    cliente?: StringFieldUpdateOperationsInput | string
+    empresa?: NullableStringFieldUpdateOperationsInput | string | null
+    cliente?: NullableStringFieldUpdateOperationsInput | string | null
     cpf_cnpj?: NullableStringFieldUpdateOperationsInput | string | null
-    quadra?: StringFieldUpdateOperationsInput | string
-    lote?: StringFieldUpdateOperationsInput | string
-    status_da_venda?: StringFieldUpdateOperationsInput | string
+    quadra?: NullableStringFieldUpdateOperationsInput | string | null
+    lote?: NullableStringFieldUpdateOperationsInput | string | null
+    status_da_venda?: NullableStringFieldUpdateOperationsInput | string | null
     benfeitoria?: NullableStringFieldUpdateOperationsInput | string | null
-    dt_agendamento?: StringFieldUpdateOperationsInput | string
-    horario_do_agen?: StringFieldUpdateOperationsInput | string
-    resp_pelo_agendamento?: StringFieldUpdateOperationsInput | string
-    demarcador?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    dt_agendamento?: NullableStringFieldUpdateOperationsInput | string | null
+    horario_do_agen?: NullableStringFieldUpdateOperationsInput | string | null
+    resp_pelo_agendamento?: NullableStringFieldUpdateOperationsInput | string | null
+    demarcador?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
     obs?: NullableStringFieldUpdateOperationsInput | string | null
     author?: UserUpdateOneWithoutAgendamentoNestedInput
   }
 
   export type BookingsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    empresa?: StringFieldUpdateOperationsInput | string
-    cliente?: StringFieldUpdateOperationsInput | string
+    empresa?: NullableStringFieldUpdateOperationsInput | string | null
+    cliente?: NullableStringFieldUpdateOperationsInput | string | null
     cpf_cnpj?: NullableStringFieldUpdateOperationsInput | string | null
-    quadra?: StringFieldUpdateOperationsInput | string
-    lote?: StringFieldUpdateOperationsInput | string
-    status_da_venda?: StringFieldUpdateOperationsInput | string
+    quadra?: NullableStringFieldUpdateOperationsInput | string | null
+    lote?: NullableStringFieldUpdateOperationsInput | string | null
+    status_da_venda?: NullableStringFieldUpdateOperationsInput | string | null
     benfeitoria?: NullableStringFieldUpdateOperationsInput | string | null
-    dt_agendamento?: StringFieldUpdateOperationsInput | string
-    horario_do_agen?: StringFieldUpdateOperationsInput | string
-    resp_pelo_agendamento?: StringFieldUpdateOperationsInput | string
-    demarcador?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    dt_agendamento?: NullableStringFieldUpdateOperationsInput | string | null
+    horario_do_agen?: NullableStringFieldUpdateOperationsInput | string | null
+    resp_pelo_agendamento?: NullableStringFieldUpdateOperationsInput | string | null
+    demarcador?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
     obs?: NullableStringFieldUpdateOperationsInput | string | null
     idBookings?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BookingsCreateManyInput = {
     id?: string
-    empresa: string
-    cliente: string
+    empresa?: string | null
+    cliente?: string | null
     cpf_cnpj?: string | null
-    quadra: string
-    lote: string
-    status_da_venda?: string
+    quadra?: string | null
+    lote?: string | null
+    status_da_venda?: string | null
     benfeitoria?: string | null
-    dt_agendamento: string
-    horario_do_agen: string
-    resp_pelo_agendamento: string
-    demarcador: string
-    status: string
+    dt_agendamento?: string | null
+    horario_do_agen?: string | null
+    resp_pelo_agendamento?: string | null
+    demarcador?: string | null
+    status?: string | null
     obs?: string | null
     idBookings?: string | null
   }
 
   export type BookingsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    empresa?: StringFieldUpdateOperationsInput | string
-    cliente?: StringFieldUpdateOperationsInput | string
+    empresa?: NullableStringFieldUpdateOperationsInput | string | null
+    cliente?: NullableStringFieldUpdateOperationsInput | string | null
     cpf_cnpj?: NullableStringFieldUpdateOperationsInput | string | null
-    quadra?: StringFieldUpdateOperationsInput | string
-    lote?: StringFieldUpdateOperationsInput | string
-    status_da_venda?: StringFieldUpdateOperationsInput | string
+    quadra?: NullableStringFieldUpdateOperationsInput | string | null
+    lote?: NullableStringFieldUpdateOperationsInput | string | null
+    status_da_venda?: NullableStringFieldUpdateOperationsInput | string | null
     benfeitoria?: NullableStringFieldUpdateOperationsInput | string | null
-    dt_agendamento?: StringFieldUpdateOperationsInput | string
-    horario_do_agen?: StringFieldUpdateOperationsInput | string
-    resp_pelo_agendamento?: StringFieldUpdateOperationsInput | string
-    demarcador?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    dt_agendamento?: NullableStringFieldUpdateOperationsInput | string | null
+    horario_do_agen?: NullableStringFieldUpdateOperationsInput | string | null
+    resp_pelo_agendamento?: NullableStringFieldUpdateOperationsInput | string | null
+    demarcador?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
     obs?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BookingsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    empresa?: StringFieldUpdateOperationsInput | string
-    cliente?: StringFieldUpdateOperationsInput | string
+    empresa?: NullableStringFieldUpdateOperationsInput | string | null
+    cliente?: NullableStringFieldUpdateOperationsInput | string | null
     cpf_cnpj?: NullableStringFieldUpdateOperationsInput | string | null
-    quadra?: StringFieldUpdateOperationsInput | string
-    lote?: StringFieldUpdateOperationsInput | string
-    status_da_venda?: StringFieldUpdateOperationsInput | string
+    quadra?: NullableStringFieldUpdateOperationsInput | string | null
+    lote?: NullableStringFieldUpdateOperationsInput | string | null
+    status_da_venda?: NullableStringFieldUpdateOperationsInput | string | null
     benfeitoria?: NullableStringFieldUpdateOperationsInput | string | null
-    dt_agendamento?: StringFieldUpdateOperationsInput | string
-    horario_do_agen?: StringFieldUpdateOperationsInput | string
-    resp_pelo_agendamento?: StringFieldUpdateOperationsInput | string
-    demarcador?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    dt_agendamento?: NullableStringFieldUpdateOperationsInput | string | null
+    horario_do_agen?: NullableStringFieldUpdateOperationsInput | string | null
+    resp_pelo_agendamento?: NullableStringFieldUpdateOperationsInput | string | null
+    demarcador?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
     obs?: NullableStringFieldUpdateOperationsInput | string | null
     idBookings?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -3818,35 +3818,35 @@ export namespace Prisma {
 
   export type BookingsCreateWithoutAuthorInput = {
     id?: string
-    empresa: string
-    cliente: string
+    empresa?: string | null
+    cliente?: string | null
     cpf_cnpj?: string | null
-    quadra: string
-    lote: string
-    status_da_venda?: string
+    quadra?: string | null
+    lote?: string | null
+    status_da_venda?: string | null
     benfeitoria?: string | null
-    dt_agendamento: string
-    horario_do_agen: string
-    resp_pelo_agendamento: string
-    demarcador: string
-    status: string
+    dt_agendamento?: string | null
+    horario_do_agen?: string | null
+    resp_pelo_agendamento?: string | null
+    demarcador?: string | null
+    status?: string | null
     obs?: string | null
   }
 
   export type BookingsUncheckedCreateWithoutAuthorInput = {
     id?: string
-    empresa: string
-    cliente: string
+    empresa?: string | null
+    cliente?: string | null
     cpf_cnpj?: string | null
-    quadra: string
-    lote: string
-    status_da_venda?: string
+    quadra?: string | null
+    lote?: string | null
+    status_da_venda?: string | null
     benfeitoria?: string | null
-    dt_agendamento: string
-    horario_do_agen: string
-    resp_pelo_agendamento: string
-    demarcador: string
-    status: string
+    dt_agendamento?: string | null
+    horario_do_agen?: string | null
+    resp_pelo_agendamento?: string | null
+    demarcador?: string | null
+    status?: string | null
     obs?: string | null
   }
 
@@ -3881,18 +3881,18 @@ export namespace Prisma {
     OR?: BookingsScalarWhereInput[]
     NOT?: BookingsScalarWhereInput | BookingsScalarWhereInput[]
     id?: StringFilter<"Bookings"> | string
-    empresa?: StringFilter<"Bookings"> | string
-    cliente?: StringFilter<"Bookings"> | string
+    empresa?: StringNullableFilter<"Bookings"> | string | null
+    cliente?: StringNullableFilter<"Bookings"> | string | null
     cpf_cnpj?: StringNullableFilter<"Bookings"> | string | null
-    quadra?: StringFilter<"Bookings"> | string
-    lote?: StringFilter<"Bookings"> | string
-    status_da_venda?: StringFilter<"Bookings"> | string
+    quadra?: StringNullableFilter<"Bookings"> | string | null
+    lote?: StringNullableFilter<"Bookings"> | string | null
+    status_da_venda?: StringNullableFilter<"Bookings"> | string | null
     benfeitoria?: StringNullableFilter<"Bookings"> | string | null
-    dt_agendamento?: StringFilter<"Bookings"> | string
-    horario_do_agen?: StringFilter<"Bookings"> | string
-    resp_pelo_agendamento?: StringFilter<"Bookings"> | string
-    demarcador?: StringFilter<"Bookings"> | string
-    status?: StringFilter<"Bookings"> | string
+    dt_agendamento?: StringNullableFilter<"Bookings"> | string | null
+    horario_do_agen?: StringNullableFilter<"Bookings"> | string | null
+    resp_pelo_agendamento?: StringNullableFilter<"Bookings"> | string | null
+    demarcador?: StringNullableFilter<"Bookings"> | string | null
+    status?: StringNullableFilter<"Bookings"> | string | null
     obs?: StringNullableFilter<"Bookings"> | string | null
     idBookings?: StringNullableFilter<"Bookings"> | string | null
   }
@@ -3951,69 +3951,69 @@ export namespace Prisma {
 
   export type BookingsCreateManyAuthorInput = {
     id?: string
-    empresa: string
-    cliente: string
+    empresa?: string | null
+    cliente?: string | null
     cpf_cnpj?: string | null
-    quadra: string
-    lote: string
-    status_da_venda?: string
+    quadra?: string | null
+    lote?: string | null
+    status_da_venda?: string | null
     benfeitoria?: string | null
-    dt_agendamento: string
-    horario_do_agen: string
-    resp_pelo_agendamento: string
-    demarcador: string
-    status: string
+    dt_agendamento?: string | null
+    horario_do_agen?: string | null
+    resp_pelo_agendamento?: string | null
+    demarcador?: string | null
+    status?: string | null
     obs?: string | null
   }
 
   export type BookingsUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    empresa?: StringFieldUpdateOperationsInput | string
-    cliente?: StringFieldUpdateOperationsInput | string
+    empresa?: NullableStringFieldUpdateOperationsInput | string | null
+    cliente?: NullableStringFieldUpdateOperationsInput | string | null
     cpf_cnpj?: NullableStringFieldUpdateOperationsInput | string | null
-    quadra?: StringFieldUpdateOperationsInput | string
-    lote?: StringFieldUpdateOperationsInput | string
-    status_da_venda?: StringFieldUpdateOperationsInput | string
+    quadra?: NullableStringFieldUpdateOperationsInput | string | null
+    lote?: NullableStringFieldUpdateOperationsInput | string | null
+    status_da_venda?: NullableStringFieldUpdateOperationsInput | string | null
     benfeitoria?: NullableStringFieldUpdateOperationsInput | string | null
-    dt_agendamento?: StringFieldUpdateOperationsInput | string
-    horario_do_agen?: StringFieldUpdateOperationsInput | string
-    resp_pelo_agendamento?: StringFieldUpdateOperationsInput | string
-    demarcador?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    dt_agendamento?: NullableStringFieldUpdateOperationsInput | string | null
+    horario_do_agen?: NullableStringFieldUpdateOperationsInput | string | null
+    resp_pelo_agendamento?: NullableStringFieldUpdateOperationsInput | string | null
+    demarcador?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
     obs?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BookingsUncheckedUpdateWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    empresa?: StringFieldUpdateOperationsInput | string
-    cliente?: StringFieldUpdateOperationsInput | string
+    empresa?: NullableStringFieldUpdateOperationsInput | string | null
+    cliente?: NullableStringFieldUpdateOperationsInput | string | null
     cpf_cnpj?: NullableStringFieldUpdateOperationsInput | string | null
-    quadra?: StringFieldUpdateOperationsInput | string
-    lote?: StringFieldUpdateOperationsInput | string
-    status_da_venda?: StringFieldUpdateOperationsInput | string
+    quadra?: NullableStringFieldUpdateOperationsInput | string | null
+    lote?: NullableStringFieldUpdateOperationsInput | string | null
+    status_da_venda?: NullableStringFieldUpdateOperationsInput | string | null
     benfeitoria?: NullableStringFieldUpdateOperationsInput | string | null
-    dt_agendamento?: StringFieldUpdateOperationsInput | string
-    horario_do_agen?: StringFieldUpdateOperationsInput | string
-    resp_pelo_agendamento?: StringFieldUpdateOperationsInput | string
-    demarcador?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    dt_agendamento?: NullableStringFieldUpdateOperationsInput | string | null
+    horario_do_agen?: NullableStringFieldUpdateOperationsInput | string | null
+    resp_pelo_agendamento?: NullableStringFieldUpdateOperationsInput | string | null
+    demarcador?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
     obs?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BookingsUncheckedUpdateManyWithoutAuthorInput = {
     id?: StringFieldUpdateOperationsInput | string
-    empresa?: StringFieldUpdateOperationsInput | string
-    cliente?: StringFieldUpdateOperationsInput | string
+    empresa?: NullableStringFieldUpdateOperationsInput | string | null
+    cliente?: NullableStringFieldUpdateOperationsInput | string | null
     cpf_cnpj?: NullableStringFieldUpdateOperationsInput | string | null
-    quadra?: StringFieldUpdateOperationsInput | string
-    lote?: StringFieldUpdateOperationsInput | string
-    status_da_venda?: StringFieldUpdateOperationsInput | string
+    quadra?: NullableStringFieldUpdateOperationsInput | string | null
+    lote?: NullableStringFieldUpdateOperationsInput | string | null
+    status_da_venda?: NullableStringFieldUpdateOperationsInput | string | null
     benfeitoria?: NullableStringFieldUpdateOperationsInput | string | null
-    dt_agendamento?: StringFieldUpdateOperationsInput | string
-    horario_do_agen?: StringFieldUpdateOperationsInput | string
-    resp_pelo_agendamento?: StringFieldUpdateOperationsInput | string
-    demarcador?: StringFieldUpdateOperationsInput | string
-    status?: StringFieldUpdateOperationsInput | string
+    dt_agendamento?: NullableStringFieldUpdateOperationsInput | string | null
+    horario_do_agen?: NullableStringFieldUpdateOperationsInput | string | null
+    resp_pelo_agendamento?: NullableStringFieldUpdateOperationsInput | string | null
+    demarcador?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: NullableStringFieldUpdateOperationsInput | string | null
     obs?: NullableStringFieldUpdateOperationsInput | string | null
   }
 

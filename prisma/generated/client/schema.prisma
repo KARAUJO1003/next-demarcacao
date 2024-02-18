@@ -21,18 +21,18 @@ model User {
 
 model Bookings {
   id                    String  @id @default(uuid())
-  empresa               String
-  cliente               String
+  empresa               String?
+  cliente               String?
   cpf_cnpj              String?
-  quadra                String
-  lote                  String
-  status_da_venda       String  @default("Ativa")
+  quadra                String?
+  lote                  String?
+  status_da_venda       String? @default("Ativa")
   benfeitoria           String?
-  dt_agendamento        String
-  horario_do_agen       String
-  resp_pelo_agendamento String
-  demarcador            String
-  status                String
+  dt_agendamento        String?
+  horario_do_agen       String?
+  resp_pelo_agendamento String?
+  demarcador            String?
+  status                String?
   obs                   String?
   idBookings            String?
   author                User?   @relation(fields: [idBookings], references: [id])
