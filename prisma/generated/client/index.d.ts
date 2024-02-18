@@ -1929,20 +1929,8 @@ export namespace Prisma {
 
   export type AggregateBookings = {
     _count: BookingsCountAggregateOutputType | null
-    _avg: BookingsAvgAggregateOutputType | null
-    _sum: BookingsSumAggregateOutputType | null
     _min: BookingsMinAggregateOutputType | null
     _max: BookingsMaxAggregateOutputType | null
-  }
-
-  export type BookingsAvgAggregateOutputType = {
-    quadra: number | null
-    lote: number | null
-  }
-
-  export type BookingsSumAggregateOutputType = {
-    quadra: number | null
-    lote: number | null
   }
 
   export type BookingsMinAggregateOutputType = {
@@ -1950,8 +1938,8 @@ export namespace Prisma {
     empresa: string | null
     cliente: string | null
     cpf_cnpj: string | null
-    quadra: number | null
-    lote: number | null
+    quadra: string | null
+    lote: string | null
     status_da_venda: string | null
     benfeitoria: string | null
     dt_agendamento: string | null
@@ -1968,8 +1956,8 @@ export namespace Prisma {
     empresa: string | null
     cliente: string | null
     cpf_cnpj: string | null
-    quadra: number | null
-    lote: number | null
+    quadra: string | null
+    lote: string | null
     status_da_venda: string | null
     benfeitoria: string | null
     dt_agendamento: string | null
@@ -2000,16 +1988,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type BookingsAvgAggregateInputType = {
-    quadra?: true
-    lote?: true
-  }
-
-  export type BookingsSumAggregateInputType = {
-    quadra?: true
-    lote?: true
-  }
 
   export type BookingsMinAggregateInputType = {
     id?: true
@@ -2104,18 +2082,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: BookingsAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: BookingsSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: BookingsMinAggregateInputType
@@ -2146,8 +2112,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: BookingsCountAggregateInputType | true
-    _avg?: BookingsAvgAggregateInputType
-    _sum?: BookingsSumAggregateInputType
     _min?: BookingsMinAggregateInputType
     _max?: BookingsMaxAggregateInputType
   }
@@ -2157,8 +2121,8 @@ export namespace Prisma {
     empresa: string
     cliente: string
     cpf_cnpj: string | null
-    quadra: number
-    lote: number
+    quadra: string
+    lote: string
     status_da_venda: string
     benfeitoria: string | null
     dt_agendamento: string
@@ -2169,8 +2133,6 @@ export namespace Prisma {
     obs: string | null
     idBookings: string
     _count: BookingsCountAggregateOutputType | null
-    _avg: BookingsAvgAggregateOutputType | null
-    _sum: BookingsSumAggregateOutputType | null
     _min: BookingsMinAggregateOutputType | null
     _max: BookingsMaxAggregateOutputType | null
   }
@@ -2241,8 +2203,8 @@ export namespace Prisma {
       empresa: string
       cliente: string
       cpf_cnpj: string | null
-      quadra: number
-      lote: number
+      quadra: string
+      lote: string
       status_da_venda: string
       benfeitoria: string | null
       dt_agendamento: string
@@ -2651,8 +2613,8 @@ export namespace Prisma {
     readonly empresa: FieldRef<"Bookings", 'String'>
     readonly cliente: FieldRef<"Bookings", 'String'>
     readonly cpf_cnpj: FieldRef<"Bookings", 'String'>
-    readonly quadra: FieldRef<"Bookings", 'Int'>
-    readonly lote: FieldRef<"Bookings", 'Int'>
+    readonly quadra: FieldRef<"Bookings", 'String'>
+    readonly lote: FieldRef<"Bookings", 'String'>
     readonly status_da_venda: FieldRef<"Bookings", 'String'>
     readonly benfeitoria: FieldRef<"Bookings", 'String'>
     readonly dt_agendamento: FieldRef<"Bookings", 'String'>
@@ -3105,20 +3067,6 @@ export namespace Prisma {
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
-
-
-  /**
-   * Reference to a field of type 'Float'
-   */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
-    
-
-
-  /**
-   * Reference to a field of type 'Float[]'
-   */
-  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
   /**
    * Deep Input Types
    */
@@ -3192,8 +3140,8 @@ export namespace Prisma {
     empresa?: StringFilter<"Bookings"> | string
     cliente?: StringFilter<"Bookings"> | string
     cpf_cnpj?: StringNullableFilter<"Bookings"> | string | null
-    quadra?: IntFilter<"Bookings"> | number
-    lote?: IntFilter<"Bookings"> | number
+    quadra?: StringFilter<"Bookings"> | string
+    lote?: StringFilter<"Bookings"> | string
     status_da_venda?: StringFilter<"Bookings"> | string
     benfeitoria?: StringNullableFilter<"Bookings"> | string | null
     dt_agendamento?: StringFilter<"Bookings"> | string
@@ -3233,8 +3181,8 @@ export namespace Prisma {
     empresa?: StringFilter<"Bookings"> | string
     cliente?: StringFilter<"Bookings"> | string
     cpf_cnpj?: StringNullableFilter<"Bookings"> | string | null
-    quadra?: IntFilter<"Bookings"> | number
-    lote?: IntFilter<"Bookings"> | number
+    quadra?: StringFilter<"Bookings"> | string
+    lote?: StringFilter<"Bookings"> | string
     status_da_venda?: StringFilter<"Bookings"> | string
     benfeitoria?: StringNullableFilter<"Bookings"> | string | null
     dt_agendamento?: StringFilter<"Bookings"> | string
@@ -3264,10 +3212,8 @@ export namespace Prisma {
     obs?: SortOrderInput | SortOrder
     idBookings?: SortOrder
     _count?: BookingsCountOrderByAggregateInput
-    _avg?: BookingsAvgOrderByAggregateInput
     _max?: BookingsMaxOrderByAggregateInput
     _min?: BookingsMinOrderByAggregateInput
-    _sum?: BookingsSumOrderByAggregateInput
   }
 
   export type BookingsScalarWhereWithAggregatesInput = {
@@ -3278,8 +3224,8 @@ export namespace Prisma {
     empresa?: StringWithAggregatesFilter<"Bookings"> | string
     cliente?: StringWithAggregatesFilter<"Bookings"> | string
     cpf_cnpj?: StringNullableWithAggregatesFilter<"Bookings"> | string | null
-    quadra?: IntWithAggregatesFilter<"Bookings"> | number
-    lote?: IntWithAggregatesFilter<"Bookings"> | number
+    quadra?: StringWithAggregatesFilter<"Bookings"> | string
+    lote?: StringWithAggregatesFilter<"Bookings"> | string
     status_da_venda?: StringWithAggregatesFilter<"Bookings"> | string
     benfeitoria?: StringNullableWithAggregatesFilter<"Bookings"> | string | null
     dt_agendamento?: StringWithAggregatesFilter<"Bookings"> | string
@@ -3363,8 +3309,8 @@ export namespace Prisma {
     empresa: string
     cliente: string
     cpf_cnpj?: string | null
-    quadra: number
-    lote: number
+    quadra: string
+    lote: string
     status_da_venda?: string
     benfeitoria?: string | null
     dt_agendamento: string
@@ -3381,8 +3327,8 @@ export namespace Prisma {
     empresa: string
     cliente: string
     cpf_cnpj?: string | null
-    quadra: number
-    lote: number
+    quadra: string
+    lote: string
     status_da_venda?: string
     benfeitoria?: string | null
     dt_agendamento: string
@@ -3399,8 +3345,8 @@ export namespace Prisma {
     empresa?: StringFieldUpdateOperationsInput | string
     cliente?: StringFieldUpdateOperationsInput | string
     cpf_cnpj?: NullableStringFieldUpdateOperationsInput | string | null
-    quadra?: IntFieldUpdateOperationsInput | number
-    lote?: IntFieldUpdateOperationsInput | number
+    quadra?: StringFieldUpdateOperationsInput | string
+    lote?: StringFieldUpdateOperationsInput | string
     status_da_venda?: StringFieldUpdateOperationsInput | string
     benfeitoria?: NullableStringFieldUpdateOperationsInput | string | null
     dt_agendamento?: StringFieldUpdateOperationsInput | string
@@ -3417,8 +3363,8 @@ export namespace Prisma {
     empresa?: StringFieldUpdateOperationsInput | string
     cliente?: StringFieldUpdateOperationsInput | string
     cpf_cnpj?: NullableStringFieldUpdateOperationsInput | string | null
-    quadra?: IntFieldUpdateOperationsInput | number
-    lote?: IntFieldUpdateOperationsInput | number
+    quadra?: StringFieldUpdateOperationsInput | string
+    lote?: StringFieldUpdateOperationsInput | string
     status_da_venda?: StringFieldUpdateOperationsInput | string
     benfeitoria?: NullableStringFieldUpdateOperationsInput | string | null
     dt_agendamento?: StringFieldUpdateOperationsInput | string
@@ -3435,8 +3381,8 @@ export namespace Prisma {
     empresa: string
     cliente: string
     cpf_cnpj?: string | null
-    quadra: number
-    lote: number
+    quadra: string
+    lote: string
     status_da_venda?: string
     benfeitoria?: string | null
     dt_agendamento: string
@@ -3453,8 +3399,8 @@ export namespace Prisma {
     empresa?: StringFieldUpdateOperationsInput | string
     cliente?: StringFieldUpdateOperationsInput | string
     cpf_cnpj?: NullableStringFieldUpdateOperationsInput | string | null
-    quadra?: IntFieldUpdateOperationsInput | number
-    lote?: IntFieldUpdateOperationsInput | number
+    quadra?: StringFieldUpdateOperationsInput | string
+    lote?: StringFieldUpdateOperationsInput | string
     status_da_venda?: StringFieldUpdateOperationsInput | string
     benfeitoria?: NullableStringFieldUpdateOperationsInput | string | null
     dt_agendamento?: StringFieldUpdateOperationsInput | string
@@ -3470,8 +3416,8 @@ export namespace Prisma {
     empresa?: StringFieldUpdateOperationsInput | string
     cliente?: StringFieldUpdateOperationsInput | string
     cpf_cnpj?: NullableStringFieldUpdateOperationsInput | string | null
-    quadra?: IntFieldUpdateOperationsInput | number
-    lote?: IntFieldUpdateOperationsInput | number
+    quadra?: StringFieldUpdateOperationsInput | string
+    lote?: StringFieldUpdateOperationsInput | string
     status_da_venda?: StringFieldUpdateOperationsInput | string
     benfeitoria?: NullableStringFieldUpdateOperationsInput | string | null
     dt_agendamento?: StringFieldUpdateOperationsInput | string
@@ -3593,17 +3539,6 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type UserRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
@@ -3630,11 +3565,6 @@ export namespace Prisma {
     status?: SortOrder
     obs?: SortOrder
     idBookings?: SortOrder
-  }
-
-  export type BookingsAvgOrderByAggregateInput = {
-    quadra?: SortOrder
-    lote?: SortOrder
   }
 
   export type BookingsMaxOrderByAggregateInput = {
@@ -3673,11 +3603,6 @@ export namespace Prisma {
     idBookings?: SortOrder
   }
 
-  export type BookingsSumOrderByAggregateInput = {
-    quadra?: SortOrder
-    lote?: SortOrder
-  }
-
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -3694,22 +3619,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type BookingsCreateNestedManyWithoutAuthorInput = {
@@ -3770,14 +3679,6 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type UserUpdateOneRequiredWithoutAgendamentoNestedInput = {
@@ -3897,40 +3798,13 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
   export type BookingsCreateWithoutAuthorInput = {
     id?: string
     empresa: string
     cliente: string
     cpf_cnpj?: string | null
-    quadra: number
-    lote: number
+    quadra: string
+    lote: string
     status_da_venda?: string
     benfeitoria?: string | null
     dt_agendamento: string
@@ -3946,8 +3820,8 @@ export namespace Prisma {
     empresa: string
     cliente: string
     cpf_cnpj?: string | null
-    quadra: number
-    lote: number
+    quadra: string
+    lote: string
     status_da_venda?: string
     benfeitoria?: string | null
     dt_agendamento: string
@@ -3992,8 +3866,8 @@ export namespace Prisma {
     empresa?: StringFilter<"Bookings"> | string
     cliente?: StringFilter<"Bookings"> | string
     cpf_cnpj?: StringNullableFilter<"Bookings"> | string | null
-    quadra?: IntFilter<"Bookings"> | number
-    lote?: IntFilter<"Bookings"> | number
+    quadra?: StringFilter<"Bookings"> | string
+    lote?: StringFilter<"Bookings"> | string
     status_da_venda?: StringFilter<"Bookings"> | string
     benfeitoria?: StringNullableFilter<"Bookings"> | string | null
     dt_agendamento?: StringFilter<"Bookings"> | string
@@ -4062,8 +3936,8 @@ export namespace Prisma {
     empresa: string
     cliente: string
     cpf_cnpj?: string | null
-    quadra: number
-    lote: number
+    quadra: string
+    lote: string
     status_da_venda?: string
     benfeitoria?: string | null
     dt_agendamento: string
@@ -4079,8 +3953,8 @@ export namespace Prisma {
     empresa?: StringFieldUpdateOperationsInput | string
     cliente?: StringFieldUpdateOperationsInput | string
     cpf_cnpj?: NullableStringFieldUpdateOperationsInput | string | null
-    quadra?: IntFieldUpdateOperationsInput | number
-    lote?: IntFieldUpdateOperationsInput | number
+    quadra?: StringFieldUpdateOperationsInput | string
+    lote?: StringFieldUpdateOperationsInput | string
     status_da_venda?: StringFieldUpdateOperationsInput | string
     benfeitoria?: NullableStringFieldUpdateOperationsInput | string | null
     dt_agendamento?: StringFieldUpdateOperationsInput | string
@@ -4096,8 +3970,8 @@ export namespace Prisma {
     empresa?: StringFieldUpdateOperationsInput | string
     cliente?: StringFieldUpdateOperationsInput | string
     cpf_cnpj?: NullableStringFieldUpdateOperationsInput | string | null
-    quadra?: IntFieldUpdateOperationsInput | number
-    lote?: IntFieldUpdateOperationsInput | number
+    quadra?: StringFieldUpdateOperationsInput | string
+    lote?: StringFieldUpdateOperationsInput | string
     status_da_venda?: StringFieldUpdateOperationsInput | string
     benfeitoria?: NullableStringFieldUpdateOperationsInput | string | null
     dt_agendamento?: StringFieldUpdateOperationsInput | string
@@ -4113,8 +3987,8 @@ export namespace Prisma {
     empresa?: StringFieldUpdateOperationsInput | string
     cliente?: StringFieldUpdateOperationsInput | string
     cpf_cnpj?: NullableStringFieldUpdateOperationsInput | string | null
-    quadra?: IntFieldUpdateOperationsInput | number
-    lote?: IntFieldUpdateOperationsInput | number
+    quadra?: StringFieldUpdateOperationsInput | string
+    lote?: StringFieldUpdateOperationsInput | string
     status_da_venda?: StringFieldUpdateOperationsInput | string
     benfeitoria?: NullableStringFieldUpdateOperationsInput | string | null
     dt_agendamento?: StringFieldUpdateOperationsInput | string

@@ -1,7 +1,7 @@
 "use client";
 
 import { AgendaItem, Demarcacao } from "@/app/ag";
-import axios from 'axios'
+import { PrismaClient } from "../../prisma/generated/client"
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -10,11 +10,14 @@ import TableItens from "@/components/TableItens";
 import CardItem from "@/components/CardItem";
 import SideBar from "@/components/SideBar";
 import { Bookings } from "../../prisma/generated/client";
+import { log } from "console";
+
+
 
 export default function Home() {
   const [exibirAgendadas, setExibirAgendadas] = useState(true);
   const [exibirDemarcadas, setExibirDemarcadas] = useState(true);
-  const [demarcacao, setDemarcacao] = useState<AgendaItem[]>(Demarcacao);
+  const [demarcacao, setDemarcacao] = useState<AgendaItem[]>([  ]);
 
   const handleTabChange = (value: any) => {
     // Atualize o estado de exibição com base na guia selecionada
@@ -33,9 +36,6 @@ export default function Home() {
   const demarcacaoFiltradaDemarcado = demarcacaoFiltrada.filter(
     (item) => item.status === "Demarcado"
   );
-  const handleAddItem:  (newItem: Bookings) => void = async (newItem) => {   // Fazer a chamada para a rota HTTP POST com os dados do formulário
-      await axios.post('/api/bookings', newItem);
-  };
 
   return (
     <main className=" min-h-screen w-full  grid grid-cols-[300px,_minmax(900px,_1fr)]">
@@ -52,7 +52,7 @@ export default function Home() {
             <TabsTrigger value="Agendado" className="text-foreground">Agendado</TabsTrigger>
             <TabsTrigger value="Demarcado" className="text-foreground">Demarcado</TabsTrigger>
           </div>
-          <Modal onAddItem={handleAddItem} />
+          <Modal />
         </TabsList>
         <TabsContent value="Agendado">
           <ScrollArea className="outline-none">

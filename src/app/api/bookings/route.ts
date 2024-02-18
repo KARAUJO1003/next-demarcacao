@@ -1,42 +1,26 @@
-import { NextResponse } from "next/server";
+
 import { PrismaClient } from "../../../../prisma/generated/client";
 import type { Bookings } from "../../../../prisma/generated/client";
+import { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
 
-export const POST = async (req: Request) => {
-  const body: Bookings = await req.json();
+
+
+export async function POST(req: NextApiRequest, res: NextApiResponse) {
+  const body = req.body;
   try {
-    // Supondo que você tenha o ID do usuário apropriado
-    const userId = body.idBookings;
-
-    // Criando o novo booking
-    const bookings = await prisma.bookings.create({
-      data: {
-        empresa: body.empresa,
-        cliente: body.cliente,
-        cpf_cnpj: body.cpf_cnpj,
-        quadra: body.quadra,
-        lote: body.lote,
-        dt_agendamento: body.dt_agendamento,
-        horario_do_agen: body.horario_do_agen,
-        resp_pelo_agendamento: body.resp_pelo_agendamento,
-        demarcador: body.demarcador,
-        status: body.status,
-        obs: body.obs,
-        // Estabelecendo a relação com o usuário existente
-        author: {
-          connect: {
-            id: userId,
-          },
-        },
-      },
+    const newBooking:Bookings = await prisma.bookings.create({
+      data: body,
     });
-
-    return NextResponse.json(bookings);
+    return res.status(201).json(newBooking);
   } catch (error) {
-    console.error("Erro ao criar o booking:", error);
-  } finally {
-    await prisma.$disconnect();
+    console.error('Erro ao criar o booking:', error);
+    return res.status(500).json({ erro: 'Erro interno do servidor' });
   }
-};
+}
+
+export async function GET(req: NextApiRequest, res: NextApiResponse) {
+  const bookings = await prisma.bookings.findMany();
+  return Response.json({ bookings });
+}

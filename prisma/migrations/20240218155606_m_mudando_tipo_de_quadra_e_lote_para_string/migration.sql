@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Bookings" ALTER COLUMN "quadra" SET DATA TYPE TEXT,
+ALTER COLUMN "lote" SET DATA TYPE TEXT;

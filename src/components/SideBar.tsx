@@ -18,10 +18,10 @@ const SideBar = (): JSX.Element => {
       </div>
       <div className="flex flex-col h-full mt-12 gap-4 items-start justify-start">
         
-        <Button variant={'outline'} className="w-full justify-start bg-zinc-300 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"><Link className="no-underline" href="/portal/login">Login</Link></Button>
-        <Button variant={'outline'} className="w-full justify-start bg-zinc-300 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"><Link className="no-underline" href="/portal/cadastro">Cadastro</Link></Button>
-        <Button variant={'outline'} className="w-full justify-start bg-zinc-300 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"><Link className="no-underline" href="/portal">Portal</Link></Button>
-        <Button variant={'outline'} className="w-full justify-start bg-zinc-300 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"><Link className="no-underline" href="/users">Users</Link></Button>
+        <Button variant={'outline'} className="w-full justify-start bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"><Link className="no-underline" href="/portal/login">Login</Link></Button>
+        <Button variant={'outline'} className="w-full justify-start bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"><Link className="no-underline" href="/portal/cadastro">Cadastro</Link></Button>
+        <Button variant={'outline'} className="w-full justify-start bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"><Link className="no-underline" href="/portal">Portal</Link></Button>
+        <Button variant={'outline'} className="w-full justify-start bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"><Link className="no-underline" href="/users">Users</Link></Button>
         
         
         

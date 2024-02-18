@@ -24,8 +24,8 @@ model Bookings {
   empresa               String
   cliente               String
   cpf_cnpj              String?
-  quadra                Int
-  lote                  Int
+  quadra                String
+  lote                  String
   status_da_venda       String  @default("Ativa")
   benfeitoria           String?
   dt_agendamento        String

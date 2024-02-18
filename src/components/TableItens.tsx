@@ -37,7 +37,7 @@ import {
 import { AgendaItem, Demarcacao } from "@/app/ag";
 import { Modal } from "./Modal";
 
-const data: AgendaItem[] = Demarcacao;
+const data: AgendaItem[] = [];
 
 export const columns: ColumnDef<AgendaItem>[] = [
   {
@@ -282,7 +282,7 @@ const DataTableDemo = () => {
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Modal onAddItem={() => console.log()} />
+          <Modal  />
         </div>
       </div>
       <div className="rounded-md border ">
