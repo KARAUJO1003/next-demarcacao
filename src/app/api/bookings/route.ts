@@ -1,3 +1,4 @@
+import { NextRequest } from "next/server";
 import {
   Bookings,
   Prisma,
@@ -7,8 +8,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
-  const { cliente, quadra, lote } = req.body as Bookings;
+export async function POST(req: NextRequest, res: NextApiResponse) {
+  const { cliente, quadra, lote } = req.body as unknown as Bookings;
   try {
     const newBooking = await prisma.bookings.create({
       data: {
