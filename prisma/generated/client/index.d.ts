@@ -2131,7 +2131,7 @@ export namespace Prisma {
     demarcador: string
     status: string
     obs: string | null
-    idBookings: string
+    idBookings: string | null
     _count: BookingsCountAggregateOutputType | null
     _min: BookingsMinAggregateOutputType | null
     _max: BookingsMaxAggregateOutputType | null
@@ -2167,7 +2167,7 @@ export namespace Prisma {
     status?: boolean
     obs?: boolean
     idBookings?: boolean
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Bookings$authorArgs<ExtArgs>
   }, ExtArgs["result"]["bookings"]>
 
   export type BookingsSelectScalar = {
@@ -2189,14 +2189,14 @@ export namespace Prisma {
   }
 
   export type BookingsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    author?: boolean | UserDefaultArgs<ExtArgs>
+    author?: boolean | Bookings$authorArgs<ExtArgs>
   }
 
 
   export type $BookingsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Bookings"
     objects: {
-      author: Prisma.$UserPayload<ExtArgs>
+      author: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -2213,7 +2213,7 @@ export namespace Prisma {
       demarcador: string
       status: string
       obs: string | null
-      idBookings: string
+      idBookings: string | null
     }, ExtArgs["result"]["bookings"]>
     composites: {}
   }
@@ -2579,7 +2579,7 @@ export namespace Prisma {
   export interface Prisma__BookingsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    author<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    author<T extends Bookings$authorArgs<ExtArgs> = {}>(args?: Subset<T, Bookings$authorArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2936,6 +2936,22 @@ export namespace Prisma {
 
 
   /**
+   * Bookings.author
+   */
+  export type Bookings$authorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+
+  /**
    * Bookings without action
    */
   export type BookingsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3150,8 +3166,8 @@ export namespace Prisma {
     demarcador?: StringFilter<"Bookings"> | string
     status?: StringFilter<"Bookings"> | string
     obs?: StringNullableFilter<"Bookings"> | string | null
-    idBookings?: StringFilter<"Bookings"> | string
-    author?: XOR<UserRelationFilter, UserWhereInput>
+    idBookings?: StringNullableFilter<"Bookings"> | string | null
+    author?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }
 
   export type BookingsOrderByWithRelationInput = {
@@ -3169,7 +3185,7 @@ export namespace Prisma {
     demarcador?: SortOrder
     status?: SortOrder
     obs?: SortOrderInput | SortOrder
-    idBookings?: SortOrder
+    idBookings?: SortOrderInput | SortOrder
     author?: UserOrderByWithRelationInput
   }
 
@@ -3191,8 +3207,8 @@ export namespace Prisma {
     demarcador?: StringFilter<"Bookings"> | string
     status?: StringFilter<"Bookings"> | string
     obs?: StringNullableFilter<"Bookings"> | string | null
-    idBookings?: StringFilter<"Bookings"> | string
-    author?: XOR<UserRelationFilter, UserWhereInput>
+    idBookings?: StringNullableFilter<"Bookings"> | string | null
+    author?: XOR<UserNullableRelationFilter, UserWhereInput> | null
   }, "id">
 
   export type BookingsOrderByWithAggregationInput = {
@@ -3210,7 +3226,7 @@ export namespace Prisma {
     demarcador?: SortOrder
     status?: SortOrder
     obs?: SortOrderInput | SortOrder
-    idBookings?: SortOrder
+    idBookings?: SortOrderInput | SortOrder
     _count?: BookingsCountOrderByAggregateInput
     _max?: BookingsMaxOrderByAggregateInput
     _min?: BookingsMinOrderByAggregateInput
@@ -3234,7 +3250,7 @@ export namespace Prisma {
     demarcador?: StringWithAggregatesFilter<"Bookings"> | string
     status?: StringWithAggregatesFilter<"Bookings"> | string
     obs?: StringNullableWithAggregatesFilter<"Bookings"> | string | null
-    idBookings?: StringWithAggregatesFilter<"Bookings"> | string
+    idBookings?: StringNullableWithAggregatesFilter<"Bookings"> | string | null
   }
 
   export type UserCreateInput = {
@@ -3319,7 +3335,7 @@ export namespace Prisma {
     demarcador: string
     status: string
     obs?: string | null
-    author: UserCreateNestedOneWithoutAgendamentoInput
+    author?: UserCreateNestedOneWithoutAgendamentoInput
   }
 
   export type BookingsUncheckedCreateInput = {
@@ -3337,7 +3353,7 @@ export namespace Prisma {
     demarcador: string
     status: string
     obs?: string | null
-    idBookings: string
+    idBookings?: string | null
   }
 
   export type BookingsUpdateInput = {
@@ -3355,7 +3371,7 @@ export namespace Prisma {
     demarcador?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     obs?: NullableStringFieldUpdateOperationsInput | string | null
-    author?: UserUpdateOneRequiredWithoutAgendamentoNestedInput
+    author?: UserUpdateOneWithoutAgendamentoNestedInput
   }
 
   export type BookingsUncheckedUpdateInput = {
@@ -3373,7 +3389,7 @@ export namespace Prisma {
     demarcador?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     obs?: NullableStringFieldUpdateOperationsInput | string | null
-    idBookings?: StringFieldUpdateOperationsInput | string
+    idBookings?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BookingsCreateManyInput = {
@@ -3391,7 +3407,7 @@ export namespace Prisma {
     demarcador: string
     status: string
     obs?: string | null
-    idBookings: string
+    idBookings?: string | null
   }
 
   export type BookingsUpdateManyMutationInput = {
@@ -3426,7 +3442,7 @@ export namespace Prisma {
     demarcador?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     obs?: NullableStringFieldUpdateOperationsInput | string | null
-    idBookings?: StringFieldUpdateOperationsInput | string
+    idBookings?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -3539,9 +3555,9 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type UserRelationFilter = {
-    is?: UserWhereInput
-    isNot?: UserWhereInput
+  export type UserNullableRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
   }
 
   export type SortOrderInput = {
@@ -3681,10 +3697,12 @@ export namespace Prisma {
     set?: string | null
   }
 
-  export type UserUpdateOneRequiredWithoutAgendamentoNestedInput = {
+  export type UserUpdateOneWithoutAgendamentoNestedInput = {
     create?: XOR<UserCreateWithoutAgendamentoInput, UserUncheckedCreateWithoutAgendamentoInput>
     connectOrCreate?: UserCreateOrConnectWithoutAgendamentoInput
     upsert?: UserUpsertWithoutAgendamentoInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAgendamentoInput, UserUpdateWithoutAgendamentoInput>, UserUncheckedUpdateWithoutAgendamentoInput>
   }
@@ -3876,7 +3894,7 @@ export namespace Prisma {
     demarcador?: StringFilter<"Bookings"> | string
     status?: StringFilter<"Bookings"> | string
     obs?: StringNullableFilter<"Bookings"> | string | null
-    idBookings?: StringFilter<"Bookings"> | string
+    idBookings?: StringNullableFilter<"Bookings"> | string | null
   }
 
   export type UserCreateWithoutAgendamentoInput = {

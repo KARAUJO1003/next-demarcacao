@@ -79,7 +79,7 @@ export function Modal() {
   const handleSubmit = async (formData: Bookings) => {
     console.log('clicou no salvar')
     setLoading(true);
-    try {
+    // try {
       const response = await fetch("/api/bookings", {
         method: "POST",
         headers: {
@@ -96,16 +96,16 @@ export function Modal() {
       console.log("Resposta do servidor:", data);
       // Exibir uma mensagem de sucesso
       toast.success("Dados enviados com sucesso!");
-    } catch (error: any) {
-      // Lidar com o erro caso ocorra
-      console.error("Erro ao enviar dados:", error.message);
-      // Exibir uma mensagem de erro para o usuário
-      toast.error(
-        "Erro ao enviar dados. Por favor, tente novamente mais tarde."
-      );
-    } finally {
-      setLoading(false);
-    }
+    // } catch (error: any) {
+    //   // Lidar com o erro caso ocorra
+    //   console.error("Erro ao enviar dados:", error.message);
+    //   // Exibir uma mensagem de erro para o usuário
+    //   toast.error(
+    //     "Erro ao enviar dados. Por favor, tente novamente mais tarde."
+    //   );
+    // } finally {
+    //   setLoading(false);
+    // }
   };
 
 
