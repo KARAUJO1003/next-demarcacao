@@ -8,11 +8,13 @@ import { Modal } from "@/components/Modal";
 import TableItens from "@/components/TableItens";
 import CardItem from "@/components/CardItem";
 import SideBar from "@/components/SideBar";
+import Link from "next/link";
+import { Bookings } from "../../prisma/generated/client";
 
 export default function Home() {
   const [exibirAgendadas, setExibirAgendadas] = useState(true);
   const [exibirDemarcadas, setExibirDemarcadas] = useState(true);
-  const [demarcacao, setDemarcacao] = useState<AgendaItem[]>([]);
+  const [demarcacao, setDemarcacao] = useState<Bookings[]>([]);
 
   useEffect(() => {
     fetch("/api/bookings")
@@ -64,6 +66,7 @@ export default function Home() {
             <ul className="flex gap-3 min-h-64">
               {demarcacaoFiltradaAgendada.map((item, id) => (
                 <li key={id} className={`  mb-3 flex flex-col min-w-80 h-min `}>
+                  <Link href={`/bookings/${item.id}`}>
                   <CardItem
                     user={item.cliente}
                     qd={item.quadra}
@@ -74,6 +77,7 @@ export default function Home() {
                     status={item.status}
                     empresa={item.empresa}
                   />
+                  </Link>
                 </li>
               ))}
             </ul>
