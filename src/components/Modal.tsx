@@ -130,7 +130,8 @@ export function Modal() {
       <DialogContent>
         <Form {...form}>
           <form
-            onSubmit={()=> handleSubmit(onSubmit)}
+            onSubmit={(
+ handleSubmit(onSubmit)}
             className="space-y-6"
           >
             {/* <Tabs>
