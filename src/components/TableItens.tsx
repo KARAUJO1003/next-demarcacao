@@ -38,9 +38,6 @@ import { AgendaItem } from "@/app/ag";
 import { Modal } from "./Modal";
 
 
-const data: AgendaItem[] = [
-
-];
 
 export const columns: ColumnDef<AgendaItem>[] = [
   {
@@ -226,6 +223,14 @@ const DataTableDemo = () => {
   const [columnVisibility, setColumnVisibility] =
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
+
+  const [data, setData] = React.useState<AgendaItem[]>([]);
+
+  React.useEffect(() => {
+    fetch("/api/bookings")
+      .then((response) => response.json())
+      .then((data) => setData(data));
+  }, []);
 
   const table = useReactTable({
     data,

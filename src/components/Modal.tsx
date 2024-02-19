@@ -52,6 +52,7 @@ export function Modal() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const [tabValue, setTabValue] = useState()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -71,7 +72,7 @@ export function Modal() {
       obs: "",
     },
   });
-  
+
   const {
     register,
     handleSubmit,
@@ -79,7 +80,7 @@ export function Modal() {
     reset,
   } = useForm();
 
-  const onSubmit: SubmitHandler<FieldValues> =  async (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const formData = form.getValues();
 
     try {
@@ -108,7 +109,7 @@ export function Modal() {
   };
 
   // const submitData = async ( data: Bookings) => {
- 
+
   //   try {
   //     const body = data ;
   //     await fetch('/api/bookings', {
@@ -131,15 +132,15 @@ export function Modal() {
         <Form {...form}>
           <form
             onSubmit={(
- handleSubmit(onSubmit)}
+              handleSubmit(onSubmit))}
             className="space-y-6"
           >
-            {/* <Tabs>
+            <Tabs onValueChange={(e:any) => setTabValue(e)}>
               <TabsList>
                 <TabsTrigger value="tab1">Dados Cliente</TabsTrigger>
                 <TabsTrigger value="tab2">Dados Empresa</TabsTrigger>
               </TabsList>
-              <TabsContent value="tab1"> */}
+              <TabsContent value="tab1">
                 <FormField
                   control={form.control}
                   name="cliente"
@@ -327,9 +328,9 @@ export function Modal() {
                     </FormItem>
                   )}
                 />
-              {/* </TabsContent>
+                 </TabsContent>
 
-              <TabsContent value="tab2"> */}
+              <TabsContent value="tab2"> 
                 <FormField
                   control={form.control}
                   name="empresa"
@@ -350,7 +351,7 @@ export function Modal() {
                     </FormItem>
                   )}
                 />
-                {/* <FormField
+                <FormField
                   control={form.control}
                   name="resp_pelo_agendamento"
                   render={({ field }) => (
@@ -430,18 +431,19 @@ export function Modal() {
                       <FormMessage />
                     </FormItem>
                   )}
-                /> */}
-              {/* </TabsContent>
-            </Tabs> */}
+                />
+              </TabsContent>
+            </Tabs>
 
             <div className="flex items-center justify-between">
               <DialogClose>
-                  Cancelar
+                Cancelar
               </DialogClose>
               <Button
+              
                 className="bg-emerald-600 hover:bg-emerald-500 text-zinc-200"
                 type="submit"
-                disabled={loading}
+                disabled={loading || tabValue == 'tab1' ? true : false}
               >
                 {loading ? 'Salvando...' : 'Salvar'}
               </Button>
@@ -450,5 +452,5 @@ export function Modal() {
         </Form>
       </DialogContent>
     </Dialog>
-  );
+  )
 }

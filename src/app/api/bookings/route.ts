@@ -5,21 +5,29 @@ import type { NextApiRequest, NextApiResponse } from "next";
 const prisma = new PrismaClient();
 
 export async function POST(req: Request, res: NextApiResponse) {
-  const { empresa, cliente, quadra, lote, status } = await req.json()
+  const { empresa, cliente, cpf_cnpj, quadra, lote, status, benfeitoria, dt_agendamento, horario_do_agen, resp_pelo_agendamento, demarcador, status_da_venda, obs } = await req.json()
 
   try {
     const newBooking = await prisma.bookings.create({
       data: {
         empresa,
         cliente,
+        cpf_cnpj,
         quadra,
         lote,
-        status
+        status,
+        benfeitoria, 
+        dt_agendamento, 
+        horario_do_agen, 
+        resp_pelo_agendamento, 
+        demarcador, 
+        status_da_venda, 
+        obs
       },
     });
     console.log(req.body)
     // console.log(newBooking)
-    return NextResponse.json( newBooking);
+    return NextResponse.json(newBooking);
   } catch (error) {
     return NextResponse.json({ message: "Erro de validação", error });
   }
