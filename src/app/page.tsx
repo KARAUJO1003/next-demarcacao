@@ -1,7 +1,6 @@
 "use client";
 
 import { AgendaItem, Demarcacao } from "@/app/ag";
-import { PrismaClient } from "../../prisma/generated/client"
 import { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
@@ -9,10 +8,6 @@ import { Modal } from "@/components/Modal";
 import TableItens from "@/components/TableItens";
 import CardItem from "@/components/CardItem";
 import SideBar from "@/components/SideBar";
-import { Bookings } from "../../prisma/generated/client";
-import { log } from "console";
-
-
 
 export default function Home() {
   const [exibirAgendadas, setExibirAgendadas] = useState(true);

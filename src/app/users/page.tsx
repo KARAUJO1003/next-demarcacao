@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import type { User } from "@prisma/client";
+import { User} from "../../../prisma/generated/client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 

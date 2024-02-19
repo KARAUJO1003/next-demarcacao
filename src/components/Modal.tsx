@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "./ui/dialog";
-import { AgendaItem } from "@/app/ag";
 import {
   Select,
   SelectContent,

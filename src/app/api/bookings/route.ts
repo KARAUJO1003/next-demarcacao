@@ -1,7 +1,6 @@
 import { NextRequest } from "next/server";
 import {
   Bookings,
-  Prisma,
   PrismaClient,
 } from "../../../../prisma/generated/client";
 import type { NextApiRequest, NextApiResponse } from "next";

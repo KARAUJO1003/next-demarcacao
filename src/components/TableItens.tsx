@@ -34,7 +34,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { AgendaItem, Demarcacao } from "@/app/ag";
+import { AgendaItem } from "@/app/ag";
 import { Modal } from "./Modal";
 
 
