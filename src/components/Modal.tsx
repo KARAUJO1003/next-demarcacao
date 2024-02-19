@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import {
@@ -28,6 +28,7 @@ import { Plus } from "lucide-react";
 import type { Bookings } from "../../prisma/generated/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { useState } from "react";
+import { SubmitHandler } from "react-hook-form";
 
 const formSchema = z.object({
   id: z.string(),
@@ -49,7 +50,7 @@ const formSchema = z.object({
 
 export function Modal() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -71,39 +72,54 @@ export function Modal() {
     },
   });
   
-  // const handleSubmit = async (formData: Bookings) => {
-  //   console.log('clicou no salvar')
-  //   setLoading(true);
-  //   // try {
-  //     const response = await fetch("/api/bookings", {
-  //       method: "POST",
-  //       body: JSON.stringify(formData),
-  //     });
-  //     if (!response.ok) {
-  //       throw new Error("Erro ao enviar formulário");
-  //     }
-  //     setSuccess(true);
-  //     // Lidar com a resposta do servidor
-  //     const data = await response.json();
-  //     console.log("Resposta do servidor:", data);
-  //     // Exibir uma mensagem de sucesso
-  //     toast.success("Dados enviados com sucesso!");
-  //     setLoading(false);
-  //   }
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm();
 
-  const submitData = async ( data: Bookings) => {
- 
+  const onSubmit: SubmitHandler<FieldValues> =  async (data) => {
+    const formData = form.getValues();
+
     try {
-      const body = data ;
-      await fetch('/api/bookings', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
+      setLoading(true);
+      const response = await fetch("/api/bookings", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
+      console.log(response)
+      console.log(data)
+
+      if (response.ok) {
+        setSuccess(true);
+        reset(); // Resetar o formulário após o envio bem-sucedido
+      } else {
+        setError("Erro ao criar registro. Por favor, tente novamente.");
+      }
     } catch (error) {
-      console.error(error);
+      setError("Erro ao criar registro. Por favor, tente novamente.");
+    } finally {
+      setLoading(false);
     }
   };
+
+  // const submitData = async ( data: Bookings) => {
+ 
+  //   try {
+  //     const body = data ;
+  //     await fetch('/api/bookings', {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' },
+  //       body: JSON.stringify(body),
+  //     });
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
   return (
     <Dialog>
       <DialogTrigger className="bg-emerald-600 rounded-md px-3 py-2 text-sm font-semibold text-zinc-100 transition-all hover:bg-emerald-500">
@@ -114,7 +130,7 @@ export function Modal() {
       <DialogContent>
         <Form {...form}>
           <form
-            onSubmit={form.handleSubmit(submitData)}
+            onSubmit={handleSubmit(onSubmit)}
             className="space-y-6"
           >
             {/* <Tabs>

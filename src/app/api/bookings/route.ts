@@ -5,7 +5,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 const prisma = new PrismaClient();
 
 export async function POST(req: Request, res: NextApiResponse) {
-  const { empresa, cliente, quadra, lote } = await req.json()
+  const { empresa, cliente, quadra, lote, status } = await req.json()
 
   try {
     const newBooking = await prisma.bookings.create({
@@ -14,6 +14,7 @@ export async function POST(req: Request, res: NextApiResponse) {
         cliente,
         quadra,
         lote,
+        status
       },
     });
     console.log(req.body)
