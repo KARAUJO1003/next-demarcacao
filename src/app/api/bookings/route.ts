@@ -27,7 +27,9 @@ export async function GET() {
   try {
     const data = await prisma.bookings.findMany();
     return Response.json(data);
-  } catch {}
+  } catch {
+    return Response.json({ message: "Erro de validação" });
+  }
 }
 
 // export default async function handler(req: NextApiRequest, res: NextApiResponse) {

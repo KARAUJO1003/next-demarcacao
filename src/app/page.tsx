@@ -12,24 +12,13 @@ import SideBar from "@/components/SideBar";
 export default function Home() {
   const [exibirAgendadas, setExibirAgendadas] = useState(true);
   const [exibirDemarcadas, setExibirDemarcadas] = useState(true);
-  const [demarcacao, setDemarcacao] = useState<AgendaItem[]>([  ]);
+  const [demarcacao, setDemarcacao] = useState<AgendaItem[]>([]);
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    async function fetchBookings() {
-      try {
-        const response = await fetch('/api/bookings');
-        if (!response.ok) {
-          throw new Error('Erro ao buscar os bookings');
-        }
-        const data = await response.json();
-        setDemarcacao(data);
-      } catch (error) {
-        console.error('Erro ao buscar os bookings:', error);
-      }
-    }
-
-    fetchBookings();
+    fetch("/api/bookings")
+      .then((response) => response.json())
+      .then((data) => setDemarcacao(data));
   }, []);
 
   const handleTabChange = (value: any) => {
@@ -62,8 +51,12 @@ export default function Home() {
       >
         <TabsList className="w-full border-b pb-2 bg-transparent items-center justify-between">
           <div className="flex gap-2">
-            <TabsTrigger value="Agendado" className="text-foreground">Agendado</TabsTrigger>
-            <TabsTrigger value="Demarcado" className="text-foreground">Demarcado</TabsTrigger>
+            <TabsTrigger value="Agendado" className="text-foreground">
+              Agendado
+            </TabsTrigger>
+            <TabsTrigger value="Demarcado" className="text-foreground">
+              Demarcado
+            </TabsTrigger>
           </div>
           <Modal />
         </TabsList>
@@ -112,7 +105,6 @@ export default function Home() {
           </ScrollArea>
         </TabsContent>
         <TableItens />
-
       </Tabs>
     </main>
   );
