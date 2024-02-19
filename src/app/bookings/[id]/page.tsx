@@ -15,28 +15,38 @@ async function getData(): Promise<Bookings[]> {
 }
 
 export default function PageUser({ params }: { params: { id: string } }) {
-  const [bookings, setBookings] = useState<Bookings[]>([]);
+  const [booking, setBooking] = useState<Bookings | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await getData();
-        setBookings(data);
+        const bookingWithId = data.find((item: Bookings) => item.id === params.id);
+        if (bookingWithId !== undefined) {
+          setBooking(bookingWithId);
+        } else {
+          console.error('Booking com ID não encontrado:', params.id);
+        }
       } catch (error) {
         console.error('Erro ao obter dados:', error);
       }
     };
     fetchData();
-  }, []);
+  }, [params.id]);
 
   return (
     <>
-      <h1>Código: {params.id}</h1>
-      {bookings.map((item, index) => (
-        <div key={item.id}>
-          <span>Nome: {item.cliente}</span>
+      {booking && (
+        <div className="flex flex-col">
+          <h1>Olá {booking.cliente}</h1>
+          <span>Nome: {booking.cliente}</span>
+          <span> {booking.cpf_cnpj}</span>
+          <span> {booking.dt_agendamento}</span>
+          <span> {booking.horario_do_agen}</span>
+          <span> {booking.status}</span>
+          {/* Adicione mais campos conforme necessário */}
         </div>
-      ))}
+      )}
     </>
   );
 }

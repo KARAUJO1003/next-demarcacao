@@ -1,50 +1,29 @@
 'use client'
 import { useEffect, useState } from "react";
 
-interface User {
-  id: string;
-  name: string;
-  // Adicione outras propriedades conforme necessário
-}
-
-async function getData(): Promise<User[]> {
-  const res = await fetch('/api/users');
-  if (!res.ok) {
-    // Isso ativará o Error Boundary mais próximo em 'error.js'
-    throw new Error('Falha ao buscar dados');
-  }
-  const rawData = await res.json();
-  console.log("Dados brutos da API:", rawData);
-  
-  // Verifique se a propriedade 'users' existe e é uma matriz
-  if (!Array.isArray(rawData.users)) {
-    throw new Error('Dados retornados não contêm uma matriz de usuários');
-  }
-  
-  return rawData.users;
-}
-
 export default function PageUser({ params }: { params: { id: string } }) {
-  const [users, setUsers] = useState<User[]>([]);
+  
+  const [user, setUser] = useState<any>(null); // Aqui você pode tipar corretamente o tipo do usuário
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await getData();
-        setUsers(data);
-      } catch (error) {
-        console.error('Erro ao obter dados:', error);
-      }
-    };
-    fetchData();
-  }, []);
+    fetch(`/api/users`)
+      .then((response) => response.json())
+      .then((data) => {
+        const userWithId = data.users.find((user: any) => user.id === params.id); // Encontra o usuário com o ID correspondente
+        setUser(userWithId); // Define o usuário correspondente no estado
+      });
+  }, [params.id]); // Adiciona params.id como uma dependência para que o efeito seja executado quando params.id mudar
 
   return (
     <>
-      <h1>Codigo: {params.id}</h1>
-      {users.map((item, index) => (
-        <span key={index}> Nome: {item.name}</span>
-      ))}
+      <h1>My Page: {params.id}</h1>
+      {user && (
+        <div>
+          <span>Nome: {user.name}</span>
+          <span>Email: {user.email}</span>
+          {/* Adicione mais campos conforme necessário */}
+        </div>
+      )}
     </>
   );
 }
