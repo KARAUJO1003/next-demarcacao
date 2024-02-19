@@ -1,25 +1,26 @@
-import { NextRequest } from "next/server";
-import {
-  Bookings,
-  PrismaClient,
-} from "../../../../prisma/generated/client";
+import { NextRequest, NextResponse } from "next/server";
+import { Bookings, PrismaClient } from "../../../../prisma/generated/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
 
-export async function POST(req: NextRequest, res: NextApiResponse) {
-  const { cliente, quadra, lote } = req.body as unknown as Bookings;
+export async function POST(req: Request, res: NextApiResponse) {
+  const { empresa, cliente, quadra, lote } = await req.json()
+
   try {
     const newBooking = await prisma.bookings.create({
       data: {
-        cliente: cliente,
-        quadra: quadra,
-        lote: lote,
+        empresa,
+        cliente,
+        quadra,
+        lote,
       },
     });
-    return Response.json(newBooking);
+    console.log(req.body)
+    // console.log(newBooking)
+    return NextResponse.json( newBooking);
   } catch (error) {
-    return Response.json({ message: "Erro de validação", error });
+    return NextResponse.json({ message: "Erro de validação", error });
   }
 }
 

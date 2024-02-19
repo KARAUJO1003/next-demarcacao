@@ -47,10 +47,6 @@ const formSchema = z.object({
   idBookings: z.string(),
 });
 
-type ProfileFormProps = {
-  onAddItem: (newItem: Bookings) => void;
-};
-
 export function Modal() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -59,9 +55,9 @@ export function Modal() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      cliente: "",
-      quadra: "",
-      lote: "",
+      cliente: "kaesyo",
+      quadra: "12",
+      lote: "21",
       dt_agendamento: "",
       horario_do_agen: "",
       status: "",
@@ -74,40 +70,40 @@ export function Modal() {
       obs: "",
     },
   });
+  
+  // const handleSubmit = async (formData: Bookings) => {
+  //   console.log('clicou no salvar')
+  //   setLoading(true);
+  //   // try {
+  //     const response = await fetch("/api/bookings", {
+  //       method: "POST",
+  //       body: JSON.stringify(formData),
+  //     });
+  //     if (!response.ok) {
+  //       throw new Error("Erro ao enviar formulário");
+  //     }
+  //     setSuccess(true);
+  //     // Lidar com a resposta do servidor
+  //     const data = await response.json();
+  //     console.log("Resposta do servidor:", data);
+  //     // Exibir uma mensagem de sucesso
+  //     toast.success("Dados enviados com sucesso!");
+  //     setLoading(false);
+  //   }
 
-  const handleSubmit = async (formData: Bookings) => {
-    console.log('clicou no salvar')
-    setLoading(true);
-    // try {
-      const response = await fetch("/api/bookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+  const submitData = async ( data: Bookings) => {
+ 
+    try {
+      const body = data ;
+      await fetch('/api/bookings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
       });
-      if (!response.ok) {
-        throw new Error("Erro ao enviar formulário");
-      }
-      setSuccess(true);
-      // Lidar com a resposta do servidor
-      const data = await response.json();
-      console.log("Resposta do servidor:", data);
-      // Exibir uma mensagem de sucesso
-      toast.success("Dados enviados com sucesso!");
-    // } catch (error: any) {
-    //   // Lidar com o erro caso ocorra
-    //   console.error("Erro ao enviar dados:", error.message);
-    //   // Exibir uma mensagem de erro para o usuário
-    //   toast.error(
-    //     "Erro ao enviar dados. Por favor, tente novamente mais tarde."
-    //   );
-    // } finally {
-    //   setLoading(false);
-    // }
+    } catch (error) {
+      console.error(error);
+    }
   };
-
-
   return (
     <Dialog>
       <DialogTrigger className="bg-emerald-600 rounded-md px-3 py-2 text-sm font-semibold text-zinc-100 transition-all hover:bg-emerald-500">
@@ -118,15 +114,15 @@ export function Modal() {
       <DialogContent>
         <Form {...form}>
           <form
-            onSubmit={form.handleSubmit(handleSubmit)}
+            onSubmit={form.handleSubmit(submitData)}
             className="space-y-6"
           >
-            <Tabs>
+            {/* <Tabs>
               <TabsList>
                 <TabsTrigger value="tab1">Dados Cliente</TabsTrigger>
                 <TabsTrigger value="tab2">Dados Empresa</TabsTrigger>
               </TabsList>
-              <TabsContent value="tab1">
+              <TabsContent value="tab1"> */}
                 <FormField
                   control={form.control}
                   name="cliente"
@@ -314,9 +310,9 @@ export function Modal() {
                     </FormItem>
                   )}
                 />
-              </TabsContent>
+              {/* </TabsContent>
 
-              <TabsContent value="tab2">
+              <TabsContent value="tab2"> */}
                 <FormField
                   control={form.control}
                   name="empresa"
@@ -337,7 +333,7 @@ export function Modal() {
                     </FormItem>
                   )}
                 />
-                <FormField
+                {/* <FormField
                   control={form.control}
                   name="resp_pelo_agendamento"
                   render={({ field }) => (
@@ -417,15 +413,13 @@ export function Modal() {
                       <FormMessage />
                     </FormItem>
                   )}
-                />
-              </TabsContent>
-            </Tabs>
+                /> */}
+              {/* </TabsContent>
+            </Tabs> */}
 
             <div className="flex items-center justify-between">
               <DialogClose>
-
                   Cancelar
-
               </DialogClose>
               <Button
                 className="bg-emerald-600 hover:bg-emerald-500 text-zinc-200"
