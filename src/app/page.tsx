@@ -13,7 +13,6 @@ export default function Home() {
   const [exibirAgendadas, setExibirAgendadas] = useState(true);
   const [exibirDemarcadas, setExibirDemarcadas] = useState(true);
   const [demarcacao, setDemarcacao] = useState<AgendaItem[]>([]);
-  const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
     fetch("/api/bookings")

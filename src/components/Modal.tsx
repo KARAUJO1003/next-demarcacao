@@ -436,7 +436,7 @@ export function Modal() {
             </Tabs>
 
             <div className="flex items-center justify-between">
-              <DialogClose>
+              <DialogClose className="border">
                 Cancelar
               </DialogClose>
               <Button

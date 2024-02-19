@@ -9,7 +9,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { User} from "../../../prisma/generated/client";
+import { User } from "../../../prisma/generated/client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -35,8 +35,10 @@ export default function UsersList() {
           <TableBody>
             {users.map((user: User) => (
               <TableRow key={user.id}>
-                <TableCell>{user.name}</TableCell>
-                <TableCell>{user.email}</TableCell>
+                <Link href={`/users/${user.id}`}>
+                  <TableCell>{user.name}</TableCell>
+                </Link>
+                  <TableCell>{user.email}</TableCell>
               </TableRow>
             ))}
           </TableBody>
