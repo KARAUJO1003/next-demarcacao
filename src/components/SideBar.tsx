@@ -12,7 +12,7 @@ const SideBar = (): JSX.Element => {
 
   return (
     <div className="prose dark:prose-invert border-r w-[300px] py-10 px-5 flex flex-col justify-between  h-screen fixed">
-      <div className="w-[200px] h-[50px] overflow-hidden flex items-center justify-center">
+      <div className="w-[200px] h-[50px] flex items-center justify-center">
         
         <Image loading="eager" alt="logo" src={theme === 'dark'? LogoDark02 : LogoLight02} height={50} width={200}/>
       </div>

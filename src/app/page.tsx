@@ -1,7 +1,7 @@
 "use client";
 
 import { AgendaItem, Demarcacao } from "@/app/ag";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Modal } from "@/components/Modal";
@@ -62,27 +62,32 @@ export default function Home() {
           <Modal />
         </TabsList>
         <TabsContent value="Agendado">
-          <ScrollArea className="outline-none">
-            <ul className="flex gap-3 min-h-64">
-              {demarcacaoFiltradaAgendada.map((item, id) => (
-                <li key={id} className={`  mb-3 flex flex-col min-w-80 h-min `}>
-                  <Link href={`/bookings/${item.id}`}>
-                  <CardItem
-                    user={item.cliente}
-                    qd={item.quadra}
-                    lt={item.lote}
-                    date={item.dt_agendamento}
-                    timer={item.horario_do_agen}
-                    demarcador={item.demarcador}
-                    status={item.status}
-                    empresa={item.empresa}
-                  />
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <ScrollBar orientation="horizontal" />
-          </ScrollArea>
+            <ScrollArea className="outline-none">
+              <ul className="flex gap-3 min-h-64">
+                {demarcacaoFiltradaAgendada.map((item, id) => (
+                  <li
+                    key={id}
+                    className={`  mb-3 flex flex-col min-w-80 h-min `}
+                  >
+                    <Link href={`/bookings/${item.id}`}>
+
+                      <CardItem
+                        user={item.cliente}
+                        qd={item.quadra}
+                        lt={item.lote}
+                        date={item.dt_agendamento}
+                        timer={item.horario_do_agen}
+                        demarcador={item.demarcador}
+                        status={item.status}
+                        empresa={item.empresa}
+                      />
+
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <ScrollBar orientation="horizontal" />
+            </ScrollArea>
         </TabsContent>
         <TabsContent value="Demarcado">
           <ScrollArea className="outline-none">
@@ -92,15 +97,17 @@ export default function Home() {
                   key={id}
                   className={` rounded-md mb-3  flex flex-col min-w-80 h-min `}
                 >
-                  <CardItem
-                    user={item.cliente}
-                    qd={item.quadra}
-                    lt={item.lote}
-                    date={item.dt_agendamento}
-                    timer={item.horario_do_agen}
-                    demarcador={item.demarcador}
-                    empresa={item.empresa}
-                  />
+                  <Link href={`/bookings/${item.id}`}>
+                    <CardItem
+                      user={item.cliente}
+                      qd={item.quadra}
+                      lt={item.lote}
+                      date={item.dt_agendamento}
+                      timer={item.horario_do_agen}
+                      demarcador={item.demarcador}
+                      empresa={item.empresa}
+                    />
+                  </Link>
                 </li>
               ))}
             </ul>

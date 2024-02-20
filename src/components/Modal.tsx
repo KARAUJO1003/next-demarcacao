@@ -50,9 +50,9 @@ const formSchema = z.object({
 
 export function Modal() {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-  const [tabValue, setTabValue] = useState()
+  const [tabValue, setTabValue] = useState();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -92,8 +92,8 @@ export function Modal() {
         },
         body: JSON.stringify(formData),
       });
-      console.log(response)
-      console.log(data)
+      console.log(response);
+      console.log(data);
 
       if (response.ok) {
         setSuccess(true);
@@ -130,12 +130,8 @@ export function Modal() {
       </DialogTrigger>
       <DialogContent>
         <Form {...form}>
-          <form
-            onSubmit={(
-              handleSubmit(onSubmit))}
-            className="space-y-6"
-          >
-            <Tabs onValueChange={(e:any) => setTabValue(e)}>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            <Tabs onValueChange={(e: any) => setTabValue(e)}>
               <TabsList>
                 <TabsTrigger value="tab1">Dados Cliente</TabsTrigger>
                 <TabsTrigger value="tab2">Dados Empresa</TabsTrigger>
@@ -266,71 +262,9 @@ export function Modal() {
                     </FormItem>
                   )}
                 />
+              </TabsContent>
 
-                <FormField
-                  control={form.control}
-                  name="demarcador"
-                  render={({ field }) => (
-                    <FormItem className="flex items-center justify-end gap-5">
-                      <FormLabel className="w-1/4 flex justify-start">
-                        Demarcador
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          className="w-3/4 300px]"
-                          placeholder="Demarcador"
-                          {...field}
-                        />
-                      </FormControl>
-
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="status"
-                  render={({ field }) => (
-                    <FormItem className="flex items-center justify-end gap-5">
-                      <FormLabel className="w-1/4 flex justify-start">
-                        Status
-                      </FormLabel>
-                      <FormControl>
-                        <Select
-                          value={form.getValues("status")}
-                          onValueChange={(selectedValue) =>
-                            form.setValue("status", selectedValue)
-                          }
-                        >
-                          <SelectTrigger className="w-3/4 300px]">
-                            <SelectValue placeholder="Selecione algo" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectGroup {...field}>
-                              <SelectItem value="Agendado">
-                                <span className="flex items-center justify-center gap-3">
-                                  <div className=" rounded-full bg-orange-500 w-3 h-3" />{" "}
-                                  Agendado
-                                </span>
-                              </SelectItem>
-                              <SelectItem value="Demarcado">
-                                <span className="flex items-center justify-center gap-3">
-                                  <div className=" rounded-full bg-green-500 w-3 h-3" />{" "}
-                                  Demarcado
-                                </span>
-                              </SelectItem>
-                            </SelectGroup>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                 </TabsContent>
-
-              <TabsContent value="tab2"> 
+              <TabsContent value="tab2">
                 <FormField
                   control={form.control}
                   name="empresa"
@@ -411,6 +345,67 @@ export function Modal() {
                     </FormItem>
                   )}
                 />
+                <FormField
+                  control={form.control}
+                  name="demarcador"
+                  render={({ field }) => (
+                    <FormItem className="flex items-center justify-end gap-5">
+                      <FormLabel className="w-1/4 flex justify-start">
+                        Demarcador
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          className="w-3/4 300px]"
+                          placeholder="Demarcador"
+                          {...field}
+                        />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="status"
+                  render={({ field }) => (
+                    <FormItem className="flex items-center justify-end gap-5">
+                      <FormLabel className="w-1/4 flex justify-start">
+                        Status
+                      </FormLabel>
+                      <FormControl>
+                        <Select
+                          value={form.getValues("status")}
+                          onValueChange={(selectedValue) =>
+                            form.setValue("status", selectedValue)
+                          }
+                        >
+                          <SelectTrigger className="w-3/4 300px]">
+                            <SelectValue placeholder="Selecione algo" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectGroup {...field}>
+                              <SelectItem value="Agendado">
+                                <span className="flex items-center justify-center gap-3">
+                                  <div className=" rounded-full bg-orange-500 w-3 h-3" />{" "}
+                                  Agendado
+                                </span>
+                              </SelectItem>
+                              <SelectItem value="Demarcado">
+                                <span className="flex items-center justify-center gap-3">
+                                  <div className=" rounded-full bg-green-500 w-3 h-3" />{" "}
+                                  Demarcado
+                                </span>
+                              </SelectItem>
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
                 <FormField
                   control={form.control}
@@ -436,21 +431,18 @@ export function Modal() {
             </Tabs>
 
             <div className="flex items-center justify-between">
-              <DialogClose className="border">
-                Cancelar
-              </DialogClose>
+              <DialogClose className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground">Cancelar</DialogClose>
               <Button
-              
                 className="bg-emerald-600 hover:bg-emerald-500 text-zinc-200"
                 type="submit"
-                disabled={loading || tabValue == 'tab1' ? true : false}
+                disabled={loading || tabValue == "tab1" ? true : false}
               >
-                {loading ? 'Salvando...' : 'Salvar'}
+                {loading ? "Salvando..." : "Salvar"}
               </Button>
             </div>
           </form>
         </Form>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

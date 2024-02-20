@@ -36,6 +36,7 @@ import {
 } from "@/components/ui/table";
 import { AgendaItem } from "@/app/ag";
 import { Modal } from "./Modal";
+import { TagBadge } from ".";
 
 
 
@@ -80,15 +81,16 @@ export const columns: ColumnDef<AgendaItem>[] = [
       );
     },
     cell: ({ row }) => (
-      <div
-        className={`capitalize text-sm rounded-full flex items-center justify-center w-min px-3 ${
-          row.getValue("status") === "Agendado"
-            ? "bg-amber-600/80 text-orange-200"
-            : "bg-emerald-600/80 text-green-200"
-        } capitalize`}
-      >
-        {row.getValue("status")}
-      </div>
+      // <div
+      //   className={`capitalize text-sm rounded-full flex items-center justify-center w-min px-3 ${
+      //     row.getValue("status") === "Agendado"
+      //       ? "bg-amber-600/80 text-orange-200"
+      //       : "bg-emerald-600/80 text-green-200"
+      //   } capitalize`}
+      // >
+      //   {row.getValue("status")}
+      // </div>
+      <TagBadge nometag={row.getValue('status')} filtertag={row.getValue('status')}/>
     ),
   },
   {

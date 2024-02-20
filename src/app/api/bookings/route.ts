@@ -16,12 +16,12 @@ export async function POST(req: Request, res: NextApiResponse) {
         quadra,
         lote,
         status,
-        benfeitoria, 
-        dt_agendamento, 
-        horario_do_agen, 
-        resp_pelo_agendamento, 
-        demarcador, 
-        status_da_venda, 
+        benfeitoria,
+        dt_agendamento,
+        horario_do_agen,
+        resp_pelo_agendamento,
+        demarcador,
+        status_da_venda,
         obs
       },
     });
@@ -30,6 +30,36 @@ export async function POST(req: Request, res: NextApiResponse) {
     return NextResponse.json(newBooking);
   } catch (error) {
     return NextResponse.json({ message: "Erro de validação", error });
+  }
+}
+export async function PUT(req: NextApiRequest, res: NextApiResponse) {
+  const { empresa, cliente, cpf_cnpj, quadra, lote, status, benfeitoria, dt_agendamento, horario_do_agen, resp_pelo_agendamento, demarcador, status_da_venda, obs } = await req.body
+  const { id } = req.query;
+
+  try {
+    // Atualiza o item com base no ID fornecido
+    const updatedBooking = await prisma.bookings.update({
+      where: { id: id as string },
+      data: {
+        empresa,
+        cliente,
+        cpf_cnpj,
+        quadra,
+        lote,
+        status,
+        benfeitoria,
+        dt_agendamento,
+        horario_do_agen,
+        resp_pelo_agendamento,
+        demarcador,
+        status_da_venda,
+        obs
+      },
+    });
+    return res.status(200).json(updatedBooking);
+  } catch (error) {
+    console.error('Erro ao atualizar o item:', error);
+    return res.status(500).json({ error: 'Erro interno do servidor' });
   }
 }
 
