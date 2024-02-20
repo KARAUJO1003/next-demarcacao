@@ -32,34 +32,26 @@ export async function POST(req: Request, res: NextApiResponse) {
     return NextResponse.json({ message: "Erro de validação", error });
   }
 }
-export async function PUT(req: NextApiRequest, res: NextApiResponse) {
-  const { empresa, cliente, cpf_cnpj, quadra, lote, status, benfeitoria, dt_agendamento, horario_do_agen, resp_pelo_agendamento, demarcador, status_da_venda, obs } = await req.body
-  const { id } = req.query;
+export async function PUT(req: Request, res: NextApiResponse) {
+  const { id, empresa, cliente,  quadra, lote, status } = await req.json()
 
   try {
     // Atualiza o item com base no ID fornecido
     const updatedBooking = await prisma.bookings.update({
-      where: { id: id as string },
+      where: { id },
       data: {
         empresa,
         cliente,
-        cpf_cnpj,
         quadra,
         lote,
         status,
-        benfeitoria,
-        dt_agendamento,
-        horario_do_agen,
-        resp_pelo_agendamento,
-        demarcador,
-        status_da_venda,
-        obs
+
       },
     });
-    return res.status(200).json(updatedBooking);
+    return Response.json(updatedBooking);
   } catch (error) {
     console.error('Erro ao atualizar o item:', error);
-    return res.status(500).json({ error: 'Erro interno do servidor' });
+    return Response.json({ error: 'Erro interno do servidor',message: 'Erro no servidor ', status: 500 });
   }
 }
 

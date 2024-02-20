@@ -27,6 +27,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { TagBadge } from "@/components";
+import Image from "next/image";
+import LogoDark01 from "@/assets/logoIcon.png";
 
 async function getData(): Promise<Bookings[]> {
   const res = await fetch("/api/bookings");
@@ -73,30 +75,31 @@ export default function PageUser({ params }: { params: { id: string } }) {
           </CardHeader>
           <CardContent className="space-y-3 ">
             <TagBadge nometag={booking.status} filtertag={booking.status} />
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2">
               <div className="col-span-1 space-y-2">
-                <div className=" items-center min-w-full grid grid-cols-3">
-                  <CardDescription className="col-span-1">CPF</CardDescription>
-                  <Input className="col-span-2" value={booking.cpf_cnpj ?? ''} />
+                <div className=" items-center min-w-full grid grid-cols-3 gap-3">
+                  <CardDescription className="w-full flex justify-end">CPF</CardDescription>
+                  <Input disabled className="col-span-2" value={booking.cpf_cnpj ?? ''} />
                 </div>
-                <div className=" items-center min-w-full grid grid-cols-3">
-                  <CardDescription className="col-span-1">Quadra</CardDescription>
-                  <Input className="col-span-2" value={booking.quadra ?? ''} />
+                <div className=" items-center min-w-full grid grid-cols-3 gap-3">
+                  <CardDescription className="w-full flex justify-end">Quadra</CardDescription>
+                  <Input disabled className="col-span-2" value={booking.quadra ?? ''} />
                 </div>
-                <div className=" items-center min-w-full grid grid-cols-3">
-                  <CardDescription className="col-span-1">Lote</CardDescription>
-                  <Input className="col-span-2" value={booking.lote ?? ''} />
+                <div className=" items-center min-w-full grid grid-cols-3 gap-3">
+                  <CardDescription className="w-full flex justify-end">Lote</CardDescription>
+                  <Input disabled className="col-span-2" value={booking.lote ?? ''} />
+                </div>
+                <div className=" items-center min-w-full grid grid-cols-3 gap-3">
+                  <CardDescription className="w-full flex justify-end">Data</CardDescription>
+                  <Input disabled className="col-span-2" value={booking.dt_agendamento ?? ''} />
+                </div>
+                <div className=" items-center min-w-full grid grid-cols-3 gap-3">
+                  <CardDescription className="w-full flex justify-end">Hora</CardDescription>
+                  <Input disabled className="col-span-2" value={booking.horario_do_agen ?? ''} />
+                </div>
               </div>
-                </div>
-              <div className="col-span-1 space-y-2">
-                <div className=" items-center min-w-full grid grid-cols-3">
-                <CardDescription>Data</CardDescription>
-                <Input className="col-span-2" value={booking.dt_agendamento ?? ''} />
-                </div>
-                <div className=" items-center min-w-full grid grid-cols-3">
-                <CardDescription>Hora</CardDescription>
-                <Input className="col-span-2" value={booking.horario_do_agen ?? ''} />
-                </div>
+              <div className="col-span-1">
+
               </div>
             </div>
             <CardDescription> Observação</CardDescription>
