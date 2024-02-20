@@ -72,23 +72,35 @@ export default function PageUser({ params }: { params: { id: string } }) {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3 ">
-            <TagBadge nometag={booking.status} filtertag={booking.status}/>
-            <div className="grid grid-cols-2">
+            <TagBadge nometag={booking.status} filtertag={booking.status} />
+            <div className="grid grid-cols-2 gap-4">
               <div className="col-span-1 space-y-2">
-                <CardDescription>CPF {booking.cpf_cnpj}</CardDescription>
-                <CardDescription>
-                  Quadra {booking.quadra} Lote {booking.lote}
-                </CardDescription>
-                <CardDescription>Data {booking.dt_agendamento}</CardDescription>
-                <CardDescription>
-                  às {booking.horario_do_agen} horas
-                </CardDescription>
+                <div className=" items-center min-w-full grid grid-cols-3">
+                  <CardDescription className="col-span-1">CPF</CardDescription>
+                  <Input className="col-span-2" value={booking.cpf_cnpj ?? ''} />
+                </div>
+                <div className=" items-center min-w-full grid grid-cols-3">
+                  <CardDescription className="col-span-1">Quadra</CardDescription>
+                  <Input className="col-span-2" value={booking.quadra ?? ''} />
+                </div>
+                <div className=" items-center min-w-full grid grid-cols-3">
+                  <CardDescription className="col-span-1">Lote</CardDescription>
+                  <Input className="col-span-2" value={booking.lote ?? ''} />
               </div>
-              <div className="col-span-1">
+                </div>
+              <div className="col-span-1 space-y-2">
+                <div className=" items-center min-w-full grid grid-cols-3">
+                <CardDescription>Data</CardDescription>
+                <Input className="col-span-2" value={booking.dt_agendamento ?? ''} />
+                </div>
+                <div className=" items-center min-w-full grid grid-cols-3">
+                <CardDescription>Hora</CardDescription>
+                <Input className="col-span-2" value={booking.horario_do_agen ?? ''} />
+                </div>
               </div>
             </div>
             <CardDescription> Observação</CardDescription>
-            <Textarea disabled value={booking.obs ?? ''}/>
+            <Textarea disabled value={booking.obs ?? ''} />
           </CardContent>
 
           <CardFooter>
