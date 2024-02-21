@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Bookings, PrismaClient } from "../../../../prisma/generated/client";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { revalidatePath } from "next/cache";
 
 const prisma = new PrismaClient();
 
@@ -48,10 +49,10 @@ export async function PUT(req: Request, res: NextApiResponse) {
 
       },
     });
-    return Response.json(updatedBooking);
+    return NextResponse.json(updatedBooking);
   } catch (error) {
     console.error('Erro ao atualizar o item:', error);
-    return Response.json({ error: 'Erro interno do servidor',message: 'Erro no servidor ', status: 500 });
+    return NextResponse.json({ error: 'Erro interno do servidor',message: 'Erro no servidor ', status: 500 });
   }
 }
 

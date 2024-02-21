@@ -29,6 +29,7 @@ import { Separator } from "@/components/ui/separator";
 import { TagBadge } from "@/components";
 import Image from "next/image";
 import LogoDark01 from "@/assets/logoIcon.png";
+import { EditBooking } from "@/components/EditBooking";
 
 async function getData(): Promise<Bookings[]> {
   const res = await fetch("/api/bookings");
@@ -99,7 +100,7 @@ export default function PageUser({ params }: { params: { id: string } }) {
                 </div>
               </div>
               <div className="col-span-1">
-
+                <EditBooking/>
               </div>
             </div>
             <CardDescription> Observação</CardDescription>
