@@ -33,9 +33,17 @@ import { TagBadge } from ".";
 
 const formSchema = z.object({
   id: z.string(),
-  cliente: z.string().min(2),
-  quadra: z.string().min(1).max(2),
-  lote: z.string().min(1).max(2),
+  cliente: z.string().min(2, {
+    message: 'Minimo 2 caracteres'
+  }),
+  quadra: z.string().min(1, {
+    message: 'Minimo 2 caracteres'
+  }).max(2),
+  lote: z.string().min(1, {
+    message: 'Minimo 2 caracteres'
+  }).max(2, {
+    message: 'Máximo 2 caracteres'
+  }),
   dt_agendamento: z.string(),
   horario_do_agen: z.string(),
   status: z.string(),
@@ -58,9 +66,9 @@ export function Modal() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      cliente: "kaesyo",
-      quadra: "12",
-      lote: "21",
+      cliente: "",
+      quadra: "",
+      lote: "",
       dt_agendamento: "",
       horario_do_agen: "",
       status: "",
@@ -155,6 +163,7 @@ export function Modal() {
                       </FormLabel>
                       <FormControl>
                         <Input
+                          required
                           placeholder="Nome completo"
                           className="w-3/4 300px]"
                           {...field}
@@ -196,6 +205,7 @@ export function Modal() {
                       </FormLabel>
                       <FormControl>
                         <Input
+                          required
                           lang="pt-BR"
                           className="w-3/4 300px]"
                           type="date"
@@ -217,6 +227,7 @@ export function Modal() {
                       </FormLabel>
                       <FormControl>
                         <Input
+                          required
                           type="time"
                           className="w-3/4 300px]"
                           {...field}
@@ -238,6 +249,7 @@ export function Modal() {
                       </FormLabel>
                       <FormControl>
                         <Input
+                          required
                           className="w-3/4 300px]"
                           type="text"
                           placeholder="Quadra"
@@ -259,6 +271,7 @@ export function Modal() {
                       </FormLabel>
                       <FormControl>
                         <Input
+                          required
                           className="w-3/4 300px]"
                           type="text"
                           placeholder="Lote"
@@ -394,10 +407,10 @@ export function Modal() {
                           <SelectContent>
                             <SelectGroup {...field}>
                               <SelectItem value="Agendado">
-                              <TagBadge nometag={"Agendado"} filtertag={"Agendado"}/>
+                                <TagBadge nometag={"Agendado"} filtertag={"Agendado"} />
                               </SelectItem>
                               <SelectItem value="Demarcado">
-                              <TagBadge nometag={"Demarcado"} filtertag={"Demarcado"}/>
+                                <TagBadge nometag={"Demarcado"} filtertag={"Demarcado"} />
                               </SelectItem>
                             </SelectGroup>
                           </SelectContent>

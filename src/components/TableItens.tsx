@@ -13,7 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+import { ArrowUpDown, ChevronDown, Edit, MoreHorizontal, Pencil, Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -92,7 +92,7 @@ export const columns: ColumnDef<Bookings>[] = [
       // >
       //   {row.getValue("status")}
       // </div>
-      <TagBadge nometag={row.getValue('status')} filtertag={row.getValue('status')}/>
+      <TagBadge nometag={row.getValue('status')} filtertag={row.getValue('status')} />
     ),
   },
   {
@@ -203,15 +203,15 @@ export const columns: ColumnDef<Bookings>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuLabel>Ações</DropdownMenuLabel>
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(payment.cliente ?? '')}
             >
-              Copiar nome do cliente
+              Copiar
             </DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
+            <DropdownMenuItem><Pencil size={12} className="mr-3"/><Link href={`/bookings/${payment.id}`}>Editar</Link></DropdownMenuItem>
+            <DropdownMenuItem><Trash size={12} className="mr-3"/>Excluir</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
@@ -234,8 +234,8 @@ const DataTableDemo = () => {
     fetch("/api/bookings")
       .then((response) => response.json())
       .then((data) => setData(data));
-      console.log(data);
-      
+    console.log(data);
+
   }, []);
 
   const table = useReactTable({
@@ -274,7 +274,7 @@ const DataTableDemo = () => {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="ml-auto">
-                Columns <ChevronDown className="ml-2 h-4 w-4" />
+                Colunas <ChevronDown className="ml-2 h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -297,14 +297,14 @@ const DataTableDemo = () => {
                 })}
             </DropdownMenuContent>
           </DropdownMenu>
-          <Modal  />
+          <Modal />
         </div>
       </div>
       <div className="rounded-md border ">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup: any, index) => (
-              
+
 
               <TableRow key={index} className="bg-muted/50">
                 {headerGroup.headers.map((header: any, index: any) => {
@@ -318,17 +318,16 @@ const DataTableDemo = () => {
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                       <div
                         onMouseDown={header.getResizeHandler()}
                         onTouchStart={header.getResizeHandler()}
-                        className={`${
-                          header.column.getIsResizing()
+                        className={`${header.column.getIsResizing()
                             ? "bg-blue-500 opacity-100"
                             : "opacity-0"
-                        } absolute hover:opacity-100 opacity-0 bg-zinc-500/50 top-0 right-0  w-1 h-full cursor-col-resize`}
+                          } absolute hover:opacity-100 opacity-0 bg-zinc-500/50 top-0 right-0  w-1 h-full cursor-col-resize`}
                       />
                     </TableHead>
                   );
@@ -340,33 +339,28 @@ const DataTableDemo = () => {
           <TableBody className="bg-zinc-50 dark:bg-background">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row: any) => (
-                              
-                
-                
-                data.map((item) => (
-                <TableRow
-                  className="text-xs "
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >{
-                    
-                }
-                  {row.getVisibleCells().map((cell: any) => (
-                    
-                    <TableCell key={cell.id}>
-                      <Link href={`/bookings/${item.id}`}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                        )}
-                </Link>
-                        </TableCell>
-                  ))}
-                </TableRow>
-              ))
-              ))
-              ) : (
-                <TableRow>
+                  <TableRow
+                    className="text-xs "
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >{
+
+                    }
+                    {row.getVisibleCells().map((cell: any) => (
+
+                      <TableCell key={cell.id}>
+                       
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+            ) : (
+              <TableRow>
                 <TableCell
                   colSpan={columns.length}
                   className="h-24 text-center"

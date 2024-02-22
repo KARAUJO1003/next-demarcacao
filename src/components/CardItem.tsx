@@ -35,9 +35,9 @@ const CardItem = ({
               {user}
             </CardDescription>
           </div>
-          <TooltipProvider>
+          <TooltipProvider delayDuration={100}>
             <Tooltip >
-              <TooltipTrigger>
+              <TooltipTrigger >
                 <p
                   className={`p-1 absolute top-3 right-3 gap-2 text-xs 
                         font-semibold rounded-full ${
