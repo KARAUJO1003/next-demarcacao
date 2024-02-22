@@ -21,6 +21,7 @@ import { z } from 'zod';
 import { Select, SelectContent, SelectGroup } from "@radix-ui/react-select";
 import { SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
+import { Loader, Save } from 'lucide-react'
 
 async function getData(): Promise<Bookings[]> {
   const res = await fetch("/api/bookings");
@@ -47,6 +48,7 @@ const schema = z.object({
 
 export default function PageUser({ params }: { params: { id: string } }) {
   const [booking, setBooking] = useState<Bookings | null>(null);
+  const [isLoading, setIsLoading ] = useState(false)
 
   const { register, handleSubmit, formState: { errors }, setValue } = useForm({
     resolver: zodResolver(schema),
@@ -82,6 +84,7 @@ export default function PageUser({ params }: { params: { id: string } }) {
     console.log(data);
 
     try {
+      setIsLoading(true)
       const response = await fetch(`/api/bookings`, {
         method: 'PUT',
         headers: {
@@ -93,6 +96,7 @@ export default function PageUser({ params }: { params: { id: string } }) {
       if (response.ok) {
         // Produto atualizado com sucesso, redirecionar para a página de detalhes do produto
         //router.push(`/products/${params.id}`);
+        setIsLoading(false)
         console.log('dados recebidos com sucesso');
         toast("Cliente editado com sucesso", {
           description: "Sunday, December 03, 2023 at 9:00 AM",
@@ -119,43 +123,39 @@ export default function PageUser({ params }: { params: { id: string } }) {
     <div className="h-screen w-full flex items-center justify-center">
       {booking && (
         <Card className="max-w-[500px] min-w-[400px]">
-          <CardHeader>
-            <CardTitle className="text-md ">
-              <span className="uppercase">{booking.cliente}</span>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3 ">
+          <CardContent className="space-y-3">
             <form onSubmit={handleSubmit(onSubmit)}>
+              <CardHeader>
+                <Input className="col-span-2" defaultValue={booking.cliente ?? ''} {...register('cliente')} />
+              </CardHeader>
 
-
-              <div className="grid grid-cols-2">
-                <div className="col-span-1 space-y-2">
-              <Select
-                defaultValue={booking.status ?? ''}
-                onValueChange={(selectedValue) =>
-                  setValue("status", selectedValue)
-                }
-              >
-                <SelectTrigger >
-                  <SelectValue placeholder="Selecione algo" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup {...register('status')}>
-                    <SelectItem value="Agendado">
-                      <TagBadge nometag={'Agendado'} filtertag={'Agendado'} />
-                    </SelectItem>
-                    <SelectItem value="Demarcado">
-                      <TagBadge nometag={'Demarcado'} filtertag={'Demarcado'} />
-                    </SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
+              <div className="grid grid-cols-3">
+                <div className="col-span-2 space-y-2">
                   <div className=" items-center min-w-full grid grid-cols-3 gap-3">
-                    <Input defaultValue={booking.id ?? ''} value={booking.id ?? ''} />
+                    <CardDescription className="w-full flex justify-end">Status</CardDescription>
+                    <Select
+                      defaultValue={booking.status ?? ''}
+                      onValueChange={(selectedValue) =>
+                        setValue("status", selectedValue)
+                      }
+                    >
+                      <SelectTrigger className="col-span-2" >
+                        <SelectValue placeholder="Selecione algo" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup {...register('status')}>
+                          <SelectItem value="Agendado">
+                            <TagBadge nometag={'Agendado'} filtertag={'Agendado'} />
+                          </SelectItem>
+                          <SelectItem value="Demarcado">
+                            <TagBadge nometag={'Demarcado'} filtertag={'Demarcado'} />
+                          </SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
                   </div>
                   <div className=" items-center min-w-full grid grid-cols-3 gap-3">
-                    <CardDescription className="w-full flex justify-end">Cliente</CardDescription>
-                    <Input className="col-span-2" defaultValue={booking.cliente ?? ''} {...register('cliente')} />
+                    <Input className="hidden" defaultValue={booking.id ?? ''} value={booking.id ?? ''} />
                   </div>
                   <div className=" items-center min-w-full grid grid-cols-3 gap-3">
                     <CardDescription className="w-full flex justify-end">Empresa</CardDescription>
@@ -177,22 +177,20 @@ export default function PageUser({ params }: { params: { id: string } }) {
                     <CardDescription className="w-full flex justify-end">Hora</CardDescription>
                     <Input className="col-span-2" defaultValue={booking.horario_do_agen ?? ''} {...register('horario_do_agen')} />
                   </div>
-                  <Button type="submit" >Atualizar</Button>
                 </div>
                 <div className="col-span-1">
 
                 </div>
               </div>
-              <CardDescription> Observação</CardDescription>
-              <Textarea value={booking.obs ?? ''} />
+              <CardFooter className="flex justify-between mt-5">
+                <Button variant={"outline"}>
+                  <Link href={"/"}>Voltar</Link>
+                </Button>
+                <Button type="submit" className="bg-emerald-600 hover:bg-emerald-500 text-zinc-200" >{isLoading ? <span className="flex items-center justify-center gap-2"><Loader size={14} className="animate-spin" /> Gravando</span> : <span className="flex items-center justify-center gap-2"><Save size={14} /> Gravar</span>}</Button>
+              </CardFooter>
             </form>
           </CardContent>
 
-          <CardFooter>
-            <Button variant={"outline"}>
-              <Link href={"/"}>Voltar</Link>
-            </Button>
-          </CardFooter>
         </Card>
       )}
     </div>
