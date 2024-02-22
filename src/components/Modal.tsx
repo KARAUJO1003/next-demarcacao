@@ -29,6 +29,7 @@ import type { Bookings } from "../../prisma/generated/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { useState } from "react";
 import { SubmitHandler } from "react-hook-form";
+import { TagBadge } from ".";
 
 const formSchema = z.object({
   id: z.string(),
@@ -97,6 +98,13 @@ export function Modal() {
 
       if (response.ok) {
         setSuccess(true);
+        toast("Cliente adicionado com sucesso", {
+          description: "Sunday, December 03, 2023 at 9:00 AM",
+          action: {
+            label: "Fechar",
+            onClick: () => console.log("Undo"),
+          },
+        })
         reset(); // Resetar o formulário após o envio bem-sucedido
       } else {
         setError("Erro ao criar registro. Por favor, tente novamente.");
@@ -386,16 +394,10 @@ export function Modal() {
                           <SelectContent>
                             <SelectGroup {...field}>
                               <SelectItem value="Agendado">
-                                <span className="flex items-center justify-center gap-3">
-                                  <div className=" rounded-full bg-orange-500 w-3 h-3" />{" "}
-                                  Agendado
-                                </span>
+                              <TagBadge nometag={"Agendado"} filtertag={"Agendado"}/>
                               </SelectItem>
                               <SelectItem value="Demarcado">
-                                <span className="flex items-center justify-center gap-3">
-                                  <div className=" rounded-full bg-green-500 w-3 h-3" />{" "}
-                                  Demarcado
-                                </span>
+                              <TagBadge nometag={"Demarcado"} filtertag={"Demarcado"}/>
                               </SelectItem>
                             </SelectGroup>
                           </SelectContent>

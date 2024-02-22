@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
+import { TagBadge } from ".";
 
 // Define o esquema para os dados do formulário
 const formSchema = z.object({
@@ -153,16 +154,10 @@ export function EditBooking({ initialData }: ModalProps) {
                       <SelectContent>
                         <SelectGroup {...field}>
                           <SelectItem value="Agendado">
-                            <span className="flex items-center justify-center gap-3">
-                              <div className=" rounded-full bg-orange-500 w-3 h-3" />{" "}
-                              Agendado
-                            </span>
+                            <TagBadge nometag={"Agendado"} filtertag={"Agendado"}/>
                           </SelectItem>
                           <SelectItem value="Demarcado">
-                            <span className="flex items-center justify-center gap-3">
-                              <div className=" rounded-full bg-green-500 w-3 h-3" />{" "}
-                              Demarcado
-                            </span>
+                            <TagBadge nometag={"Demarcado"} filtertag={"Demarcado"}/>
                           </SelectItem>
                         </SelectGroup>
                       </SelectContent>

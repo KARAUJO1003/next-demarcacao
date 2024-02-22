@@ -37,10 +37,12 @@ import {
 import { AgendaItem } from "@/app/ag";
 import { Modal } from "./Modal";
 import { TagBadge } from ".";
+import Link from "next/link";
+import { Bookings } from "../../prisma/generated/client";
 
 
 
-export const columns: ColumnDef<AgendaItem>[] = [
+export const columns: ColumnDef<Bookings>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -203,7 +205,7 @@ export const columns: ColumnDef<AgendaItem>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.cliente)}
+              onClick={() => navigator.clipboard.writeText(payment.cliente ?? '')}
             >
               Copiar nome do cliente
             </DropdownMenuItem>
@@ -226,12 +228,14 @@ const DataTableDemo = () => {
     React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
 
-  const [data, setData] = React.useState<AgendaItem[]>([]);
+  const [data, setData] = React.useState<Bookings[]>([]);
 
   React.useEffect(() => {
     fetch("/api/bookings")
       .then((response) => response.json())
       .then((data) => setData(data));
+      console.log(data);
+      
   }, []);
 
   const table = useReactTable({
@@ -300,6 +304,8 @@ const DataTableDemo = () => {
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup: any, index) => (
+              
+
               <TableRow key={index} className="bg-muted/50">
                 {headerGroup.headers.map((header: any, index: any) => {
                   return (
@@ -328,28 +334,39 @@ const DataTableDemo = () => {
                   );
                 })}
               </TableRow>
+
             ))}
           </TableHeader>
           <TableBody className="bg-zinc-50 dark:bg-background">
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row: any) => (
+                              
+                
+                
+                data.map((item) => (
                 <TableRow
                   className="text-xs "
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                >
+                >{
+                    
+                }
                   {row.getVisibleCells().map((cell: any) => (
+                    
                     <TableCell key={cell.id}>
+                      <Link href={`/bookings/${item.id}`}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
-                      )}
-                    </TableCell>
+                        )}
+                </Link>
+                        </TableCell>
                   ))}
                 </TableRow>
               ))
-            ) : (
-              <TableRow>
+              ))
+              ) : (
+                <TableRow>
                 <TableCell
                   colSpan={columns.length}
                   className="h-24 text-center"

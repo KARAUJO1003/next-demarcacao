@@ -34,7 +34,8 @@ export async function POST(req: Request, res: NextApiResponse) {
   }
 }
 export async function PUT(req: Request, res: NextApiResponse) {
-  const { id, empresa, cliente,  quadra, lote, status } = await req.json()
+  const { id, empresa, cliente,  quadra, lote, status,dt_agendamento,
+    horario_do_agen, } = await req.json()
 
   try {
     // Atualiza o item com base no ID fornecido
@@ -46,6 +47,8 @@ export async function PUT(req: Request, res: NextApiResponse) {
         quadra,
         lote,
         status,
+        dt_agendamento,
+        horario_do_agen,
 
       },
     });
