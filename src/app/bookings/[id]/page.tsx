@@ -18,8 +18,7 @@ import { EditBooking } from "@/components/EditBooking";
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { Select, SelectContent, SelectGroup } from "@radix-ui/react-select";
-import { SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { SelectItem, SelectTrigger, SelectValue, Select, SelectContent, SelectGroup} from "@/components/ui/select";
 import { toast } from "sonner";
 import { Loader, Save } from 'lucide-react'
 
