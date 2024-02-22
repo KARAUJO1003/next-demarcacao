@@ -71,12 +71,12 @@ export function Modal() {
       lote: "",
       dt_agendamento: "",
       horario_do_agen: "",
-      status: "",
-      demarcador: "",
+      status: "Agendado",
+      demarcador: "Mauro",
       empresa: "",
       cpf_cnpj: "",
-      status_da_venda: "",
-      benfeitoria: "",
+      status_da_venda: "Ativa",
+      benfeitoria: "Não",
       resp_pelo_agendamento: "",
       obs: "",
     },
@@ -396,6 +396,7 @@ export function Modal() {
                       </FormLabel>
                       <FormControl>
                         <Select
+                          defaultValue="Agendado"
                           value={form.getValues("status")}
                           onValueChange={(selectedValue) =>
                             form.setValue("status", selectedValue)

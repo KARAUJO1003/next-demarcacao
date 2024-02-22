@@ -39,6 +39,7 @@ import { Modal } from "./Modal";
 import { TagBadge } from ".";
 import Link from "next/link";
 import { Bookings } from "../../prisma/generated/client";
+import { Skeleton } from "./ui/skeleton";
 
 
 
@@ -363,9 +364,14 @@ const DataTableDemo = () => {
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className="w-full text-center space-y-1"
                 >
-                  No results.
+                  <Skeleton className="w-full h-10"/>
+                  <Skeleton className="w-full h-10"/>
+                  <Skeleton className="w-full h-10"/>
+                  <Skeleton className="w-full h-10"/>
+                  <Skeleton className="w-full h-10"/>
+                  <Skeleton className="w-full h-10"/>
                 </TableCell>
               </TableRow>
             )}

@@ -70,22 +70,22 @@ export default function Home() {
         </div>
         <TabsContent value="Agendado">
           <ScrollArea className="outline-none">
-              {loading == true ? (
-                <div className="max-w-96 h-[250px] p-5 flex flex-col gap-2 justify-between text-ellipsis shadow-md dark:bg-zinc-900">
-                  <Skeleton className="h-6 w-full" />
-                  <Skeleton className="h-8 w-3/4" />
-                  <Skeleton className="h-8 w-3/4" />
-                  <Skeleton className="h-6 w-full" />
-                  <Skeleton className="h-6 w-full" />
-                </div>
+            {loading == true ? (
+              <div className="max-w-[320px] h-[229px] min-h-64 p-5 flex flex-col gap-2 justify-between text-ellipsis shadow-md dark:bg-zinc-900">
+                <Skeleton className="h-6 w-full" />
+                <Skeleton className="h-8 w-3/4" />
+                <Skeleton className="h-8 w-3/4" />
+                <Skeleton className="h-6 w-full" />
+                <Skeleton className="h-6 w-full" />
+              </div>
 
-              ) : (
-            <ul className="flex gap-3 min-h-64">
-              {demarcacaoFiltradaAgendada.map((item, id) => (
-                <li
-                  key={id}
-                  className={`  mb-3 flex flex-col min-w-80 h-min `}
-                >
+            ) : (
+              <ul className="flex gap-3 min-h-64">
+                {demarcacaoFiltradaAgendada.map((item, id) => (
+                  <li
+                    key={id}
+                    className={`  mb-3 flex flex-col min-w-80 h-min `}
+                  >
                     <Link href={`/bookings/${item.id}`}>
                       <CardItem
                         user={item.cliente}
@@ -99,31 +99,31 @@ export default function Home() {
                       />
 
                     </Link>
-                    </li>
-                    ))}
-            </ul>
-                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
         </TabsContent>
         <TabsContent value="Demarcado">
           <ScrollArea className="outline-none">
-          {loading == true ? (
-                <div className="max-w-96 h-[250px] p-5 flex flex-col gap-2 justify-between text-ellipsis shadow-md dark:bg-zinc-900">
-                  <Skeleton className="h-6 w-full" />
-                  <Skeleton className="h-8 w-3/4" />
-                  <Skeleton className="h-8 w-3/4" />
-                  <Skeleton className="h-6 w-full" />
-                  <Skeleton className="h-6 w-full" />
-                </div>
+            {loading == true ? (
+              <div className="max-w-96[320px] h-[229px] min-h-64 p-5 flex flex-col gap-2 justify-between text-ellipsis shadow-md dark:bg-zinc-900">
+                <Skeleton className="h-6 w-full" />
+                <Skeleton className="h-8 w-3/4" />
+                <Skeleton className="h-8 w-3/4" />
+                <Skeleton className="h-6 w-full" />
+                <Skeleton className="h-6 w-full" />
+              </div>
 
-              ) : (
-            <ul className="flex gap-3 min-h-64">
-              {demarcacaoFiltradaDemarcado.map((item, id) => (
-                <li
-                  key={id}
-                  className={`  mb-3 flex flex-col min-w-80 h-min `}
-                >
+            ) : (
+              <ul className="flex gap-3 min-h-64">
+                {demarcacaoFiltradaDemarcado.map((item, id) => (
+                  <li
+                    key={id}
+                    className={`  mb-3 flex flex-col min-w-80 h-min `}
+                  >
                     <Link href={`/bookings/${item.id}`}>
                       <CardItem
                         user={item.cliente}
@@ -137,10 +137,10 @@ export default function Home() {
                       />
 
                     </Link>
-                    </li>
-                    ))}
-            </ul>
-                    )}
+                  </li>
+                ))}
+              </ul>
+            )}
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
         </TabsContent>
