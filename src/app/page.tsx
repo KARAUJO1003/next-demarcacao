@@ -11,6 +11,7 @@ import SideBar from "@/components/SideBar";
 import Link from "next/link";
 import { Bookings } from "../../prisma/generated/client";
 import { Skeleton } from "@/components/ui/skeleton";
+import CardSkeleton from "@/components/CardSkeleton";
 
 export default function Home() {
   const [exibirAgendadas, setExibirAgendadas] = useState(true);
@@ -19,14 +20,12 @@ export default function Home() {
   const [demarcacao, setDemarcacao] = useState<Bookings[]>([]);
 
   useEffect(() => {
-
     fetch("/api/bookings")
       .then((response) => response.json())
       .then((data) => {
-        setDemarcacao(data)
-        setLoading(false)
-      }
-      );
+        setDemarcacao(data);
+        setLoading(false);
+      });
   }, []);
 
   const handleTabChange = (value: any) => {
@@ -71,14 +70,12 @@ export default function Home() {
         <TabsContent value="Agendado">
           <ScrollArea className="outline-none">
             {loading == true ? (
-              <div className="max-w-[320px] h-[229px] min-h-64 p-5 flex flex-col gap-2 justify-between text-ellipsis shadow-md dark:bg-zinc-900">
-                <Skeleton className="h-6 w-full" />
-                <Skeleton className="h-8 w-3/4" />
-                <Skeleton className="h-8 w-3/4" />
-                <Skeleton className="h-6 w-full" />
-                <Skeleton className="h-6 w-full" />
+              <div className="flex items-center gap-2">
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
               </div>
-
             ) : (
               <ul className="flex gap-3 min-h-64">
                 {demarcacaoFiltradaAgendada.map((item, id) => (
@@ -97,7 +94,6 @@ export default function Home() {
                         status={item.status}
                         empresa={item.empresa}
                       />
-
                     </Link>
                   </li>
                 ))}
@@ -109,14 +105,12 @@ export default function Home() {
         <TabsContent value="Demarcado">
           <ScrollArea className="outline-none">
             {loading == true ? (
-              <div className="max-w-96[320px] h-[229px] min-h-64 p-5 flex flex-col gap-2 justify-between text-ellipsis shadow-md dark:bg-zinc-900">
-                <Skeleton className="h-6 w-full" />
-                <Skeleton className="h-8 w-3/4" />
-                <Skeleton className="h-8 w-3/4" />
-                <Skeleton className="h-6 w-full" />
-                <Skeleton className="h-6 w-full" />
+              <div className="flex items-center gap-2">
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
+                <CardSkeleton />
               </div>
-
             ) : (
               <ul className="flex gap-3 min-h-64">
                 {demarcacaoFiltradaDemarcado.map((item, id) => (
@@ -135,7 +129,6 @@ export default function Home() {
                         status={item.status}
                         empresa={item.empresa}
                       />
-
                     </Link>
                   </li>
                 ))}

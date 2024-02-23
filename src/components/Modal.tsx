@@ -27,23 +27,31 @@ import { toast } from "sonner";
 import { Plus } from "lucide-react";
 import type { Bookings } from "../../prisma/generated/client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { TagBadge } from ".";
+import InputMask from "react-input-mask";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   id: z.string(),
   cliente: z.string().min(2, {
-    message: 'Minimo 2 caracteres'
+    message: "Minimo 2 caracteres",
   }),
-  quadra: z.string().min(1, {
-    message: 'Minimo 2 caracteres'
-  }).max(2),
-  lote: z.string().min(1, {
-    message: 'Minimo 2 caracteres'
-  }).max(2, {
-    message: 'Máximo 2 caracteres'
-  }),
+  quadra: z
+    .string()
+    .min(1, {
+      message: "Minimo 2 caracteres",
+    })
+    .max(2),
+  lote: z
+    .string()
+    .min(1, {
+      message: "Minimo 2 caracteres",
+    })
+    .max(2, {
+      message: "Máximo 2 caracteres",
+    }),
   dt_agendamento: z.string(),
   horario_do_agen: z.string(),
   status: z.string(),
@@ -58,10 +66,12 @@ const formSchema = z.object({
 });
 
 export function Modal() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [tabValue, setTabValue] = useState();
+
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -73,7 +83,7 @@ export function Modal() {
       horario_do_agen: "",
       status: "Agendado",
       demarcador: "Mauro",
-      empresa: "",
+      empresa: "Valle do Acai",
       cpf_cnpj: "",
       status_da_venda: "Ativa",
       benfeitoria: "Não",
@@ -88,7 +98,6 @@ export function Modal() {
     formState: { errors },
     reset,
   } = useForm();
-
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const formData = form.getValues();
 
@@ -112,7 +121,7 @@ export function Modal() {
             label: "Fechar",
             onClick: () => console.log("Undo"),
           },
-        })
+        });
         reset(); // Resetar o formulário após o envio bem-sucedido
       } else {
         setError("Erro ao criar registro. Por favor, tente novamente.");
@@ -122,21 +131,9 @@ export function Modal() {
     } finally {
       setLoading(false);
     }
+    router.push("/");
   };
-
-  // const submitData = async ( data: Bookings) => {
-
-  //   try {
-  //     const body = data ;
-  //     await fetch('/api/bookings', {
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify(body),
-  //     });
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
+  
   return (
     <Dialog>
       <DialogTrigger className="bg-emerald-600 rounded-md px-3 py-2 text-sm font-semibold text-zinc-100 transition-all hover:bg-emerald-500">
@@ -184,9 +181,12 @@ export function Modal() {
                         CPF/CNPJ
                       </FormLabel>
                       <FormControl>
-                        <Input
-                          placeholder="CPF/CNPJ"
-                          className="w-3/4 300px]"
+                        <InputMask
+                          className=" col-span-3 flex h-10 w-3/4 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                          mask={"999.999.999-99"}
+                          required
+                          maskChar={"_"}
+                          alwaysShowMask={true}
                           {...field}
                         />
                       </FormControl>
@@ -248,11 +248,12 @@ export function Modal() {
                         Quadra
                       </FormLabel>
                       <FormControl>
-                        <Input
+                        <InputMask
+                          className=" col-span-3 flex h-10 w-3/4 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                          mask={"99"}
                           required
-                          className="w-3/4 300px]"
-                          type="text"
-                          placeholder="Quadra"
+                          maskChar={"_"}
+                          alwaysShowMask={true}
                           {...field}
                         />
                       </FormControl>
@@ -270,11 +271,12 @@ export function Modal() {
                         Lote
                       </FormLabel>
                       <FormControl>
-                        <Input
+                        <InputMask
+                          className=" col-span-3 flex h-10 w-3/4 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                          mask={"99"}
                           required
-                          className="w-3/4 300px]"
-                          type="text"
-                          placeholder="Lote"
+                          maskChar={"_"}
+                          alwaysShowMask={true}
                           {...field}
                         />
                       </FormControl>
@@ -295,11 +297,21 @@ export function Modal() {
                         Empresa
                       </FormLabel>
                       <FormControl>
-                        <Input
-                          className="w-3/4 300px]"
-                          placeholder="Empresa"
-                          {...field}
-                        />
+                        <Select>
+                          <SelectTrigger className="w-3/4">
+                            <SelectValue placeholder="Selecione algo" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectGroup {...field}>
+                              <SelectItem value="VALLE DO ACAI">
+                                Valle do Açaí
+                              </SelectItem>
+                              <SelectItem value="PARK JARDINS">
+                                Park Jardins
+                              </SelectItem>
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
                       </FormControl>
 
                       <FormMessage />
@@ -332,14 +344,20 @@ export function Modal() {
                   render={({ field }) => (
                     <FormItem className="flex items-center justify-end gap-5">
                       <FormLabel className="w-1/4 flex justify-start">
-                        Benfeitoria
+                        Possui Benfeitoria
                       </FormLabel>
                       <FormControl>
-                        <Input
-                          className="w-3/4 300px]"
-                          placeholder="Benfeitoria"
-                          {...field}
-                        />
+                        <Select>
+                          <SelectTrigger className="w-3/4 300px]">
+                            <SelectValue placeholder="Selecione algo" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectGroup {...field}>
+                              <SelectItem value="Sim">Sim</SelectItem>
+                              <SelectItem value="Nao">Não</SelectItem>
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
                       </FormControl>
 
                       <FormMessage />
@@ -355,11 +373,19 @@ export function Modal() {
                         Status da Venda
                       </FormLabel>
                       <FormControl>
-                        <Input
-                          className="w-3/4 300px]"
-                          placeholder="Status da  Venda"
-                          {...field}
-                        />
+                        <Select>
+                          <SelectTrigger className="w-3/4 300px]">
+                            <SelectValue placeholder="Selecione algo" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectGroup {...field}>
+                              <SelectItem value="Ativa">Ativa</SelectItem>
+                              <SelectItem value="Cancelada">
+                                Cancelada
+                              </SelectItem>
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
                       </FormControl>
 
                       <FormMessage />
@@ -408,10 +434,16 @@ export function Modal() {
                           <SelectContent>
                             <SelectGroup {...field}>
                               <SelectItem value="Agendado">
-                                <TagBadge nometag={"Agendado"} filtertag={"Agendado"} />
+                                <TagBadge
+                                  nometag={"Agendado"}
+                                  filtertag={"Agendado"}
+                                />
                               </SelectItem>
                               <SelectItem value="Demarcado">
-                                <TagBadge nometag={"Demarcado"} filtertag={"Demarcado"} />
+                                <TagBadge
+                                  nometag={"Demarcado"}
+                                  filtertag={"Demarcado"}
+                                />
                               </SelectItem>
                             </SelectGroup>
                           </SelectContent>
@@ -447,7 +479,9 @@ export function Modal() {
             </Tabs>
 
             <div className="flex items-center justify-between">
-              <DialogClose className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground">Cancelar</DialogClose>
+              <DialogClose className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 border border-input bg-background hover:bg-accent hover:text-accent-foreground">
+                Cancelar
+              </DialogClose>
               <Button
                 className="bg-emerald-600 hover:bg-emerald-500 text-zinc-200"
                 type="submit"

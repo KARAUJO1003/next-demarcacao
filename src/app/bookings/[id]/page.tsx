@@ -15,12 +15,20 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { TagBadge } from "@/components";
 import { EditBooking } from "@/components/EditBooking";
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { z } from 'zod';
-import { SelectItem, SelectTrigger, SelectValue, Select, SelectContent, SelectGroup} from "@/components/ui/select";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import {
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  Select,
+  SelectContent,
+  SelectGroup,
+} from "@/components/ui/select";
 import { toast } from "sonner";
-import { Loader, Save } from 'lucide-react'
+import { Loader, Save } from "lucide-react";
+import InputMask from "react-input-mask";
 
 async function getData(): Promise<Bookings[]> {
   const res = await fetch("/api/bookings");
@@ -47,17 +55,22 @@ const schema = z.object({
 
 export default function PageUser({ params }: { params: { id: string } }) {
   const [booking, setBooking] = useState<Bookings | null>(null);
-  const [isLoading, setIsLoading ] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { register, handleSubmit, formState: { errors }, setValue } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm({
     resolver: zodResolver(schema),
   });
 
   useEffect(() => {
     if (params.id) {
-      setValue('id', params.id as string); // Define o valor do campo ID como o valor recebido via parâmetro da rota
+      setValue("id", params.id as string); // Define o valor do campo ID como o valor recebido via parâmetro da rota
     }
-  }, [params.id]);
+  }, [params.id, setValue]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,11 +96,11 @@ export default function PageUser({ params }: { params: { id: string } }) {
     console.log(data);
 
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       const response = await fetch(`/api/bookings`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
       });
@@ -95,26 +108,22 @@ export default function PageUser({ params }: { params: { id: string } }) {
       if (response.ok) {
         // Produto atualizado com sucesso, redirecionar para a página de detalhes do produto
         //router.push(`/products/${params.id}`);
-        setIsLoading(false)
-        console.log('dados recebidos com sucesso');
+        setIsLoading(false);
+        console.log("dados recebidos com sucesso");
         toast("Cliente editado com sucesso", {
           description: "Sunday, December 03, 2023 at 9:00 AM",
           action: {
             label: "Fechar",
             onClick: () => console.log("Undo"),
           },
-        })
-
+        });
       } else {
         // Lidar com erros
         console.log("Dados não atualizados");
-
-
       }
     } catch (error) {
       // Lidar com erros de rede
       console.log(error);
-
     }
   };
 
@@ -124,72 +133,148 @@ export default function PageUser({ params }: { params: { id: string } }) {
         <Card className="max-w-[500px] min-w-[400px]">
           <CardContent className="space-y-3">
             <form onSubmit={handleSubmit(onSubmit)}>
-              <CardHeader>
-                <Input className="col-span-2" defaultValue={booking.cliente ?? ''} {...register('cliente')} />
-              </CardHeader>
+              <Input
+                className=" my-5"
+                defaultValue={booking.cliente ?? ""}
+                {...register("cliente")}
+              />
 
-              <div className="grid grid-cols-3">
-                <div className="col-span-2 space-y-2">
-                  <div className=" items-center min-w-full grid grid-cols-3 gap-3">
-                    <CardDescription className="w-full flex justify-end">Status</CardDescription>
+              <div className="">
+                <div className="col-span-3 space-y-2">
+                  <div className=" items-center min-w-full grid grid-cols-4 gap-3">
+                    <CardDescription className="w-full flex justify-end">
+                      Status
+                    </CardDescription>
                     <Select
-                      defaultValue={booking.status ?? ''}
+                      defaultValue={booking.status ?? ""}
                       onValueChange={(selectedValue) =>
                         setValue("status", selectedValue)
                       }
                     >
-                      <SelectTrigger className="col-span-2" >
+                      <SelectTrigger className="col-span-3">
                         <SelectValue placeholder="Selecione algo" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectGroup {...register('status')}>
+                        <SelectGroup {...register("status")}>
                           <SelectItem value="Agendado">
-                            <TagBadge nometag={'Agendado'} filtertag={'Agendado'} />
+                            <TagBadge
+                              nometag={"Agendado"}
+                              filtertag={"Agendado"}
+                            />
                           </SelectItem>
                           <SelectItem value="Demarcado">
-                            <TagBadge nometag={'Demarcado'} filtertag={'Demarcado'} />
+                            <TagBadge
+                              nometag={"Demarcado"}
+                              filtertag={"Demarcado"}
+                            />
                           </SelectItem>
                         </SelectGroup>
                       </SelectContent>
                     </Select>
                   </div>
-                  <div className=" items-center min-w-full grid grid-cols-3 gap-3">
-                    <Input className="hidden" defaultValue={booking.id ?? ''} value={booking.id ?? ''} />
+                  <div className=" items-center min-w-full grid grid-cols-4 gap-3">
+                    <Input
+                      className="hidden"
+                      defaultValue={booking.id ?? ""}
+                      value={booking.id ?? ""}
+                    />
                   </div>
-                  <div className=" items-center min-w-full grid grid-cols-3 gap-3">
-                    <CardDescription className="w-full flex justify-end">Empresa</CardDescription>
-                    <Input className="col-span-2" defaultValue={booking.empresa ?? ''} {...register('empresa')} />
+                  <div className=" items-center min-w-full grid grid-cols-4 gap-3">
+                    <CardDescription className="w-full flex justify-end">
+                      Empresa
+                    </CardDescription>
+                    <Select
+                      defaultValue={booking.empresa ?? ""}
+                      onValueChange={(selectedValue) =>
+                        setValue("empresa", selectedValue)
+                      }
+                    >
+                      <SelectTrigger className="col-span-3">
+                        <SelectValue placeholder="Selecione algo" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup {...register("status")}>
+                          <SelectItem value="VALLE DO ACAI">
+                            Valle do Açaí
+                          </SelectItem>
+                          <SelectItem value="PARK JARDINS">
+                            Park Jardins
+                          </SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
                   </div>
-                  <div className=" items-center min-w-full grid grid-cols-3 gap-3">
-                    <CardDescription className="w-full flex justify-end">Quadra</CardDescription>
-                    <Input className="col-span-2" defaultValue={booking.quadra ?? ''} {...register('quadra')} />
+                  <div className=" items-center min-w-full grid grid-cols-4 gap-3">
+                    <CardDescription className="w-full flex justify-end">
+                      Quadra
+                    </CardDescription>
+                    <InputMask
+                      className=" col-span-3 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      mask={"99"}
+                      maskChar={""}
+                      alwaysShowMask={true}
+                      defaultValue={booking.quadra ?? ""}
+                      {...register("quadra")}
+                    />
                   </div>
-                  <div className=" items-center min-w-full grid grid-cols-3 gap-3">
-                    <CardDescription className="w-full flex justify-end">Lote</CardDescription>
-                    <Input className="col-span-2" defaultValue={booking.lote ?? ''} {...register('lote')} />
+                  <div className=" items-center min-w-full grid grid-cols-4 gap-3">
+                    <CardDescription className="w-full flex justify-end">
+                      Lote
+                    </CardDescription>
+                    <InputMask
+                      className="col-span-3 flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                      mask={"99"}
+                      maskChar={""}
+                      alwaysShowMask={true}
+                      defaultValue={booking.lote ?? ""}
+                      {...register("lote")}
+                    />
                   </div>
-                  <div className=" items-center min-w-full grid grid-cols-3 gap-3">
-                    <CardDescription className="w-full flex justify-end">Data</CardDescription>
-                    <Input className="col-span-2" defaultValue={booking.dt_agendamento ?? ''} {...register('dt_agendamento')} />
+                  <div className=" items-center min-w-full grid grid-cols-4 gap-3">
+                    <CardDescription className="w-full flex justify-end">
+                      Data
+                    </CardDescription>
+                    <Input
+                      type="date"
+                      className="col-span-3"
+                      defaultValue={booking.dt_agendamento ?? ""}
+                      {...register("dt_agendamento")}
+                    />
                   </div>
-                  <div className=" items-center min-w-full grid grid-cols-3 gap-3">
-                    <CardDescription className="w-full flex justify-end">Hora</CardDescription>
-                    <Input className="col-span-2" defaultValue={booking.horario_do_agen ?? ''} {...register('horario_do_agen')} />
+                  <div className=" items-center min-w-full grid grid-cols-4 gap-3">
+                    <CardDescription className="w-full flex justify-end">
+                      Hora
+                    </CardDescription>
+                    <Input
+                      type="time"
+                      className="col-span-3"
+                      defaultValue={booking.horario_do_agen ?? ""}
+                      {...register("horario_do_agen")}
+                    />
                   </div>
-                </div>
-                <div className="col-span-1">
-
                 </div>
               </div>
-              <CardFooter className="flex justify-between mt-5">
+              <CardFooter className="flex justify-between mt-10 px-0">
                 <Button variant={"outline"}>
                   <Link href={"/"}>Voltar</Link>
                 </Button>
-                <Button type="submit" className="bg-emerald-600 hover:bg-emerald-500 text-zinc-200" >{isLoading ? <span className="flex items-center justify-center gap-2"><Loader size={14} className="animate-spin" /> Gravando</span> : <span className="flex items-center justify-center gap-2"><Save size={14} /> Gravar</span>}</Button>
+                <Button
+                  type="submit"
+                  className="bg-emerald-600 hover:bg-emerald-500 text-zinc-200"
+                >
+                  {isLoading ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <Loader size={14} className="animate-spin" /> Gravando
+                    </span>
+                  ) : (
+                    <span className="flex items-center justify-center gap-2">
+                      <Save size={14} /> Gravar
+                    </span>
+                  )}
+                </Button>
               </CardFooter>
             </form>
           </CardContent>
-
         </Card>
       )}
     </div>

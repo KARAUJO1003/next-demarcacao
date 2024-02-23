@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Bookings, PrismaClient } from "../../../../prisma/generated/client";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 const prisma = new PrismaClient();
 
@@ -28,6 +29,7 @@ export async function POST(req: Request, res: NextApiResponse) {
     });
     console.log(req.body)
     // console.log(newBooking)
+    redirect('/')
     return NextResponse.json(newBooking);
   } catch (error) {
     return NextResponse.json({ message: "Erro de validação", error });
