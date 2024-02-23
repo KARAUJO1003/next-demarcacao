@@ -46,6 +46,7 @@ import { Skeleton } from "./ui/skeleton";
 export const columns: ColumnDef<Bookings>[] = [
   {
     id: "select",
+    maxSize: 50,
     header: ({ table }) => (
       <Checkbox
         checked={
@@ -71,7 +72,7 @@ export const columns: ColumnDef<Bookings>[] = [
   {
     accessorKey: "status",
     enableResizing: true,
-    size: 200,
+    maxSize: 100,
     header: ({ column }) => {
       return (
         <Button
@@ -98,7 +99,7 @@ export const columns: ColumnDef<Bookings>[] = [
   },
   {
     accessorKey: "cliente",
-    minSize: 350,
+    minSize: 250,
     header: ({ column }) => {
       return (
         <Button
@@ -116,7 +117,6 @@ export const columns: ColumnDef<Bookings>[] = [
   },
   {
     accessorKey: "quadra",
-
     header: ({ column }) => {
       return (
         <Button

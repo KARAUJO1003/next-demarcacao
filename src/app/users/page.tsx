@@ -13,6 +13,7 @@ import { User } from "../../../prisma/generated/client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import {User2Icon } from "lucide-react";
 
 export default function UsersList() {
   const [users, setUsers] = useState([]);
@@ -46,18 +47,18 @@ export default function UsersList() {
           <div className="w-full h-screen flex items-center justify-center">
 
             <div className=" h-screen flex flex-col items-center justify-center max-w-full">
-              <div className="flex w-full items-center justify-between mb-5 p-2">
+              <div className="flex w-full items-center justify-between mb-5 p-4 border rounded-md">
 
-                <h1 className="text-2xl">Lista de usuários</h1>
+                <h1 className="text-xl flex items-center justify-center gap-3 rounded-md"><Button variant={'outline'} size={'icon'}><User2Icon size={18}/></Button> Usuários</h1>
                 <Button variant={'outline'}>
                   <Link className="no-underline" href="/">
                     Pagina inicial
                   </Link>
                 </Button>
               </div>
-              <div>
-                <Table className="border rounded-md">
-                  <TableHeader>
+              <div className="border rounded-md">
+                <Table >
+                  <TableHeader className="dark:bg-zinc-900">
                     <TableHead>Nome</TableHead>
                     <TableHead>Email</TableHead>
                   </TableHeader>
