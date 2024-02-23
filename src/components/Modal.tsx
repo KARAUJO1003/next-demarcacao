@@ -31,7 +31,6 @@ import { useEffect, useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { TagBadge } from ".";
 import InputMask from "react-input-mask";
-import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   id: z.string(),
@@ -66,7 +65,6 @@ const formSchema = z.object({
 });
 
 export function Modal() {
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -131,7 +129,6 @@ export function Modal() {
     } finally {
       setLoading(false);
     }
-    router.push("/");
   };
   
   return (
