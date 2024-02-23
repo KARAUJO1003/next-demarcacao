@@ -33,16 +33,19 @@ export default function UsersList() {
       {
         loading ? (
           <div className="space-y-2 flex items-center justify-center flex-col h-screen w-full">
-            <Skeleton className="h-6 w-[600px]" />
-            <Skeleton className="h-6 w-[600px]" />
-            <Skeleton className="h-6 w-[600px]" />
-            <Skeleton className="h-6 w-[600px]" />
-            <Skeleton className="h-6 w-[600px]" />
+            <Skeleton className="h-10 w-full max-w-[600px]" />
+            <div className="p-4 border dark:border-zinc-800 rounded-md  space-y-2 w-[600px]">
+
+            <Skeleton className="h-10 w-full " />
+            <Skeleton className="h-10 w-full" />
+            <Skeleton className="h-10 w-full" />
+            <Skeleton className="h-10 w-full" />
+            </div>
           </div>
         ) : (
           <div className="w-full h-screen flex items-center justify-center">
 
-            <div className=" h-screen flex flex-col items-center justify-center max-w-[600px]">
+            <div className=" h-screen flex flex-col items-center justify-center max-w-full">
               <div className="flex w-full items-center justify-between mb-5 p-2">
 
                 <h1 className="text-2xl">Lista de usuários</h1>

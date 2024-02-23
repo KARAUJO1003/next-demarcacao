@@ -12,9 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { TagBadge } from "@/components";
-import { EditBooking } from "@/components/EditBooking";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -185,15 +183,15 @@ export default function PageUser({ params }: { params: { id: string } }) {
                     </CardDescription>
                     <Select
                       defaultValue={booking.empresa ?? ""}
-                      onValueChange={(selectedValue) =>
-                        setValue("empresa", selectedValue)
-                      }
+                      // onValueChange={(selectedValue) =>
+                      //   setValue("empresa", selectedValue)
+                      // }
                     >
                       <SelectTrigger className="col-span-3">
                         <SelectValue placeholder="Selecione algo" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectGroup {...register("status")}>
+                        <SelectGroup {...register("empresa")}>
                           <SelectItem value="VALLE DO ACAI">
                             Valle do Açaí
                           </SelectItem>

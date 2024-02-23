@@ -78,7 +78,7 @@ const CardItem = ({
             {timer}
           </CardDescription>
           </div>
-          <CardDescription className="font-semibold text-xs  px-2 rounded bg-zinc-200 dark:bg-zinc-800">
+          <CardDescription className="font-semibold text-xs  px-2 rounded bg-zinc-200 dark:bg-zinc-800 uppercase">
             {empresa}
           </CardDescription>
         </CardFooter>

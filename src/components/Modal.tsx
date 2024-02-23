@@ -31,6 +31,7 @@ import { useEffect, useState } from "react";
 import { SubmitHandler } from "react-hook-form";
 import { TagBadge } from ".";
 import InputMask from "react-input-mask";
+import { Textarea } from "./ui/textarea";
 
 const formSchema = z.object({
   id: z.string(),
@@ -84,7 +85,7 @@ export function Modal() {
       empresa: "Valle do Acai",
       cpf_cnpj: "",
       status_da_venda: "Ativa",
-      benfeitoria: "Não",
+      benfeitoria: "Nao",
       resp_pelo_agendamento: "",
       obs: "",
     },
@@ -135,18 +136,18 @@ export function Modal() {
     <Dialog>
       <DialogTrigger className="bg-emerald-600 rounded-md px-3 py-2 text-sm font-semibold text-zinc-100 transition-all hover:bg-emerald-500">
         <span className="flex items-center">
-          <Plus size={19} /> Add New
+          <Plus size={19} /> Novo registro
         </span>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="min-h-[500px]">
         <Form {...form}>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 flex flex-col justify-between">
             <Tabs onValueChange={(e: any) => setTabValue(e)}>
               <TabsList>
-                <TabsTrigger value="tab1">Dados Cliente</TabsTrigger>
-                <TabsTrigger value="tab2">Dados Empresa</TabsTrigger>
+                <TabsTrigger value="tab1">Agendamento</TabsTrigger>
+                <TabsTrigger value="tab2">Mais informações</TabsTrigger>
               </TabsList>
-              <TabsContent value="tab1">
+              <TabsContent  value="tab1">
                 <FormField
                   control={form.control}
                   name="cliente"
@@ -282,134 +283,7 @@ export function Modal() {
                     </FormItem>
                   )}
                 />
-              </TabsContent>
-
-              <TabsContent value="tab2">
-                <FormField
-                  control={form.control}
-                  name="empresa"
-                  render={({ field }) => (
-                    <FormItem className="flex items-center justify-end gap-5">
-                      <FormLabel className="w-1/4 flex justify-start">
-                        Empresa
-                      </FormLabel>
-                      <FormControl>
-                        <Select>
-                          <SelectTrigger className="w-3/4">
-                            <SelectValue placeholder="Selecione algo" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectGroup {...field}>
-                              <SelectItem value="VALLE DO ACAI">
-                                Valle do Açaí
-                              </SelectItem>
-                              <SelectItem value="PARK JARDINS">
-                                Park Jardins
-                              </SelectItem>
-                            </SelectGroup>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="resp_pelo_agendamento"
-                  render={({ field }) => (
-                    <FormItem className="flex items-center justify-end gap-5">
-                      <FormLabel className="w-1/4 flex justify-start">
-                        Resp. Agendamento
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          className="w-3/4 300px]"
-                          placeholder="Responsável pelo agendamento"
-                          {...field}
-                        />
-                      </FormControl>
-
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="benfeitoria"
-                  render={({ field }) => (
-                    <FormItem className="flex items-center justify-end gap-5">
-                      <FormLabel className="w-1/4 flex justify-start">
-                        Possui Benfeitoria
-                      </FormLabel>
-                      <FormControl>
-                        <Select>
-                          <SelectTrigger className="w-3/4 300px]">
-                            <SelectValue placeholder="Selecione algo" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectGroup {...field}>
-                              <SelectItem value="Sim">Sim</SelectItem>
-                              <SelectItem value="Nao">Não</SelectItem>
-                            </SelectGroup>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="status_da_venda"
-                  render={({ field }) => (
-                    <FormItem className="flex items-center justify-end gap-5">
-                      <FormLabel className="w-1/4 flex justify-start">
-                        Status da Venda
-                      </FormLabel>
-                      <FormControl>
-                        <Select>
-                          <SelectTrigger className="w-3/4 300px]">
-                            <SelectValue placeholder="Selecione algo" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectGroup {...field}>
-                              <SelectItem value="Ativa">Ativa</SelectItem>
-                              <SelectItem value="Cancelada">
-                                Cancelada
-                              </SelectItem>
-                            </SelectGroup>
-                          </SelectContent>
-                        </Select>
-                      </FormControl>
-
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
-                  control={form.control}
-                  name="demarcador"
-                  render={({ field }) => (
-                    <FormItem className="flex items-center justify-end gap-5">
-                      <FormLabel className="w-1/4 flex justify-start">
-                        Demarcador
-                      </FormLabel>
-                      <FormControl>
-                        <Input
-                          className="w-3/4 300px]"
-                          placeholder="Demarcador"
-                          {...field}
-                        />
-                      </FormControl>
-
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <FormField
+                                <FormField
                   control={form.control}
                   name="status"
                   render={({ field }) => (
@@ -451,6 +325,136 @@ export function Modal() {
                     </FormItem>
                   )}
                 />
+              </TabsContent>
+
+              <TabsContent value="tab2">
+                <FormField
+                  control={form.control}
+                  name="empresa"
+                  render={({ field }) => (
+                    <FormItem className="flex items-center justify-end gap-5">
+                      <FormLabel className="w-1/4 flex justify-start">
+                        Empresa
+                      </FormLabel>
+                      <FormControl>
+                        <Select defaultValue="VALLE DO ACAI">
+                          <SelectTrigger className="w-3/4">
+                            <SelectValue placeholder="Selecione algo" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectGroup {...field}>
+                              <SelectItem value="VALLE DO ACAI">
+                                Valle do Açaí
+                              </SelectItem>
+                              <SelectItem value="PARK JARDINS">
+                                Park Jardins
+                              </SelectItem>
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="resp_pelo_agendamento"
+                  render={({ field }) => (
+                    <FormItem className="flex items-center justify-end gap-5">
+                      <FormLabel className="w-1/4 flex justify-start">
+                        Agente
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          className="w-3/4 300px]"
+                          placeholder="Responsável pelo agendamento"
+                          {...field}
+                        />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="benfeitoria"
+                  render={({ field }) => (
+                    <FormItem className="flex items-center justify-end gap-5">
+                      <FormLabel className="w-1/4 flex justify-start">
+                        Benfeitoria
+                      </FormLabel>
+                      <FormControl>
+                        <Select defaultValue="Nao"
+                          >
+                          <SelectTrigger className="w-3/4 300px]">
+                            <SelectValue placeholder="Selecione algo" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectGroup {...field}>
+                              <SelectItem value="Sim">Sim</SelectItem>
+                              <SelectItem value="Nao">Não</SelectItem>
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="status_da_venda"
+                  render={({ field }) => (
+                    <FormItem className="flex items-center justify-end gap-5">
+                      <FormLabel className="w-1/4 flex justify-start">
+                        Status da Venda
+                      </FormLabel>
+                      <FormControl>
+                        <Select defaultValue="Ativa"
+                          value={form.getValues("status_da_venda")}>
+                          <SelectTrigger className="w-3/4 300px]">
+                            <SelectValue placeholder="Selecione algo" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectGroup {...field}>
+                              <SelectItem value="Ativa">Ativa</SelectItem>
+                              <SelectItem value="Cancelada">
+                                Cancelada
+                              </SelectItem>
+                            </SelectGroup>
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="demarcador"
+                  render={({ field }) => (
+                    <FormItem className="flex items-center justify-end gap-5">
+                      <FormLabel className="w-1/4 flex justify-start">
+                        Demarcador
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          className="w-3/4 300px]"
+                          placeholder="Demarcador"
+                          {...field}
+                        />
+                      </FormControl>
+
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
 
                 <FormField
                   control={form.control}
@@ -461,7 +465,7 @@ export function Modal() {
                         Observação
                       </FormLabel>
                       <FormControl>
-                        <Input
+                        <Textarea
                           className="w-3/4 300px]"
                           placeholder="Observação"
                           {...field}
