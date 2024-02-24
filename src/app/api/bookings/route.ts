@@ -35,6 +35,7 @@ export async function POST(req: Request, res: NextApiResponse) {
     return NextResponse.json({ message: "Erro de validação", error });
   }
 }
+
 export async function PUT(req: Request, res: NextApiResponse) {
   const { id, empresa, cliente,  quadra, lote, status,dt_agendamento,
     horario_do_agen, } = await req.json()
@@ -70,24 +71,3 @@ export async function GET() {
   }
 }
 
-// export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-//   if (req.method === 'POST') {
-
-//       const body= req.body as Bookings;
-
-//       const newBooking = await prisma.bookings.create({
-//         data: body
-//       });
-//       return res.status(201).json(newBooking);
-//   } else if (req.method === 'GET') {
-//     try {
-//       const bookings = await prisma.bookings.findMany();
-//       return res.status(200).json({ bookings });
-//     } catch (error) {
-//       console.error('Erro ao buscar os bookings:', error);
-//       return res.status(500).json({ erro: 'Erro interno do servidor' });
-//     }
-//   } else {
-//     return res.status(405).end(); // Método não permitido
-//   }
-// }

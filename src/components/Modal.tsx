@@ -161,7 +161,7 @@ export function Modal() {
                           required
                           placeholder="Nome completo"
                           className="w-3/4 300px]"
-                          {...field}
+                          {...field }
                         />
                       </FormControl>
 

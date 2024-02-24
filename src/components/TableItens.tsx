@@ -41,7 +41,28 @@ import Link from "next/link";
 import { Bookings } from "../../prisma/generated/client";
 import { Skeleton } from "./ui/skeleton";
 
-
+const handleDelete = async (id: string) => {
+  try {
+    // Faz a solicitação DELETE
+    const response = await fetch(`/api/bookings${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(id),
+    });
+    if (response.ok) {
+      // Atualiza os dados após a exclusão bem-sucedida
+      console.log('deletado com sucesso');
+      
+    } else {
+      throw new Error("Falha ao excluir o item.");
+    }
+  } catch (error) {
+    console.error("Erro ao excluir:", error);
+    // Trate o erro, se necessário
+  }
+};
 
 export const columns: ColumnDef<Bookings>[] = [
   {
@@ -212,7 +233,7 @@ export const columns: ColumnDef<Bookings>[] = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem><Pencil size={12} className="mr-3"/><Link href={`/bookings/${payment.id}`}>Editar</Link></DropdownMenuItem>
-            <DropdownMenuItem><Trash size={12} className="mr-3"/>Excluir</DropdownMenuItem>
+            <DropdownMenuItem><Trash size={12} className="mr-3" /><Button onClick={() => handleDelete(payment.id)}>Excluir</Button></DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
@@ -258,6 +279,7 @@ const DataTableDemo = () => {
       rowSelection,
     },
   });
+
 
 
   return (

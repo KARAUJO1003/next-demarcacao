@@ -183,9 +183,9 @@ export default function PageUser({ params }: { params: { id: string } }) {
                     </CardDescription>
                     <Select
                       defaultValue={booking.empresa ?? ""}
-                      // onValueChange={(selectedValue) =>
-                      //   setValue("empresa", selectedValue)
-                      // }
+                      onValueChange={(selectedValue) =>
+                        setValue("empresa", selectedValue)
+                      }
                     >
                       <SelectTrigger className="col-span-3">
                         <SelectValue placeholder="Selecione algo" />
