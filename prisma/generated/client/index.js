@@ -146,7 +146,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\KAESYO\\Documents\\GitHub\\next-demarcacao\\prisma\\generated\\client",
+      "value": "C:\\Users\\kaesy\\OneDrive\\Documentos\\GitHub\\next-demarcacao\\prisma\\generated\\client",
       "fromEnvVar": null
     },
     "config": {

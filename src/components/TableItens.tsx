@@ -36,7 +36,7 @@ import {
 } from "@/components/ui/table";
 import { AgendaItem } from "@/app/ag";
 import { Modal } from "./Modal";
-import { TagBadge } from ".";
+import { TagBadge } from "./TagBadge";
 import Link from "next/link";
 import { Bookings } from "../../prisma/generated/client";
 import { Skeleton } from "./ui/skeleton";

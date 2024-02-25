@@ -1,7 +1,6 @@
 "use client";
 
-import { AgendaItem, Demarcacao } from "@/app/ag";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Modal } from "@/components/Modal";
@@ -10,7 +9,6 @@ import CardItem from "@/components/CardItem";
 import SideBar from "@/components/SideBar";
 import Link from "next/link";
 import { Bookings } from "../../prisma/generated/client";
-import { Skeleton } from "@/components/ui/skeleton";
 import CardSkeleton from "@/components/CardSkeleton";
 
 export default function Home() {
@@ -48,9 +46,11 @@ export default function Home() {
 
   return (
     <main className=" min-h-screen w-full  grid grid-cols-[300px,_minmax(900px,_1fr)]">
+
       <div>
         <SideBar />
       </div>
+
       <Tabs
         defaultValue="Agendado"
         onValueChange={handleTabChange}
@@ -58,15 +58,19 @@ export default function Home() {
       >
         <div className="flex gap-2 w-full border-b pb-2 bg-transparent items-center justify-between">
           <TabsList className="">
+
             <TabsTrigger value="Agendado" className="text-foreground">
               Agendado
             </TabsTrigger>
+
             <TabsTrigger value="Demarcado" className="text-foreground">
               Demarcado
             </TabsTrigger>
+
           </TabsList>
           <Modal />
         </div>
+
         <TabsContent value="Agendado">
           <ScrollArea className="outline-none">
             {loading == true ? (
@@ -85,11 +89,11 @@ export default function Home() {
                   >
                     <Link href={`/bookings/${item.id}`}>
                       <CardItem
-                        user={item.cliente}
-                        qd={item.quadra}
-                        lt={item.lote}
-                        date={item.dt_agendamento}
-                        timer={item.horario_do_agen}
+                        cliente={item.cliente}
+                        quadra={item.quadra}
+                        lote={item.lote}
+                        dt_agendamento={item.dt_agendamento}
+                        horario_do_agen={item.horario_do_agen}
                         demarcador={item.demarcador}
                         status={item.status}
                         empresa={item.empresa}
@@ -102,6 +106,7 @@ export default function Home() {
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
         </TabsContent>
+
         <TabsContent value="Demarcado">
           <ScrollArea className="outline-none">
             {loading == true ? (
@@ -120,11 +125,11 @@ export default function Home() {
                   >
                     <Link href={`/bookings/${item.id}`}>
                       <CardItem
-                        user={item.cliente}
-                        qd={item.quadra}
-                        lt={item.lote}
-                        date={item.dt_agendamento}
-                        timer={item.horario_do_agen}
+                        cliente={item.cliente}
+                        quadra={item.quadra}
+                        lote={item.lote}
+                        dt_agendamento={item.dt_agendamento}
+                        horario_do_agen={item.horario_do_agen}
                         demarcador={item.demarcador}
                         status={item.status}
                         empresa={item.empresa}
@@ -137,6 +142,7 @@ export default function Home() {
             <ScrollBar orientation="horizontal" />
           </ScrollArea>
         </TabsContent>
+
         <TableItens />
       </Tabs>
     </main>

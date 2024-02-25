@@ -1,1 +1,0 @@
-export {TagBadge} from './TagBadge';

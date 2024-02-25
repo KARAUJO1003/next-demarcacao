@@ -2,8 +2,19 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FieldValues, useForm } from "react-hook-form";
+import { SubmitHandler } from "react-hook-form";
 import * as z from "zod";
+import InputMask from "react-input-mask";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+import { Input } from "@/components/ui/input";
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from "./ui/dialog";
+import { toast } from "sonner";
+import { Plus } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { useState } from "react";
+import { TagBadge } from "./TagBadge";
+import { Textarea } from "./ui/textarea";
 import {
   Form,
   FormControl,
@@ -13,8 +24,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Dialog, DialogClose, DialogContent, DialogTrigger } from "./ui/dialog";
 import {
   Select,
   SelectContent,
@@ -23,16 +32,9 @@ import {
   SelectItem,
   SelectValue,
 } from "./ui/select";
-import { toast } from "sonner";
-import { Plus } from "lucide-react";
-import type { Bookings } from "../../prisma/generated/client";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { useEffect, useState } from "react";
-import { SubmitHandler } from "react-hook-form";
-import { TagBadge } from ".";
-import InputMask from "react-input-mask";
-import { Textarea } from "./ui/textarea";
-import { useRouter } from "next/navigation";
+import { Switch } from "./ui/switch";
+import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
+import { Label } from "./ui/label";
 
 const formSchema = z.object({
   id: z.string(),
@@ -70,9 +72,10 @@ export function Modal() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [toggleCpf, setToggleCpf] = useState("");
   const [tabValue, setTabValue] = useState();
-  const router = useRouter()
 
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -93,48 +96,36 @@ export function Modal() {
     },
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+  const { handleSubmit, reset } = useForm();
+
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const formData = form.getValues();
 
     try {
       setLoading(true);
-      const response = await fetch("/api/bookings", {
+      const res = await fetch("/api/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
-      console.log(response);
-      console.log(data);
 
-      if (response.ok) {
+      if (res.ok) {
         setSuccess(true);
-        toast("Cliente adicionado com sucesso", {
-          description: "Sunday, December 03, 2023 at 9:00 AM",
-          action: {
-            label: "Fechar",
-            onClick: () => console.log("Undo"),
-          },
-        });
+        toast("Cliente cadastrado com sucesso!");
         reset(); // Resetar o formulário após o envio bem-sucedido
-        router.push('/')
       } else {
         setError("Erro ao criar registro. Por favor, tente novamente.");
       }
     } catch (error) {
-      setError("Erro ao criar registro. Por favor, tente novamente.");
+      toast("Erro ao criar registro. Por favor, tente novamente.");
     } finally {
       setLoading(false);
+      router.push("/");
     }
   };
-  
+
   return (
     <Dialog>
       <DialogTrigger className="bg-emerald-600 rounded-md px-3 py-2 text-sm font-semibold text-zinc-100 transition-all hover:bg-emerald-500">
@@ -144,13 +135,16 @@ export function Modal() {
       </DialogTrigger>
       <DialogContent className="min-h-[500px]">
         <Form {...form}>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 flex flex-col justify-between">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="space-y-6 flex flex-col justify-between"
+          >
             <Tabs onValueChange={(e: any) => setTabValue(e)}>
               <TabsList>
                 <TabsTrigger value="tab1">Agendamento</TabsTrigger>
                 <TabsTrigger value="tab2">Mais informações</TabsTrigger>
               </TabsList>
-              <TabsContent  value="tab1">
+              <TabsContent value="tab1">
                 <FormField
                   control={form.control}
                   name="cliente"
@@ -164,10 +158,9 @@ export function Modal() {
                           required
                           placeholder="Nome completo"
                           className="w-3/4 300px]"
-                          {...field }
+                          {...field}
                         />
                       </FormControl>
-
                       <FormMessage />
                     </FormItem>
                   )}
@@ -179,12 +172,30 @@ export function Modal() {
                   render={({ field }) => (
                     <FormItem className="flex items-center justify-end gap-5">
                       <FormLabel className="w-1/4 flex justify-start">
-                        CPF/CNPJ
+                        <div className="flex flex-col items-center justify-center gap-1">
+                          <RadioGroup
+                            defaultValue="CPF"
+                            onValueChange={(e) => setToggleCpf(e)}
+                          >
+                            <div className="flex items-center gap-2">
+                              <RadioGroupItem id="CPF" value="CPF" />
+                              <Label htmlFor="CPF">CPF</Label>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <RadioGroupItem id="CNPJ" value="CNPJ" />
+                              <Label htmlFor="CNPJ">CNPJ</Label>
+                            </div>
+                          </RadioGroup>
+                        </div>
                       </FormLabel>
                       <FormControl>
                         <InputMask
                           className=" col-span-3 flex h-10 w-3/4 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                          mask={"999.999.999-99"}
+                          mask={
+                            toggleCpf === "CPF"
+                              ? "999.999.999-99"
+                              : "99.999.999/9999-99"
+                          }
                           required
                           maskChar={"_"}
                           alwaysShowMask={true}
@@ -286,7 +297,7 @@ export function Modal() {
                     </FormItem>
                   )}
                 />
-                                <FormField
+                <FormField
                   control={form.control}
                   name="status"
                   render={({ field }) => (
@@ -390,8 +401,7 @@ export function Modal() {
                         Benfeitoria
                       </FormLabel>
                       <FormControl>
-                        <Select defaultValue="Nao"
-                          >
+                        <Select defaultValue="Nao">
                           <SelectTrigger className="w-3/4 300px]">
                             <SelectValue placeholder="Selecione algo" />
                           </SelectTrigger>
@@ -417,8 +427,10 @@ export function Modal() {
                         Status da Venda
                       </FormLabel>
                       <FormControl>
-                        <Select defaultValue="Ativa"
-                          value={form.getValues("status_da_venda")}>
+                        <Select
+                          defaultValue="Ativa"
+                          value={form.getValues("status_da_venda")}
+                        >
                           <SelectTrigger className="w-3/4 300px]">
                             <SelectValue placeholder="Selecione algo" />
                           </SelectTrigger>
@@ -457,7 +469,6 @@ export function Modal() {
                     </FormItem>
                   )}
                 />
-
 
                 <FormField
                   control={form.control}

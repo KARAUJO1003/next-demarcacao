@@ -1,46 +1,32 @@
 "use client";
+
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import InputMask from "react-input-mask";
 import { Bookings } from "../../../../prisma/generated/client";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { TagBadge } from "@/components/TagBadge";
+import { Input } from "@/components/ui/input";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader, Save } from "lucide-react";
 import {
   Card,
   CardContent,
   CardDescription,
   CardFooter,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { TagBadge } from "@/components";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import {
   SelectItem,
   SelectTrigger,
   SelectValue,
   Select,
-  SelectContent,
   SelectGroup,
+  SelectContent,
 } from "@/components/ui/select";
-import { toast } from "sonner";
-import { Loader, Save } from "lucide-react";
-import InputMask from "react-input-mask";
-import { useRouter } from "next/navigation";
-
-
-async function getData(): Promise<Bookings[]> {
-  const res = await fetch("/api/bookings");
-  if (!res.ok) {
-    // Isso ativará o Error Boundary mais próximo em 'error.js'
-    throw new Error("Falha ao buscar dados");
-  }
-  const rawData = await res.json();
-  console.log("Dados brutos da API:", rawData);
-  
-  return rawData;
-}
 
 const schema = z.object({
   id: z.string(),
@@ -53,7 +39,19 @@ const schema = z.object({
   horario_do_agen: z.string(),
 });
 
+async function getData(): Promise<Bookings[]> {
+  const res = await fetch("/api/bookings");
+  if (!res.ok) {
+    throw new Error("Falha ao buscar dados");
+  }
+  const rawData = await res.json();
+  console.log("Dados brutos da API:", rawData);
+  return rawData;
+}
+
+
 export default function PageUser({ params }: { params: { id: string } }) {
+
   const [booking, setBooking] = useState<Bookings | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const router =  useRouter()
@@ -61,7 +59,6 @@ export default function PageUser({ params }: { params: { id: string } }) {
   const {
     register,
     handleSubmit,
-    formState: { errors },
     setValue,
   } = useForm({
     resolver: zodResolver(schema),
@@ -108,7 +105,6 @@ export default function PageUser({ params }: { params: { id: string } }) {
 
       if (response.ok) {
         // Produto atualizado com sucesso, redirecionar para a página de detalhes do produto
-        //router.push(`/products/${params.id}`);
         setIsLoading(false);
         console.log("dados recebidos com sucesso");
         toast("Cliente editado com sucesso", {
@@ -127,6 +123,7 @@ export default function PageUser({ params }: { params: { id: string } }) {
       console.log(error);
     }
   };
+
   const handleDelete = async (id: string) => {
     try {
       // Faz a solicitação DELETE
@@ -137,19 +134,19 @@ export default function PageUser({ params }: { params: { id: string } }) {
         },
         body: JSON.stringify(id),
       });
+
       if (response.ok) {
-        // Atualiza os dados após a exclusão bem-sucedida
         console.log('deletado com sucesso');
         router.push('/')
-        
       } else {
         throw new Error("Falha ao excluir o item.");
       }
+
     } catch (error) {
       console.error("Erro ao excluir:", error);
-      // Trate o erro, se necessário
     }
   };
+
   return (
     <div className="h-screen w-full flex items-center justify-center">
       {booking && (

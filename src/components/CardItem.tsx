@@ -7,7 +7,6 @@ import {
   CardHeader,
   CardTitle,
 } from "./ui/card";
-import { AgendaItem } from "@/app/ag";
 import {
   Tooltip,
   TooltipContent,
@@ -16,15 +15,14 @@ import {
 } from "@/components/ui/tooltip";
 
 const CardItem = ({
-  user,
-  qd,
-  lt,
-  date,
-  timer,
-  demarcador,
+  cliente,
+  quadra,
+  lote,
+  dt_agendamento,
+  horario_do_agen,
   status,
   empresa,
-}: any): JSX.Element => {
+}:any): JSX.Element => {
   return (
     <div>
       <Card className="relative max-w-96 max-h-[250px] text-ellipsis shadow-md dark:bg-zinc-900">
@@ -32,19 +30,19 @@ const CardItem = ({
           <div className="flex items-center justify-start text-zinc-500 gap-1 max-w-[90%] h-min">
             <User size={17} />
             <CardDescription className=" text-nowrap text-ellipsis overflow-hidden leading-none  uppercase">
-              {user}
+              {cliente}
             </CardDescription>
           </div>
           <TooltipProvider delayDuration={100}>
             <Tooltip >
               <TooltipTrigger >
                 <p
-                  className={`p-1 absolute top-3 right-3 gap-2 text-xs 
+                  className={`p-1 absolute top-3 right-3 gap-2 text-xs
                         font-semibold rounded-full ${
                           status === "Agendado"
                             ? "bg-orange-200 dark:bg-amber-500"
                             : "bg-green-200 dark:bg-emerald-500"
-                        }  w-min flex 
+                        }  w-min flex
                         items-center  justify-center`}
                 >
                   <span
@@ -62,20 +60,20 @@ const CardItem = ({
         </CardHeader>
         <CardContent className="flex flex-col">
           <CardTitle className="font-bold text-foreground mb-3">
-            QUADRA: {qd}
+            QUADRA: {quadra}
           </CardTitle>
-          <CardTitle className="font-bold text-foreground">LOTE: {lt}</CardTitle>
+          <CardTitle className="font-bold text-foreground">LOTE: {lote}</CardTitle>
         </CardContent>
         <CardFooter className="flex  justify-between items-end gap-2">
           <div className="flex flex-col justify-start items-start gap-2">
 
           <CardDescription className="flex items-center justify-center gap-2">
             <Calendar size={17} />
-            {date}
+            {dt_agendamento}
           </CardDescription>
           <CardDescription className="flex items-center justify-center gap-2">
             <TimerIcon size={19} />
-            {timer}
+            {horario_do_agen}
           </CardDescription>
           </div>
           <CardDescription className="font-semibold text-xs  px-2 rounded bg-zinc-200 dark:bg-zinc-800 uppercase">
