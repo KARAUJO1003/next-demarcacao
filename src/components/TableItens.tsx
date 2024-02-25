@@ -40,6 +40,7 @@ import { TagBadge } from "./TagBadge";
 import Link from "next/link";
 import { Bookings } from "../../prisma/generated/client";
 import { Skeleton } from "./ui/skeleton";
+import { toast } from "sonner";
 
 const handleDelete = async (id: string) => {
   try {
@@ -53,13 +54,13 @@ const handleDelete = async (id: string) => {
     });
     if (response.ok) {
       // Atualiza os dados após a exclusão bem-sucedida
-      console.log('deletado com sucesso');
-      
+      toast.success('Deletado com sucesso');
     } else {
       throw new Error("Falha ao excluir o item.");
     }
   } catch (error) {
     console.error("Erro ao excluir:", error);
+    toast.error('Erro ao excluir item')
     // Trate o erro, se necessário
   }
 };
