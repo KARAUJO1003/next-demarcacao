@@ -32,6 +32,7 @@ import { SubmitHandler } from "react-hook-form";
 import { TagBadge } from ".";
 import InputMask from "react-input-mask";
 import { Textarea } from "./ui/textarea";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
   id: z.string(),
@@ -70,6 +71,7 @@ export function Modal() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [tabValue, setTabValue] = useState();
+  const router = useRouter()
 
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -122,6 +124,7 @@ export function Modal() {
           },
         });
         reset(); // Resetar o formulário após o envio bem-sucedido
+        router.push('/')
       } else {
         setError("Erro ao criar registro. Por favor, tente novamente.");
       }

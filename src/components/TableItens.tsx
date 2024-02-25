@@ -44,7 +44,7 @@ import { Skeleton } from "./ui/skeleton";
 const handleDelete = async (id: string) => {
   try {
     // Faz a solicitação DELETE
-    const response = await fetch(`/api/bookings${id}`, {
+    const response = await fetch(`/api/bookings/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

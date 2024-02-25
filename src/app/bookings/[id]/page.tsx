@@ -27,6 +27,8 @@ import {
 import { toast } from "sonner";
 import { Loader, Save } from "lucide-react";
 import InputMask from "react-input-mask";
+import { useRouter } from "next/navigation";
+
 
 async function getData(): Promise<Bookings[]> {
   const res = await fetch("/api/bookings");
@@ -36,7 +38,7 @@ async function getData(): Promise<Bookings[]> {
   }
   const rawData = await res.json();
   console.log("Dados brutos da API:", rawData);
-
+  
   return rawData;
 }
 
@@ -54,6 +56,7 @@ const schema = z.object({
 export default function PageUser({ params }: { params: { id: string } }) {
   const [booking, setBooking] = useState<Bookings | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const router =  useRouter()
 
   const {
     register,
@@ -124,18 +127,44 @@ export default function PageUser({ params }: { params: { id: string } }) {
       console.log(error);
     }
   };
-
+  const handleDelete = async (id: string) => {
+    try {
+      // Faz a solicitação DELETE
+      const response = await fetch(`/api/bookings/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(id),
+      });
+      if (response.ok) {
+        // Atualiza os dados após a exclusão bem-sucedida
+        console.log('deletado com sucesso');
+        router.push('/')
+        
+      } else {
+        throw new Error("Falha ao excluir o item.");
+      }
+    } catch (error) {
+      console.error("Erro ao excluir:", error);
+      // Trate o erro, se necessário
+    }
+  };
   return (
     <div className="h-screen w-full flex items-center justify-center">
       {booking && (
         <Card className="max-w-[500px] min-w-[400px]">
           <CardContent className="space-y-3">
             <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="flex items-center justify-between gap-4">
+  
               <Input
                 className=" my-5"
                 defaultValue={booking.cliente ?? ""}
                 {...register("cliente")}
-              />
+                />
+                <Button variant={'outline'} onClick={()=> handleDelete(booking.id)}>Excluir</Button>
+                </div>
 
               <div className="">
                 <div className="col-span-3 space-y-2">
