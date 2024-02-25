@@ -18,7 +18,11 @@ export default function Home() {
   const [demarcacao, setDemarcacao] = useState<Bookings[]>([]);
 
   useEffect(() => {
-    fetch("/api/bookings")
+    fetch("/api/bookings", {
+      next: {
+        tags: ['get-bookings']
+      }
+    })
       .then((response) => response.json())
       .then((data) => {
         setDemarcacao(data);

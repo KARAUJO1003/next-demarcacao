@@ -12,7 +12,7 @@ import Link from "next/link";
 import { TagBadge } from "@/components/TagBadge";
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader, Save } from "lucide-react";
+import { Loader, Save, Trash, Trash2 } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -49,18 +49,12 @@ async function getData(): Promise<Bookings[]> {
   return rawData;
 }
 
-
 export default function PageUser({ params }: { params: { id: string } }) {
-
   const [booking, setBooking] = useState<Bookings | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const router =  useRouter()
+  const router = useRouter();
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-  } = useForm({
+  const { register, handleSubmit, setValue } = useForm({
     resolver: zodResolver(schema),
   });
 
@@ -136,12 +130,11 @@ export default function PageUser({ params }: { params: { id: string } }) {
       });
 
       if (response.ok) {
-        console.log('deletado com sucesso');
-        router.push('/')
+        toast.success("Registro deletado com sucesso");
+        router.push("/");
       } else {
         throw new Error("Falha ao excluir o item.");
       }
-
     } catch (error) {
       console.error("Erro ao excluir:", error);
     }
@@ -154,14 +147,21 @@ export default function PageUser({ params }: { params: { id: string } }) {
           <CardContent className="space-y-3">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="flex items-center justify-between gap-4">
-  
-              <Input
-                className=" my-5"
-                defaultValue={booking.cliente ?? ""}
-                {...register("cliente")}
+                <Button
+                  size={"icon"}
+                  className="gap-2"
+                  variant={"outline"}
+                  onClick={() => handleDelete(booking.id)}
+                >
+                  <Trash2 size={14} />
+                </Button>
+
+                <Input
+                  className=" my-5"
+                  defaultValue={booking.cliente ?? ""}
+                  {...register("cliente")}
                 />
-                <Button variant={'outline'} onClick={()=> handleDelete(booking.id)}>Excluir</Button>
-                </div>
+              </div>
 
               <div className="">
                 <div className="col-span-3 space-y-2">

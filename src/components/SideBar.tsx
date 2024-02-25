@@ -4,7 +4,7 @@ import LogoDark02 from '@/assets/logo02dark.png'
 import LogoLight02 from '@/assets/logo02light.png'
 import Image from "next/image";
 import { Button } from "./ui/button";
-import { LogOut } from "lucide-react";
+import { CircleUserRound, HomeIcon, LogIn, LogOut, UsersRound } from "lucide-react";
 import { useTheme } from "next-themes";
 const SideBar = (): JSX.Element => {
 
@@ -17,10 +17,10 @@ const SideBar = (): JSX.Element => {
       </div>
 
       <div className="flex flex-col h-full mt-12 gap-4 items-start justify-start">
-        <Button variant={'outline'} className="w-full justify-start bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"><Link className="no-underline" href="/portal/login">Login</Link></Button>
-        <Button variant={'outline'} className="w-full justify-start bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"><Link className="no-underline" href="/portal/cadastro">Cadastro</Link></Button>
-        <Button variant={'outline'} className="w-full justify-start bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"><Link className="no-underline" href="/portal">Portal</Link></Button>
-        <Button variant={'outline'} className="w-full justify-start bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"><Link className="no-underline" href="/users">Users</Link></Button>
+        <Button variant={'outline'} className="w-full justify-start bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"><Link className="no-underline flex items-center gap-2" href="/portal"><HomeIcon size={16}/>Pagina Inicial</Link></Button>
+        <Button variant={'outline'} className="w-full justify-start bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"><Link className="no-underline flex items-center gap-2" href="/portal/login"> <LogIn  size={16}/>Login</Link></Button>
+        <Button variant={'outline'} className="w-full justify-start bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"><Link className="no-underline flex items-center gap-2" href="/portal/cadastro"><CircleUserRound  size={16}/>Pessoas</Link></Button>
+        <Button variant={'outline'} className="w-full justify-start bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50"><Link className="no-underline flex items-center gap-2" href="/users"><UsersRound  size={16}/>Usuários</Link></Button>
       </div>
 
       <div className="w-full flex items-center justify-between">

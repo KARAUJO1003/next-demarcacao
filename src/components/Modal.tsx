@@ -35,6 +35,7 @@ import {
 import { Switch } from "./ui/switch";
 import { RadioGroup, RadioGroupItem } from "./ui/radio-group";
 import { Label } from "./ui/label";
+import { revalidateTag } from "next/cache";
 
 const formSchema = z.object({
   id: z.string(),
@@ -72,7 +73,7 @@ export function Modal() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-  const [toggleCpf, setToggleCpf] = useState("");
+  const [toggleCpf, setToggleCpf] = useState("CPF");
   const [tabValue, setTabValue] = useState();
 
   const router = useRouter();
@@ -113,7 +114,7 @@ export function Modal() {
 
       if (res.ok) {
         setSuccess(true);
-        toast("Cliente cadastrado com sucesso!");
+        toast.success("Cliente cadastrado com sucesso!");
         reset(); // Resetar o formulário após o envio bem-sucedido
       } else {
         setError("Erro ao criar registro. Por favor, tente novamente.");

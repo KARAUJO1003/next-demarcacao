@@ -13,7 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, Edit, MoreHorizontal, Pencil, Trash } from "lucide-react";
+import { ArrowUpDown, ChevronDown, Edit, MoreHorizontal, Pencil, Trash, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -234,7 +234,7 @@ export const columns: ColumnDef<Bookings>[] = [
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem><Pencil size={12} className="mr-3"/><Link href={`/bookings/${payment.id}`}>Editar</Link></DropdownMenuItem>
-            <DropdownMenuItem><Trash size={12} className="mr-3" /><Button onClick={() => handleDelete(payment.id)}>Excluir</Button></DropdownMenuItem>
+            <DropdownMenuItem><Trash2 size={12} className="mr-3" /><Button className="h-auto p-0" variant={'ghost'} onClick={() => handleDelete(payment.id)}>Excluir</Button></DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
