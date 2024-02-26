@@ -107,15 +107,6 @@ export const columns: ColumnDef<Bookings>[] = [
       );
     },
     cell: ({ row }) => (
-      // <div
-      //   className={`capitalize text-sm rounded-full flex items-center justify-center w-min px-3 ${
-      //     row.getValue("status") === "Agendado"
-      //       ? "bg-amber-600/80 text-orange-200"
-      //       : "bg-emerald-600/80 text-green-200"
-      //   } capitalize`}
-      // >
-      //   {row.getValue("status")}
-      // </div>
       <TagBadge nometag={row.getValue('status')} filtertag={row.getValue('status')} />
     ),
   },
@@ -135,6 +126,74 @@ export const columns: ColumnDef<Bookings>[] = [
     },
     cell: ({ row }) => (
       <div className="capitalize">{row.getValue("cliente")}</div>
+    ),
+  },
+  {
+    accessorKey: "empresa",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Empresa
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("empresa")}</div>
+    ),
+  },
+  {
+    accessorKey: "status_da_venda",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Status da Venda
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("status_da_venda")}</div>
+    ),
+  },
+  {
+    accessorKey: "benfeitoria",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Benfeitoria
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("benfeitoria")}</div>
+    ),
+  },
+  {
+    accessorKey: "cpf_cnpj",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          CPF/CNPJ
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("cpf_cnpj")}</div>
     ),
   },
   {
