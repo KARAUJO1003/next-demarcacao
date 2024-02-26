@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+## Buzzy Agendamento de Demarcação!
+
+![image](https://github.com/KARAUJO1003/next-demarcacao/assets/129511975/caf2ae06-598a-4649-b15a-82fff3b3013f)
+![image](https://github.com/KARAUJO1003/next-demarcacao/assets/129511975/43a5c19b-81f1-4497-875f-24ef890473ab)
+![image](https://github.com/KARAUJO1003/next-demarcacao/assets/129511975/dff6ee16-b0fe-4ec7-8820-13f551801eba)
+![image](https://github.com/KARAUJO1003/next-demarcacao/assets/129511975/f9835bc0-e380-44fd-81cf-d9db3d159ecb)
+![image](https://github.com/KARAUJO1003/next-demarcacao/assets/129511975/86e720a9-7e31-4436-940a-a0fc1d9ef65e)
+![image](https://github.com/KARAUJO1003/next-demarcacao/assets/129511975/f9df5e29-1d95-43e2-8089-9d4c05a2d8db)
+![image](https://github.com/KARAUJO1003/next-demarcacao/assets/129511975/dbd94d5e-2229-4d38-a78a-7f6d94ae528d)
+![image](https://github.com/KARAUJO1003/next-demarcacao/assets/129511975/c21a695c-50ee-43e9-b2eb-f6c3bbf6346c)
+![image](https://github.com/KARAUJO1003/next-demarcacao/assets/129511975/4f21fdb2-6226-4961-bdcf-ac03b727730c)
+![image](https://github.com/KARAUJO1003/next-demarcacao/assets/129511975/71ce0a72-f810-4aa8-8d55-c8dee5c25304)
+![image](https://github.com/KARAUJO1003/next-demarcacao/assets/129511975/475b823a-4fe3-4ec6-97f9-1e7e7ea2ec67)
+![image](https://github.com/KARAUJO1003/next-demarcacao/assets/129511975/d69af2f3-138b-4254-a5a3-42314cdcdd91)
+![image](https://github.com/KARAUJO1003/next-demarcacao/assets/129511975/90a30e61-2c3c-4baa-8fbf-0e01b1e426c0)
+
+
+
+### Como clonar o projeto:
+
+1 - Primeiro:, instalação de dependências:
+
+```bash
+npm install
+# or
+yarn install
+
+```
+2 - Segundo: Inicie o projeto com o comando:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra o navegador no endereço [http://localhost:3000](http://localhost:3000) .
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
