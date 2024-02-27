@@ -318,7 +318,7 @@ const DataTableDemo = () => {
       .then((data) => setData(data));
     console.log(data);
 
-  }, []);
+  }, [data]);
 
   const table = useReactTable({
     data,
